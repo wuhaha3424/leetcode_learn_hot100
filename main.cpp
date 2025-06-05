@@ -54,6 +54,18 @@ void printListNode(ListNode* head)
 	cout << endl;
 }
 
+ListNode* VectorToListNode(vector<int> nums)
+{
+	ListNode* dummynode = new ListNode(0);
+	ListNode* p = dummynode;
+	for (int i = 0; i < nums.size(); i++)
+	{
+		p->next = p->next = new ListNode(nums[i]);
+		p = p->next;
+	}
+	return dummynode->next;
+}
+
 vector<int> twosum(vector<int> nums, int target)
 {	
 	unordered_map<int, int> map;
@@ -1058,6 +1070,145 @@ void Test_detectCycle()
 	cout << resval<< endl;
 }
 
+ListNode* mergeTwoLists(ListNode* list1, ListNode* list2) {
+	ListNode dummynode(0);
+	ListNode* p = &dummynode;
+	while (list1 != NULL && list2 != NULL) {
+		if (list1->val > list2->val) {
+			ListNode* newnode = new ListNode(list2->val);
+			p->next = newnode;
+			p = p->next;
+			list2 = list2->next;
+		}
+		else {
+			ListNode* newnode = new ListNode(list1->val);
+			p->next = newnode;
+			p = p->next;
+			list1 = list1->next;
+		}
+	}
+	if (list1 != NULL) {
+		p->next = list1;
+	}
+	if (list2 != NULL) {
+		p->next = list2;
+	}
+	return dummynode.next;
+}
+
+void Test_mergeTwoLists()
+{
+	ListNode a1(1);
+	ListNode a2(2); a1.next = &a2;
+	ListNode a3(4); a2.next = &a3;
+
+	ListNode b1(1);
+	ListNode b2(3); b1.next = &b2;
+	ListNode b3(4); b2.next = &b3;
+
+	ListNode* heada = &a1;
+	ListNode* headb = &b1;
+	ListNode* res = mergeTwoLists(heada, headb);
+	printListNode(res);
+}
+
+ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
+	ListNode* dummynode = new ListNode(0);
+	ListNode* p = dummynode;
+	int lastval = 0;
+	while (l1 != NULL && l2 != NULL) {
+		int sum = l1->val + l2->val + lastval;
+		lastval = sum / 10;
+		sum = sum % 10;
+		ListNode* newnode = new ListNode(sum);
+		p->next = newnode;
+		l1 = l1->next;
+		l2 = l2->next;
+		p = p->next;
+	}
+	while (l1 != NULL) {
+		int sum = l1->val + lastval;
+		lastval = sum / 10;
+		sum = sum % 10;
+		ListNode* newnode = new ListNode(sum);
+		p->next = newnode;
+		l1 = l1->next;
+		p = p->next;
+	}
+	while (l2 != NULL) {
+		int sum = l2->val + lastval;
+		lastval = sum / 10;
+		sum = sum % 10;
+		ListNode* newnode = new ListNode(sum);
+		p->next = newnode;
+		l2 = l2->next;
+		p = p->next;
+	}
+	if (lastval != 0)
+	{
+		ListNode* newnode = new ListNode(lastval);
+		p->next = newnode;
+	}
+	return dummynode->next;
+}
+
+void Test_addTwoNumbers()
+{
+	ListNode a1(2);
+	ListNode a2(4); a1.next = &a2;
+	ListNode a3(3); a2.next = &a3;
+
+	ListNode b1(5);
+	ListNode b2(6); b1.next = &b2;
+	ListNode b3(4); b2.next = &b3;
+
+	ListNode* heada = &a1;
+	ListNode* headb = &b1;
+	ListNode* res = addTwoNumbers(heada, headb);
+	printListNode(res);
+}
+
+ListNode* removeNthFromEnd(ListNode* head, int n) {
+	ListNode* dummynode = new ListNode(0);
+	dummynode->next = head;
+	ListNode* p1 = dummynode;
+	ListNode* p2 = dummynode;
+	while (n--)
+	{
+		p1 = p1->next;
+	}
+	p1 = p1 -> next;
+	while (p1 != NULL)
+	{
+		p1 = p1->next;
+		p2 = p2->next;
+	}
+	ListNode* temp = p2->next;
+	p2->next = p2->next->next;
+	delete temp;
+	return dummynode->next;
+}
+
+void Test_removeNthFromEnd()
+{
+	cout << " 19. 删除链表的倒数第 N 个结点 " << endl;
+	vector<int> nums;
+	int num;
+	cout << " 依次输入链表元素 " << endl;
+	while (cin >> num)
+	{
+		nums.push_back(num);
+		if (cin.peek() == '\n')
+			break;
+	}
+	int target;
+	cout << " 输入删去倒数第几个元素 " << endl;
+	cin >> target;
+	ListNode* head = VectorToListNode(nums);
+	ListNode* res = removeNthFromEnd(head, target);
+	printListNode(res);
+}
+
 int main()
 {
 	//Test_twosum();						/*			hot100 1.	两数之和						*/
@@ -1085,5 +1236,8 @@ int main()
 	//Test_reverseList();					/*			hot100 206. 反转链表						*/
 	//Test_isPalindrome();					/*			hot100 234. 回文链表						*/
 	//Test_hasCycle();						/*			hot100 141. 环形链表						*/
-	Test_detectCycle();						/*			hot100 142. 环形链表 II					*/
+	//Test_detectCycle();					/*			hot100 142. 环形链表 II					*/
+	//Test_mergeTwoLists();					/*			hot100 21.	合并两个有序链表				*/
+	//Test_addTwoNumbers();					/*			hot100 2.	两数相加						*/
+	Test_removeNthFromEnd();				/*			hot100 19.	删除链表的倒数第 N 个结点		*/
 }
