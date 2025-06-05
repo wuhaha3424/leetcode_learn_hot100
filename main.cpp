@@ -6,6 +6,7 @@
 #include <functional>
 #include <mutex>
 #include <unordered_set>
+#include <stack>
 using namespace std;
 
 template<typename T>
@@ -34,7 +35,24 @@ void printVectorOfVector(vector<vector<T>> nums)
 	cout << endl;
 }
 
+struct ListNode {
+	int val;
+	ListNode* next;
+	ListNode():val(0),next(nullptr){}
+	ListNode(int x) :val(x), next(nullptr) {}
+	ListNode(int x, ListNode* node) :val(x), next(node) {}
+};
 
+void printListNode(ListNode* head)
+{
+	ListNode* p = head;
+	while (p != NULL)
+	{
+		cout << p->val << " ";
+		p = p->next;
+	}
+	cout << endl;
+}
 
 vector<int> twosum(vector<int> nums, int target)
 {	
@@ -892,6 +910,154 @@ void Test_searchMatrix()
 	cout << res << endl;
 }
 
+ListNode* getIntersectionNode(ListNode* headA, ListNode* headB) {
+	ListNode* p1 = headA;
+	ListNode* p2 = headB;
+	while (p1 != p2)
+	{
+		p1 = (p1 == nullptr) ? headB : p1->next;
+		p2 = (p2 == nullptr) ? headA : p2->next;
+		if (p1 == nullptr && p2 == nullptr) return nullptr;
+	}
+	return p1;
+}
+
+void Test_getIntersectionNode()
+{
+	ListNode a1(4); 
+	ListNode a2(1); a1.next = &a2;
+	ListNode b1(5);
+	ListNode b2(6); b1.next = &b2;
+	ListNode b3(1); b2.next = &b3;
+	ListNode c1(8); a2.next = &c1; b3.next = &c1;
+	ListNode c2(4); c1.next = &c2;
+	ListNode c3(5); c2.next = &c3;
+	ListNode* headA = &a1;
+	ListNode* headB = &b1;
+	ListNode* res = getIntersectionNode(headA, headB);
+	if (res == nullptr)
+		cout << "null" << endl;
+	else
+		cout << res->val << endl;
+}
+
+ListNode* reverseList(ListNode* head) {
+	ListNode* p = head;
+	ListNode* pre = NULL;
+	while (p != NULL)
+	{
+		ListNode* temp = p->next;
+		p->next = pre;
+		pre = p;
+		p = temp;
+	}
+	return pre;
+}
+
+void Test_reverseList()
+{
+	ListNode a1(1);
+	ListNode a2(2); a1.next = &a2;
+	ListNode a3(3); a2.next = &a3;
+	ListNode a4(4); a3.next = &a4;
+	ListNode a5(5); a4.next = &a5;
+	ListNode* head = &a1;
+	ListNode* res = reverseList(head);
+	printListNode(res);
+}
+
+bool isPalindrome(ListNode* head) {
+	stack<int> sta;
+	ListNode* p1 = head;
+	while (p1 != nullptr)
+	{
+		sta.push(p1->val);
+		p1 = p1->next;
+	}
+	ListNode* p2 = head;
+	while (p2 != NULL)
+	{
+		int temp = sta.top();
+		sta.pop();
+		if(p2->val!=temp)
+		{
+			return false;
+		}
+		p2 = p2->next;
+	}
+	return true;
+}
+
+void Test_isPalindrome()
+{
+	ListNode a1(1);
+	ListNode a2(2); a1.next = &a2;
+	ListNode a3(2); a2.next = &a3;
+	ListNode a4(3); a3.next = &a4;
+	ListNode* head = &a1;
+	bool res = isPalindrome(head);
+	string resout = (res == true) ? "TRUE" : "FALSE";
+	cout << resout << endl;
+}
+
+bool hasCycle(ListNode* head) {
+	ListNode* p1 = head;
+	ListNode* p2 = head;
+	while (p1 != NULL && p1->next != NULL && p2 != NULL) {
+		p1 = p1->next->next;
+		p2 = p2->next;
+		if (p1 == p2) {
+			return true;
+		}
+	}
+	return false;
+}
+
+void Test_hasCycle()
+{
+	ListNode a1(3);
+	ListNode a2(2); a1.next = &a2;
+	ListNode a3(0); a2.next = &a3;
+	ListNode a4(4); a3.next = &a4; a4.next = &a2;
+	ListNode* head = &a1;
+	bool res = hasCycle(head);
+	string resout = (res == true) ? "TRUE" : "FALSE";
+	cout << resout << endl;
+}
+
+ListNode* detectCycle(ListNode* head) {
+	ListNode* p1 = head;
+	ListNode* p2 = head;
+	while (p1 != NULL && p1->next != NULL && p2 != NULL) {
+		p1 = p1->next->next;
+		p2 = p2->next;
+		if (p1 == p2) {
+			ListNode* p3 = head;
+			while (p3 != p2)
+			{
+				p3 = p3->next;
+				p2 = p2->next;
+			}
+			return p3;
+		}
+	}
+	return NULL;
+}
+
+void Test_detectCycle()
+{
+	ListNode a1(3);
+	ListNode a2(2); a1.next = &a2;
+	ListNode a3(0); a2.next = &a3;
+	ListNode a4(4); a3.next = &a4; a4.next = &a2;
+	ListNode* head = &a1;
+	ListNode* res = detectCycle(head);
+	if (res == NULL)
+		cout << "NULL" << endl;
+	int resval = res->val;
+	cout << resval<< endl;
+}
+
 int main()
 {
 	//Test_twosum();						/*			hot100 1.	两数之和						*/
@@ -914,5 +1080,10 @@ int main()
 	//Test_setZeroes();						/*			hot100 73.	矩阵置零						*/
 	//Test_spiralOrder();					/*			hot100 54.	螺旋矩阵						*/
 	//Test_rotate_nums();					/*			hot100 48.	旋转图像						*/
-	//Test_searchMatrix();					/*			hot100 48.	240. 搜索二维矩阵 II			*/
+	//Test_searchMatrix();					/*			hot100 240. 搜索二维矩阵 II				*/
+	//Test_getIntersectionNode();			/*			hot100 160. 相交链表						*/
+	//Test_reverseList();					/*			hot100 206. 反转链表						*/
+	//Test_isPalindrome();					/*			hot100 234. 回文链表						*/
+	//Test_hasCycle();						/*			hot100 141. 环形链表						*/
+	Test_detectCycle();						/*			hot100 142. 环形链表 II					*/
 }
