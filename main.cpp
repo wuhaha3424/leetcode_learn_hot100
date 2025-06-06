@@ -1209,6 +1209,75 @@ void Test_removeNthFromEnd()
 	printListNode(res);
 }
 
+ListNode* swapPairs(ListNode* head) {
+	if (head == NULL || head->next == NULL)
+		return head;
+	ListNode* slow = head;
+	ListNode* fast = head->next;
+	ListNode* temp = fast->next;
+	fast->next = slow;
+	slow->next = swapPairs(temp);
+	return fast;
+}
+
+void Test_swapPairs() {
+	ListNode a1(1);
+	ListNode a2(2); a1.next = &a2;
+	ListNode a3(3); a2.next = &a3;
+	ListNode a4(4); a3.next = &a4;
+	ListNode* head = &a1;
+	ListNode* res = swapPairs(head);
+	printListNode(res);
+}
+
+ListNode* reverse(ListNode* left, ListNode* right)
+{
+	ListNode* p = left;
+	ListNode* pre = nullptr;
+	while (p != right)
+	{
+		ListNode* temp = p->next;
+		p->next = pre;
+		pre = p;
+		p = temp;
+	}
+	return pre;
+}
+
+ListNode* reverseKGroup(ListNode* head, int k) {
+	ListNode* left = head;
+	ListNode* right = head;
+	for (int i = k; i > 0; i--)
+	{
+		if (right == nullptr)
+			return head;
+		right = right->next;
+	}
+	ListNode* node = reverse(left, right);
+	left->next = reverseKGroup(right, k);
+	return node;
+}
+
+void Test_reverseKGroup()
+{
+	cout << " 25. K 个一组翻转链表 " << endl;
+	vector<int> nums;
+	int num;
+	cout << "依次输入链表元素" << endl;
+	while (cin >> num)
+	{
+		nums.push_back(num);
+		if (cin.peek() == '\n')
+			break;
+	}
+	int target;
+	cout << "输入几个一组：" << endl;
+	cin >> target;
+	ListNode* head = VectorToListNode(nums);
+	ListNode* res = reverseKGroup(head, target);
+	printListNode(res);
+}
+
 int main()
 {
 	//Test_twosum();						/*			hot100 1.	两数之和						*/
@@ -1239,5 +1308,7 @@ int main()
 	//Test_detectCycle();					/*			hot100 142. 环形链表 II					*/
 	//Test_mergeTwoLists();					/*			hot100 21.	合并两个有序链表				*/
 	//Test_addTwoNumbers();					/*			hot100 2.	两数相加						*/
-	Test_removeNthFromEnd();				/*			hot100 19.	删除链表的倒数第 N 个结点		*/
+	//Test_removeNthFromEnd();				/*			hot100 19.	删除链表的倒数第 N 个结点		*/
+	//Test_swapPairs();						/*			hot100 24. 两两交换链表中的节点			*/
+	Test_reverseKGroup();					/*			hot100 25. K 个一组翻转链表				*/
 }
