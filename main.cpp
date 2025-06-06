@@ -1384,6 +1384,56 @@ void Test_sortList()
 	printListNode(res);
 }
 
+ListNode* inputLists()
+{
+	vector<int> nums;
+	int num;
+	cout << "\n依次输入链表元素" << endl;
+	while (cin >> num)
+	{
+		nums.push_back(num);
+		if (cin.peek() == '\n')
+			break;
+	}
+	ListNode* head = VectorToListNode(nums);
+	return head;
+}
+
+ListNode* mergeKLists(vector<ListNode*>& lists) {
+	auto myfunc = [](ListNode* a, ListNode* b) {return a->val > b->val; };
+	priority_queue < ListNode*, vector<ListNode*>, decltype(myfunc)> que(myfunc);
+	for (int i = 0; i < lists.size(); i++)
+	{
+		if(lists[i]!=nullptr)
+		que.push(lists[i]);
+	}
+	ListNode* dummynode = new ListNode(0);
+	ListNode* p = dummynode;
+	while (!que.empty()) {
+		ListNode* node = que.top();
+		que.pop();
+		if (node->next != nullptr)
+		{
+			que.push(node->next);
+		}
+		p->next = node;
+		p = p->next;
+	}
+	return dummynode->next;
+}
+
+void Test_mergeKLists()
+{
+	cout << " 23. 合并 K 个升序链表 " << endl;
+	ListNode* head1 = inputLists();
+	ListNode* head2 = inputLists();
+	ListNode* head3 = inputLists();
+	vector<ListNode*> lists = {head1, head2, head3};
+	ListNode* res = mergeKLists(lists);
+	cout << endl;
+	printListNode(res);
+}
+
 int main()
 {
 	//Test_twosum();						/*			hot100 1.	两数之和						*/
@@ -1415,8 +1465,9 @@ int main()
 	//Test_mergeTwoLists();					/*			hot100 21.	合并两个有序链表				*/
 	//Test_addTwoNumbers();					/*			hot100 2.	两数相加						*/
 	//Test_removeNthFromEnd();				/*			hot100 19.	删除链表的倒数第 N 个结点		*/
-	//Test_swapPairs();						/*			hot100 24. 两两交换链表中的节点			*/
-	//Test_reverseKGroup();					/*			hot100 25. K 个一组翻转链表				*/
+	//Test_swapPairs();						/*			hot100 24.	两两交换链表中的节点			*/
+	//Test_reverseKGroup();					/*			hot100 25.	K 个一组翻转链表				*/
 	//Test_copyRandomList();				/*			hot100 138. 随机链表的复制				*/
 	//Test_sortList();						/*			hot100 148. 排序链表						*/
+	//Test_mergeKLists();					/*			hot100 23. 合并 K 个升序链表				*/
 }
