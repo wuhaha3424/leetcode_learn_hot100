@@ -1330,6 +1330,60 @@ void Test_copyRandomList()
 	printNode(res);
 }
 
+ListNode* sortList(ListNode* head) {
+	if (head == NULL || head->next == NULL)
+		return head;
+	ListNode* slow = head;
+	ListNode* fast = head->next;
+	while (fast != NULL&&fast->next!=NULL)
+	{
+		fast = fast->next->next;
+		slow = slow->next;
+	}
+	ListNode* newhead = slow->next;
+	slow->next = nullptr;
+	ListNode* left = sortList(head);
+	ListNode* right = sortList(newhead);
+
+	ListNode* dummynode = new ListNode(0);
+	ListNode* p = dummynode;
+	while (left != nullptr && right != nullptr)
+	{
+		if (left->val < right->val)
+		{
+			p->next = left;
+			left = left->next;
+		}
+		else {
+			p->next = right;
+			right = right->next;
+		}
+		p = p->next;
+	}
+	if (left != nullptr)
+		p->next = left;
+	if (right != nullptr)
+		p->next = right;
+	return dummynode->next;
+}
+
+void Test_sortList()
+{
+	cout << " 148. 排序链表 " << endl;
+	vector<int> nums;
+	int num;
+	cout << "依次输入链表元素" << endl;
+	while (cin >> num)
+	{
+		nums.push_back(num);
+		if (cin.peek() == '\n')
+			break;
+	}
+	ListNode* head = VectorToListNode(nums);
+	ListNode* res = sortList(head);
+	printListNode(res);
+}
+
 int main()
 {
 	//Test_twosum();						/*			hot100 1.	两数之和						*/
@@ -1364,4 +1418,5 @@ int main()
 	//Test_swapPairs();						/*			hot100 24. 两两交换链表中的节点			*/
 	//Test_reverseKGroup();					/*			hot100 25. K 个一组翻转链表				*/
 	//Test_copyRandomList();				/*			hot100 138. 随机链表的复制				*/
+	//Test_sortList();						/*			hot100 148. 排序链表						*/
 }
