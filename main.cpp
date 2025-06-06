@@ -43,6 +43,14 @@ struct ListNode {
 	ListNode(int x, ListNode* node) :val(x), next(node) {}
 };
 
+class Node {
+public:
+	int val;
+	Node* next;
+	Node* random;
+	Node(int int_val):val(int_val),next(NULL),random(NULL){}
+};
+
 void printListNode(ListNode* head)
 {
 	ListNode* p = head;
@@ -1278,6 +1286,50 @@ void Test_reverseKGroup()
 	printListNode(res);
 }
 
+Node* copyRandomList(Node* head) {
+	unordered_map<Node*, Node*> map;
+	for (Node* p = head; p != NULL; p = p->next)
+	{
+		if (map.find(p) == map.end())
+			map[p] = new Node(p->val);
+	}
+	for (Node* p = head; p != NULL; p = p->next)
+	{
+		if (p->next != NULL)
+			map[p]->next = map[p->next];
+		if (p->random != NULL)
+			map[p]->random = map[p->random];
+	}
+	return map[head];
+}
+
+void printNode(Node* head)
+{
+	for (Node* p = head; p != NULL; p = p->next)
+	{
+		cout << "Node: " << p->val;
+		cout << ", Next: ";
+		if (p->next) cout << p->next->val; else cout << "null";
+		cout << ", Random: ";
+		if (p->random) cout << p->random->val; else cout << "null";
+		cout << endl;
+	}
+}
+
+void Test_copyRandomList()
+{
+	Node a1(7);
+	Node a2(13);
+	Node a3(11);
+	Node a4(10);
+	Node a5(1);
+	a1.next = &a2; a2.next = &a3; a3.next = &a4; a4.next = &a5; a5.next = nullptr;
+	a1.random = nullptr; a2.random = &a1; a3.random = &a5; a4.random = &a3; a5.random = &a1;
+	Node* head = &a1;
+	Node* res = copyRandomList(head);
+	printNode(res);
+}
+
 int main()
 {
 	//Test_twosum();						/*			hot100 1.	两数之和						*/
@@ -1310,5 +1362,6 @@ int main()
 	//Test_addTwoNumbers();					/*			hot100 2.	两数相加						*/
 	//Test_removeNthFromEnd();				/*			hot100 19.	删除链表的倒数第 N 个结点		*/
 	//Test_swapPairs();						/*			hot100 24. 两两交换链表中的节点			*/
-	Test_reverseKGroup();					/*			hot100 25. K 个一组翻转链表				*/
+	//Test_reverseKGroup();					/*			hot100 25. K 个一组翻转链表				*/
+	//Test_copyRandomList();				/*			hot100 138. 随机链表的复制				*/
 }
