@@ -1434,6 +1434,61 @@ void Test_mergeKLists()
 	printListNode(res);
 }
 
+class LRUCache {
+public:
+	LRUCache(int capacity) {
+		cap = capacity;
+	}
+
+	int get(int key) {
+		if (mapcache.find(key) == mapcache.end())
+		{
+			return -1;
+		}
+		else {
+			pair<int, int> node = *mapcache[key];
+			cachelist.erase(mapcache[key]);
+			cachelist.push_front(node);
+			mapcache[key] = cachelist.begin();
+			return node.second;
+		}
+	}
+
+	void put(int key, int value) {
+		if (mapcache.find(key) == mapcache.end())
+		{
+			if (cachelist.size() >= cap)
+			{
+				mapcache.erase(cachelist.back().first);
+				cachelist.pop_back();
+			}
+			cachelist.push_front({ key,value});
+			mapcache[key] = cachelist.begin();
+		}
+		else {
+			cachelist.erase(mapcache[key]);
+			cachelist.push_front({ key,value });
+			mapcache[key] = cachelist.begin();
+		}
+	}
+private:
+	list<pair<int, int>> cachelist;
+	unordered_map<int, list<pair<int, int>>::iterator> mapcache;
+	int cap;
+};
+
+void Test_LRUCache()
+{
+	LRUCache mylru(2);
+	mylru.put(1, 1);
+	mylru.put(2, 2);
+	cout << mylru.get(1) << endl;//1
+	mylru.put(3, 3);
+	cout << mylru.get(2) << endl;//-1
+	mylru.put(4, 4);
+	cout << mylru.get(1) << endl;//-1
+}
+
 int main()
 {
 	//Test_twosum();						/*			hot100 1.	两数之和						*/
@@ -1469,5 +1524,6 @@ int main()
 	//Test_reverseKGroup();					/*			hot100 25.	K 个一组翻转链表				*/
 	//Test_copyRandomList();				/*			hot100 138. 随机链表的复制				*/
 	//Test_sortList();						/*			hot100 148. 排序链表						*/
-	//Test_mergeKLists();					/*			hot100 23. 合并 K 个升序链表				*/
+	//Test_mergeKLists();					/*			hot100 23.	合并 K 个升序链表				*/
+	Test_LRUCache();						/*			hot100 146. LRU 缓存						*/
 }
