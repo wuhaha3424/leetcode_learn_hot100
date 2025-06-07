@@ -1627,6 +1627,41 @@ void Test_diameterOfBinaryTree()
 	cout << res << endl;
 }
 
+vector<vector<int>> levelOrder(TreeNode* root) {
+	vector<vector<int>> res;
+	if (root == nullptr) return res;
+	queue<TreeNode*> que;
+	que.push(root);
+	while (!que.empty())
+	{
+		int size = que.size();
+		vector<int> temp;
+		for (int i = 0; i < size; i++)
+		{
+			TreeNode* node = que.front();
+			que.pop();
+			temp.push_back(node->val);
+			if (node->left) que.push(node->left);
+			if (node->right) que.push(node->right);
+		}
+		res.push_back(temp);
+	}
+	return res;
+}
+
+void Test_levelOrder()
+{
+
+	cout << "hot100 102. 二叉树的层序遍历" << endl;
+	TreeNode* root = new TreeNode(0);
+	root->left = new TreeNode(1);
+	root->left->left = new TreeNode(3);
+	root->left->right = new TreeNode(4);
+	root->right = new TreeNode(2);
+	vector<vector<int>> res = levelOrder(root);
+	printVectorOfVector(res);
+}
+
 int main()
 {
 	//Test_twosum();						/*			hot100 1.	两数之和						*/
@@ -1668,5 +1703,6 @@ int main()
 	//Test_maxDepth();						/*			hot100 104. 二叉树的最大深度				*/
 	//Test_invertTree();					/*			hot100 226. 翻转二叉树					*/
 	//Test_isSymmetric();					/*			hot100 101. 对称二叉树					*/
-	Test_diameterOfBinaryTree();			/*			hot100 543. 二叉树的直径					*/
+	//Test_diameterOfBinaryTree();			/*			hot100 543. 二叉树的直径					*/
+	Test_levelOrder();						/*			hot100 102. 二叉树的层序遍历				*/
 }
