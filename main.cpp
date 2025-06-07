@@ -51,6 +51,15 @@ public:
 	Node(int int_val):val(int_val),next(NULL),random(NULL){}
 };
 
+struct TreeNode {
+	int val;
+	TreeNode* left;
+	TreeNode* right;
+	TreeNode():val(0),left(NULL),right(NULL){}
+	TreeNode(int val) :val(val), left(NULL), right(NULL) {}
+	TreeNode(int val, TreeNode* left, TreeNode* right) :val(val), left(left), right(right) {}
+};
+
 void printListNode(ListNode* head)
 {
 	ListNode* p = head;
@@ -1489,6 +1498,135 @@ void Test_LRUCache()
 	cout << mylru.get(1) << endl;//-1
 }
 
+void inordertraversal(TreeNode* root, vector<int>& res)
+{
+	if (root == NULL)
+		return;
+	inordertraversal(root->left, res);
+	res.push_back(root->val);
+	inordertraversal(root->right, res);
+}
+
+vector<int> inorderTraversal(TreeNode* root) {
+	vector<int> res;
+	inordertraversal(root, res);
+	return res;
+}
+
+void Test_inorderTraversal()
+{
+	cout << "hot100 94.  二叉树的中序遍历" << endl;
+	TreeNode* root = new TreeNode(0);
+	root->left = new TreeNode(1);
+	root->left->left = new TreeNode(3);
+	root->left->right = new TreeNode(4);
+	root->right = new TreeNode(2);
+	vector<int> res = inorderTraversal(root);
+	printVector(res);
+}
+
+int maxDepth(TreeNode* root) {
+	if (root == nullptr)
+		return 0;
+	int left = maxDepth(root->left) + 1;
+	int right = maxDepth(root->right) + 1;
+	return max(left, right);
+}
+
+void Test_maxDepth()
+{
+	cout << "hot100 104. 二叉树的最大深度" << endl;
+	TreeNode* root = new TreeNode(0);
+	root->left = new TreeNode(1);
+	root->left->left = new TreeNode(3);
+	root->left->right = new TreeNode(4);
+	root->right = new TreeNode(2);
+	int res = maxDepth(root);
+	cout << "the max depth is " << res << endl;
+}
+
+TreeNode* invertTree(TreeNode* root) {
+	if (root == nullptr)
+		return root;
+	TreeNode* left = invertTree(root->left);
+	TreeNode* right = invertTree(root->right);
+	TreeNode* temp = left;
+	root->left = right;
+	root->right = temp;
+	return root;
+}
+
+void Test_invertTree()
+{
+	cout << "hot100 226. 翻转二叉树" << endl;
+	TreeNode* root = new TreeNode(0);
+	root->left = new TreeNode(1);
+	root->left->left = new TreeNode(3);
+	root->left->right = new TreeNode(4);
+	root->right = new TreeNode(2);
+	TreeNode* res = invertTree(root);
+	vector<int> resv = inorderTraversal(res);
+	printVector(resv);
+}
+
+bool issymmetric(TreeNode* left, TreeNode* right)
+{
+	if (left == nullptr && right == nullptr)
+		return true;
+	if (left == nullptr || right == nullptr)
+		return false;
+	else if (left->val != right->val)
+		return false;
+	bool leftB = issymmetric(left->left, right->right);
+	bool rightB = issymmetric(left->right, right->left);
+	return leftB && rightB;
+
+}
+bool isSymmetric(TreeNode* root) {
+	return issymmetric(root->left, root->right);
+}
+
+void Test_isSymmetric()
+{
+	cout << "hot100 101. 对称二叉树" << endl;
+	TreeNode* root = new TreeNode(0);
+	root->left = new TreeNode(1);
+	root->left->left = new TreeNode(3);
+	root->left->right = new TreeNode(4);
+	root->right = new TreeNode(2);
+	bool res = isSymmetric(root);
+	string resstr = (res == true) ? "TRUE" : "FALSE";
+	cout << resstr << endl;
+}
+
+int findValue(TreeNode* root, int& maxres)
+{
+	if (root == nullptr)
+		return 0;
+	int leftV = findValue(root->left, maxres);
+	int rightV = findValue(root->right, maxres);
+	maxres = max(maxres, (leftV + rightV));
+	return max(leftV, rightV) + 1;
+}
+
+int diameterOfBinaryTree(TreeNode* root) {
+	int maxres = 0;
+	findValue(root, maxres);
+	return maxres;
+}
+
+void Test_diameterOfBinaryTree()
+{
+	cout << "hot100 543. 二叉树的直径" << endl;
+	TreeNode* root = new TreeNode(0);
+	root->left = new TreeNode(1);
+	root->left->left = new TreeNode(3);
+	root->left->right = new TreeNode(4);
+	root->right = new TreeNode(2);
+	int res = diameterOfBinaryTree(root);
+	cout << res << endl;
+}
+
 int main()
 {
 	//Test_twosum();						/*			hot100 1.	两数之和						*/
@@ -1525,5 +1663,10 @@ int main()
 	//Test_copyRandomList();				/*			hot100 138. 随机链表的复制				*/
 	//Test_sortList();						/*			hot100 148. 排序链表						*/
 	//Test_mergeKLists();					/*			hot100 23.	合并 K 个升序链表				*/
-	Test_LRUCache();						/*			hot100 146. LRU 缓存						*/
+	//Test_LRUCache();						/*			hot100 146. LRU 缓存						*/
+	//Test_inorderTraversal();				/*			hot100 94.  二叉树的中序遍历				*/
+	//Test_maxDepth();						/*			hot100 104. 二叉树的最大深度				*/
+	//Test_invertTree();					/*			hot100 226. 翻转二叉树					*/
+	//Test_isSymmetric();					/*			hot100 101. 对称二叉树					*/
+	Test_diameterOfBinaryTree();			/*			hot100 543. 二叉树的直径					*/
 }
