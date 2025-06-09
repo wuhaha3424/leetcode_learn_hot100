@@ -1651,7 +1651,6 @@ vector<vector<int>> levelOrder(TreeNode* root) {
 
 void Test_levelOrder()
 {
-
 	cout << "hot100 102. 二叉树的层序遍历" << endl;
 	TreeNode* root = new TreeNode(0);
 	root->left = new TreeNode(1);
@@ -1662,47 +1661,252 @@ void Test_levelOrder()
 	printVectorOfVector(res);
 }
 
+TreeNode* sortedarraytoBST(vector<int>& nums, int begin, int end)
+{
+	if (begin > end)
+		return nullptr;
+	int index = (begin + end) / 2;
+	TreeNode* root = new TreeNode(nums[index]);
+	root->left = sortedarraytoBST(nums, begin, index - 1);
+	root->right = sortedarraytoBST(nums, index + 1, end);
+	return root;
+}
+
+TreeNode* sortedArrayToBST(vector<int>& nums) {
+	return sortedarraytoBST(nums, 0, nums.size() - 1);
+}
+
+void Test_sortedArrayToBST()
+{
+	cout << "hot100 108. 将有序数组转换为二叉搜索树" << endl;
+	vector<int> nums;
+	int num;
+	cout << "\n依次输入升序数组的元素" << endl;
+	while (cin >> num)
+	{
+		nums.push_back(num);
+		if (cin.peek() == '\n')
+			break;
+	}
+	TreeNode* res = sortedArrayToBST(nums);
+	vector<int> resvectror= inorderTraversal(res);
+	printVector(resvectror);
+}
+
+TreeNode* isValidBST_pre = nullptr;
+bool isValidBST(TreeNode* root) {
+	if (root == nullptr)
+		return true;
+	bool left = isValidBST(root->left);
+	if (isValidBST_pre != nullptr)
+	{
+		if (isValidBST_pre->val >= root->val)
+			return false;
+	}
+	isValidBST_pre = root;
+	bool right = isValidBST(root->right);
+	return left && right;
+}
+
+
+void Test_isValidBST()
+{
+	cout << "hot100 98. 验证二叉搜索树" << endl;
+	TreeNode* root = new TreeNode(0);
+	root->left = new TreeNode(1);
+	root->left->left = new TreeNode(3);
+	root->left->right = new TreeNode(4);
+	root->right = new TreeNode(2);
+	bool res = isValidBST(root);
+	string resstr = (res == true) ? "true" : "false";
+	cout << resstr << endl;
+}
+
+int findkthSmallest_res;
+void findkthSmallest(TreeNode* root, int& k)
+{
+	if (root == nullptr)
+		return;
+	findkthSmallest(root->left, k);
+	k--;
+	if (k == 0)
+	{
+		findkthSmallest_res = root->val;
+		return;
+	}
+	findkthSmallest(root->right, k);
+}
+
+int kthSmallest(TreeNode* root, int k) {
+	findkthSmallest(root, k);
+	return findkthSmallest_res;
+}
+
+void Test_kthSmallest()
+{
+	cout << "hot100 230. 二叉搜索树中第 K 小的元素" << endl;
+	vector<int> nums;
+	int num;
+	cout << "\n依次输入升序数组的元素" << endl;
+	while (cin >> num)
+	{
+		nums.push_back(num);
+		if (cin.peek() == '\n')
+			break;
+	}
+	int k;
+	cout << "\n输入需要查找第k小的元素:" << endl;
+	cin >> k;
+	TreeNode* nodeTree = sortedArrayToBST(nums);
+	int res = kthSmallest(nodeTree, k);
+	cout << "\nres：" << res << endl;
+}
+
+vector<int> rightSideView(TreeNode* root) {
+	vector<int> res;
+	queue<TreeNode*> que;
+	if (root == nullptr)
+		return res;
+	que.push(root);
+	while (!que.empty())
+	{
+		int size = que.size();
+		for (int i = 0; i < size; i++)
+		{
+			TreeNode* node = que.front();
+			que.pop();
+			if (i == size - 1)
+				res.push_back(node->val);
+			if (node->left) que.push(node->left);
+			if (node->right) que.push(node->right);
+		}
+	}
+	return res;
+}
+
+void Test_rightSideView()
+{
+	cout << "hot100 199. 二叉树的右视图" << endl;
+	TreeNode* root = new TreeNode(0);
+	root->left = new TreeNode(1);
+	root->left->left = new TreeNode(3);
+	root->left->right = new TreeNode(4);
+	root->right = new TreeNode(2);
+	vector<int> res = rightSideView(root);
+	printVector(res);
+}
+
+void flatten(TreeNode* root) {
+	if (root == nullptr)
+		return;
+	flatten(root->left);
+	flatten(root->right);
+	TreeNode* left = root->left;
+	TreeNode* right = root->right;
+	root->right = left;
+	root->left = nullptr;
+	TreeNode* p = root;
+	while (p->right != nullptr)
+		p = p->right;
+	p->right = right;
+	return;
+}
+
+void Test_flatten()
+{
+	cout << "hot100 114. 二叉树展开为链表" << endl;
+	TreeNode* root = new TreeNode(1);
+	root->left = new TreeNode(2);
+	root->left->left = new TreeNode(3);
+	root->left->right = new TreeNode(4);
+	root->right = new TreeNode(5);
+	root->right->right = new TreeNode(6);
+	flatten(root);
+	vector<int> res = inorderTraversal(root);
+	printVector(res);
+}
+
+TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder) {
+	if (preorder.size() == 0)
+		return nullptr;
+	int rootval = preorder[0];
+	TreeNode* root = new TreeNode(rootval);
+	int midindex = 0;
+	for (int i = 0; i < inorder.size(); i++)
+	{
+		if (inorder[i] == rootval)
+		{
+			midindex = i;
+			break;
+		}
+	}
+	vector<int> leftinorder(inorder.begin(), inorder.begin() + midindex);
+	vector<int> rightinorder(inorder.begin() + midindex + 1, inorder.end());
+	vector<int> leftpreorder(preorder.begin()+1, preorder.begin() + 1+leftinorder.size());
+	vector<int> rightpreorder(preorder.begin() + 1 + leftinorder.size(), preorder.end());
+	root->left = buildTree(leftpreorder, leftinorder);
+	root->right = buildTree(rightpreorder, rightinorder);
+	return root;
+}
+
+void Test_buildTree()
+{
+	cout << "hot100 105. 从前序与中序遍历序列构造二叉树" << endl;
+	vector<int> preorder = {3, 9, 20, 15, 7};
+	vector<int> inorder = {9, 3, 15, 20, 7};
+	TreeNode* root = buildTree(preorder, inorder);
+	vector<vector<int>> res = levelOrder(root);
+	printVectorOfVector(res);
+}
+
+
 int main()
 {
-	//Test_twosum();						/*			hot100 1.	两数之和						*/
-	//Test_groupAnagrams();					/*			hot100 49.	字母异位词分组				*/
-	//Test_longestConsecutive();			/*			hot100 128.	最长连续序列					*/
-	//Test_moveZeroes();					/*			hot100 283.	移动零						*/
-	//Test_maxArea();						/*			hot100 11.	盛最多水的容器				*/
-	//Test_threeSum();						/*			hot100 15.	三数之和						*/
-	//Test_trap();							/*			hot100 42.	接雨水						*/
-	//Test_lengthOfLongestSubstring();		/*			hot100 3.	无重复字符的最长子串			*/
-	//Test_findAnagrams();					/*			hot100 438.	找到字符串中所有字母异位词		*/
-	//Test_subarraySum();					/*			hot100 560. 和为 K 的子数组				*/
-	//Test_maxSlidingWindow();				/*			hot100 239. 滑动窗口最大值				*/
-	//Test_minWindow();						/*			hot100 76.	最小覆盖子串					*/
-	//Test_maxSubArray();					/*			hot100 53.	最大子数组和					*/
-	//Test_merge();							/*			hot100 56.	合并区间						*/	
-	//Test_rotate();						/*			hot100 189. 轮转数组						*/
-	//Test_productExceptSelf();				/*			hot100 238. 除自身以外数组的乘积			*/
-	//Test_firstMissingPositive();			/*			hot100 41.	缺失的第一个正数				*/
-	//Test_setZeroes();						/*			hot100 73.	矩阵置零						*/
-	//Test_spiralOrder();					/*			hot100 54.	螺旋矩阵						*/
-	//Test_rotate_nums();					/*			hot100 48.	旋转图像						*/
-	//Test_searchMatrix();					/*			hot100 240. 搜索二维矩阵 II				*/
-	//Test_getIntersectionNode();			/*			hot100 160. 相交链表						*/
-	//Test_reverseList();					/*			hot100 206. 反转链表						*/
-	//Test_isPalindrome();					/*			hot100 234. 回文链表						*/
-	//Test_hasCycle();						/*			hot100 141. 环形链表						*/
-	//Test_detectCycle();					/*			hot100 142. 环形链表 II					*/
-	//Test_mergeTwoLists();					/*			hot100 21.	合并两个有序链表				*/
-	//Test_addTwoNumbers();					/*			hot100 2.	两数相加						*/
-	//Test_removeNthFromEnd();				/*			hot100 19.	删除链表的倒数第 N 个结点		*/
-	//Test_swapPairs();						/*			hot100 24.	两两交换链表中的节点			*/
-	//Test_reverseKGroup();					/*			hot100 25.	K 个一组翻转链表				*/
-	//Test_copyRandomList();				/*			hot100 138. 随机链表的复制				*/
-	//Test_sortList();						/*			hot100 148. 排序链表						*/
-	//Test_mergeKLists();					/*			hot100 23.	合并 K 个升序链表				*/
-	//Test_LRUCache();						/*			hot100 146. LRU 缓存						*/
-	//Test_inorderTraversal();				/*			hot100 94.  二叉树的中序遍历				*/
-	//Test_maxDepth();						/*			hot100 104. 二叉树的最大深度				*/
-	//Test_invertTree();					/*			hot100 226. 翻转二叉树					*/
-	//Test_isSymmetric();					/*			hot100 101. 对称二叉树					*/
-	//Test_diameterOfBinaryTree();			/*			hot100 543. 二叉树的直径					*/
-	Test_levelOrder();						/*			hot100 102. 二叉树的层序遍历				*/
+	//Test_twosum();						/*			hot100 1.	两数之和							*/
+	//Test_groupAnagrams();					/*			hot100 49.	字母异位词分组					*/
+	//Test_longestConsecutive();			/*			hot100 128.	最长连续序列						*/
+	//Test_moveZeroes();					/*			hot100 283.	移动零							*/
+	//Test_maxArea();						/*			hot100 11.	盛最多水的容器					*/
+	//Test_threeSum();						/*			hot100 15.	三数之和							*/
+	//Test_trap();							/*			hot100 42.	接雨水							*/
+	//Test_lengthOfLongestSubstring();		/*			hot100 3.	无重复字符的最长子串				*/
+	//Test_findAnagrams();					/*			hot100 438.	找到字符串中所有字母异位词			*/
+	//Test_subarraySum();					/*			hot100 560. 和为 K 的子数组					*/
+	//Test_maxSlidingWindow();				/*			hot100 239. 滑动窗口最大值					*/
+	//Test_minWindow();						/*			hot100 76.	最小覆盖子串						*/
+	//Test_maxSubArray();					/*			hot100 53.	最大子数组和						*/
+	//Test_merge();							/*			hot100 56.	合并区间							*/	
+	//Test_rotate();						/*			hot100 189. 轮转数组							*/
+	//Test_productExceptSelf();				/*			hot100 238. 除自身以外数组的乘积				*/
+	//Test_firstMissingPositive();			/*			hot100 41.	缺失的第一个正数					*/
+	//Test_setZeroes();						/*			hot100 73.	矩阵置零							*/
+	//Test_spiralOrder();					/*			hot100 54.	螺旋矩阵							*/
+	//Test_rotate_nums();					/*			hot100 48.	旋转图像							*/
+	//Test_searchMatrix();					/*			hot100 240. 搜索二维矩阵 II					*/
+	//Test_getIntersectionNode();			/*			hot100 160. 相交链表							*/
+	//Test_reverseList();					/*			hot100 206. 反转链表							*/
+	//Test_isPalindrome();					/*			hot100 234. 回文链表							*/
+	//Test_hasCycle();						/*			hot100 141. 环形链表							*/
+	//Test_detectCycle();					/*			hot100 142. 环形链表 II						*/
+	//Test_mergeTwoLists();					/*			hot100 21.	合并两个有序链表					*/
+	//Test_addTwoNumbers();					/*			hot100 2.	两数相加							*/
+	//Test_removeNthFromEnd();				/*			hot100 19.	删除链表的倒数第 N 个结点			*/
+	//Test_swapPairs();						/*			hot100 24.	两两交换链表中的节点				*/
+	//Test_reverseKGroup();					/*			hot100 25.	K 个一组翻转链表					*/
+	//Test_copyRandomList();				/*			hot100 138. 随机链表的复制					*/
+	//Test_sortList();						/*			hot100 148. 排序链表							*/
+	//Test_mergeKLists();					/*			hot100 23.	合并 K 个升序链表					*/
+	//Test_LRUCache();						/*			hot100 146. LRU 缓存							*/
+	//Test_inorderTraversal();				/*			hot100 94.  二叉树的中序遍历					*/
+	//Test_maxDepth();						/*			hot100 104. 二叉树的最大深度					*/
+	//Test_invertTree();					/*			hot100 226. 翻转二叉树						*/
+	//Test_isSymmetric();					/*			hot100 101. 对称二叉树						*/
+	//Test_diameterOfBinaryTree();			/*			hot100 543. 二叉树的直径						*/
+	//Test_levelOrder();					/*			hot100 102. 二叉树的层序遍历					*/
+	//Test_sortedArrayToBST();				/*			hot100 108. 将有序数组转换为二叉搜索树			*/
+	//Test_isValidBST();					/*			hot100 98.	验证二叉搜索树					*/
+	//Test_kthSmallest();					/*			hot100 230. 二叉搜索树中第 K 小的元素			*/
+	//Test_rightSideView();					/*			hot100 199. 二叉树的右视图					*/
+	//Test_flatten();						/*			hot100 114. 二叉树展开为链表					*/
+	//Test_buildTree();						/*			hot100 105. 从前序与中序遍历序列构造二叉树		*/
 }
