@@ -1859,6 +1859,41 @@ void Test_buildTree()
 	printVectorOfVector(res);
 }
 
+void find_pathSum(TreeNode* root, int targetSum, long long sum, int& res, unordered_map<long long, int>& map)
+{
+	if (root == nullptr)
+		return;
+	sum += root->val;
+	res += map.count(sum-targetSum) ? map[sum - targetSum] : 0;
+	map[sum]++;
+	find_pathSum(root->left, targetSum, sum, res, map);
+	find_pathSum(root->right, targetSum, sum, res, map);
+	map[sum]--;
+}
+
+int pathSum(TreeNode* root, int targetSum) {
+	int res = 0;
+	unordered_map<long long, int> map;
+	map[0] = 1;
+	find_pathSum(root, targetSum, 0, res, map);
+	return res;
+}
+
+void Test_pathSum()
+{
+	cout << "hot100 437. 路径总和 III" << endl;
+	TreeNode* root = new TreeNode(10);
+	root->left = new TreeNode(5);
+	root->left->left = new TreeNode(3);
+	root->left->left->left = new TreeNode(3);
+	root->left->left->left = new TreeNode(-2);
+	root->left->right = new TreeNode(2);
+	root->left->right->right = new TreeNode(1);
+	root->right = new TreeNode(-3);
+	root->right->right = new TreeNode(11);
+	int res = pathSum(root, 8);
+	cout << res << endl;
+}
 
 int main()
 {
@@ -1909,4 +1944,5 @@ int main()
 	//Test_rightSideView();					/*			hot100 199. 二叉树的右视图					*/
 	//Test_flatten();						/*			hot100 114. 二叉树展开为链表					*/
 	//Test_buildTree();						/*			hot100 105. 从前序与中序遍历序列构造二叉树		*/
+	Test_pathSum();							/*			hot100 437. 路径总和 III						*/
 }
