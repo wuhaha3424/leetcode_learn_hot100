@@ -1895,6 +1895,40 @@ void Test_pathSum()
 	cout << res << endl;
 }
 
+TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
+	if (root == nullptr)
+		return nullptr;
+	if (root == p || root == q)
+		return root;
+	TreeNode* left = lowestCommonAncestor(root->left, p, q);
+	TreeNode* right = lowestCommonAncestor(root->right, p, q);
+	if (left && right)
+		return root;
+	else if (left && !right)
+		return left;
+	else if (!left && right)
+		return right;
+	else
+		return nullptr;
+}
+
+void Test_lowestCommonAncestor()
+{
+	cout << "hot100 236. 二叉树的最近公共祖先" << endl;
+	TreeNode* root = new TreeNode(10);
+	root->left = new TreeNode(5);
+	root->left->left = new TreeNode(3);
+	root->left->left->left = new TreeNode(3);
+	root->left->left->left = new TreeNode(-2);
+	root->left->right = new TreeNode(2);
+	root->left->right->right = new TreeNode(1);
+	root->right = new TreeNode(-3);
+	root->right->right = new TreeNode(11);
+	TreeNode* res = lowestCommonAncestor(root, root->left->right, root->right->right);
+	cout << res->val << endl;
+}
+
+
 int main()
 {
 	//Test_twosum();						/*			hot100 1.	两数之和							*/
@@ -1944,5 +1978,6 @@ int main()
 	//Test_rightSideView();					/*			hot100 199. 二叉树的右视图					*/
 	//Test_flatten();						/*			hot100 114. 二叉树展开为链表					*/
 	//Test_buildTree();						/*			hot100 105. 从前序与中序遍历序列构造二叉树		*/
-	Test_pathSum();							/*			hot100 437. 路径总和 III						*/
+	//Test_pathSum();						/*			hot100 437. 路径总和 III						*/
+	Test_lowestCommonAncestor();			/*			hot100 236. 二叉树的最近公共祖先				*/
 }
