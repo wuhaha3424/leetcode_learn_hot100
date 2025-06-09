@@ -1928,6 +1928,37 @@ void Test_lowestCommonAncestor()
 	cout << res->val << endl;
 }
 
+int find_maxPathSum(TreeNode* root, int& maxPathSum_sum) {
+	if (root == nullptr)
+		return 0;
+	int leftV = max(0, find_maxPathSum(root->left, maxPathSum_sum));
+	int rightV = max(0, find_maxPathSum(root->right, maxPathSum_sum));
+	int sumn = root->val + leftV + rightV;
+	maxPathSum_sum = max(maxPathSum_sum, sumn);
+	return max(leftV, rightV) + root->val;
+}
+
+int maxPathSum(TreeNode* root) {
+	int maxPathSum_sum = INT_MIN;
+	find_maxPathSum(root, maxPathSum_sum);
+	return maxPathSum_sum;
+}
+
+void Test_maxPathSum()
+{
+	cout << "hot100 124. 二叉树中的最大路径和" << endl;
+	TreeNode* root = new TreeNode(10);
+	root->left = new TreeNode(5);
+	root->left->left = new TreeNode(3);
+	root->left->left->left = new TreeNode(3);
+	root->left->left->left = new TreeNode(-2);
+	root->left->right = new TreeNode(2);
+	root->left->right->right = new TreeNode(1);
+	root->right = new TreeNode(-3);
+	root->right->right = new TreeNode(11);
+	int  res = maxPathSum(root);
+	cout << res << endl;
+}
 
 int main()
 {
@@ -1979,5 +2010,6 @@ int main()
 	//Test_flatten();						/*			hot100 114. 二叉树展开为链表					*/
 	//Test_buildTree();						/*			hot100 105. 从前序与中序遍历序列构造二叉树		*/
 	//Test_pathSum();						/*			hot100 437. 路径总和 III						*/
-	Test_lowestCommonAncestor();			/*			hot100 236. 二叉树的最近公共祖先				*/
+	//Test_lowestCommonAncestor();			/*			hot100 236. 二叉树的最近公共祖先				*/
+	//Test_maxPathSum();					/*			hot100 124. 二叉树中的最大路径和				*/
 }
