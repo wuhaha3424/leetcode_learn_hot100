@@ -1859,15 +1859,15 @@ void Test_buildTree()
 	printVectorOfVector(res);
 }
 
-void find_pathSum(TreeNode* root, int targetSum, long long sum, int& res, unordered_map<long long, int>& map)
+void find_pathsum(TreeNode* root, int targetSum, long long sum, unordered_map<long long, int>& map, int& res)
 {
 	if (root == nullptr)
 		return;
 	sum += root->val;
-	res += map.count(sum-targetSum) ? map[sum - targetSum] : 0;
+	res += map.count(sum - targetSum) ? map[sum - targetSum] : 0;
 	map[sum]++;
-	find_pathSum(root->left, targetSum, sum, res, map);
-	find_pathSum(root->right, targetSum, sum, res, map);
+	find_pathsum(root->left, targetSum, sum, map, res);
+	find_pathsum(root->right, targetSum, sum, map, res);
 	map[sum]--;
 }
 
@@ -1875,7 +1875,7 @@ int pathSum(TreeNode* root, int targetSum) {
 	int res = 0;
 	unordered_map<long long, int> map;
 	map[0] = 1;
-	find_pathSum(root, targetSum, 0, res, map);
+	find_pathsum(root, targetSum, 0, map, res);
 	return res;
 }
 
