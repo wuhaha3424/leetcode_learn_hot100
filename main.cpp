@@ -1960,6 +1960,318 @@ void Test_maxPathSum()
 	cout << res << endl;
 }
 
+void numIslands_dfs(vector<vector<char>>& grid, int x, int y, vector<vector<int>> dir)
+{
+	if (grid[x][y] == '0')
+		return;
+	if (grid[x][y] == '1')
+		grid[x][y] = '0';
+	for (int i = 0; i < 4; i++)
+	{
+		int newx = dir[i][0] + x;
+		int newy = dir[i][1] + y;
+		if (newx >= 0 && newx < grid.size() && newy >= 0 && newy < grid[0].size())
+			numIslands_dfs(grid, newx, newy, dir);
+	}
+}
+
+int numIslands(vector<vector<char>>& grid) {
+	int res = 0;
+	vector<vector<int>> dir = { {-1,0},{1,0},{0,1},{0,-1} };
+	for (int i = 0; i < grid.size(); i++)
+	{
+		for (int j = 0; j < grid[0].size(); j++)
+		{
+			if (grid[i][j] == '1')
+			{
+				res++;
+				numIslands_dfs(grid, i, j, dir);
+			}
+		}
+	}
+	return res;
+}
+
+void Test_numIslands()
+{
+	cout << "hot100 200. 岛屿数量" << endl;
+	int m, n;
+	cout << "\n请输入目标矩阵的高度m和宽度n" << endl;
+	cin >> m >> n;
+	vector<vector<char>> grid(m, vector<char>(n));
+	cout << "\n接下来依次输入矩阵元素:" << endl;
+	for (int i = 0; i < m; i++)
+	{
+		for (int j = 0; j < n; j++)
+		{
+			cin >> grid[i][j];
+		}
+	}
+	int res = numIslands(grid);
+	cout << "the res is ：" << res << endl;
+}
+
+int orangesRotting(vector<vector<int>>& grid) {
+	vector<vector<int>> dir = { {-1,0},{1,0},{0,1},{0,-1} };
+	queue<pair<int, int>> que;
+	int fresh = 0;
+	for (int i = 0; i < grid.size(); i++)
+	{
+		for (int j = 0; j < grid[0].size(); j++)
+		{
+			if (grid[i][j] == 1)
+				fresh++;
+			else if (grid[i][j] == 2)
+				que.push({ i,j });
+		}
+	}
+	int res = 0;
+	while (!que.empty())
+	{
+		int size = que.size();
+		bool ifbad = false;
+		for (int i = 0; i < size; i++)
+		{
+			int x = que.front().first;
+			int y = que.front().second;
+			que.pop();
+			for (int i = 0; i < dir.size(); i++)
+			{
+				int newx = x + dir[i][0];
+				int newy = y + dir[i][1];
+				if (newx >= 0 && newx < grid.size() && newy >= 0 && newy < grid[0].size())
+				{
+					if (grid[newx][newy] == 1)
+					{
+						grid[newx][newy] = 2;
+						fresh--;
+						que.push({ newx,newy });
+						ifbad = true;
+
+					}
+				}
+			}
+		}
+		if (ifbad)
+			res++;
+	}
+	return fresh == 0 ? res : -1;
+}
+
+void Test_orangesRotting()
+{
+	cout << "hot100 994. 腐烂的橘子" << endl;
+	int m, n;
+	cout << "\n请输入目标矩阵的高度m和宽度n" << endl;
+	cin >> m >> n;
+	vector<vector<int>> grid(m, vector<int>(n));
+	cout << "\n接下来依次输入矩阵元素(0-空, 1-新鲜, 2-腐烂):" << endl;
+	for (int i = 0; i < m; i++)
+	{
+		for (int j = 0; j < n; j++)
+		{
+			cin >> grid[i][j];
+		}
+	}
+	int res = orangesRotting(grid);
+	cout << "the res is ：" << res << endl;
+}
+
+bool canFinish(int numCourses, vector<vector<int>>& prerequisites) {
+	vector<list<int>> graph(numCourses);
+	vector<int> input(numCourses);
+	for (vector<int> prerequisite : prerequisites)
+	{
+		graph[prerequisite[1]].push_back(prerequisite[0]);
+		input[prerequisite[0]]++;
+	}
+	queue<int> que;
+	for (int i = 0; i<input.size(); i++)
+	{
+		if (input[i] == 0)
+			que.push(i);
+	}
+	int count = 0;
+	while (!que.empty())
+	{
+		int index = que.front();
+		que.pop();
+		count++;
+		for (int num : prerequisites[index])
+		{
+			input[num]--;
+			if (input[num] == 0)
+				que.push(num);
+		}
+	}
+	return count == numCourses;
+}
+
+void Test_canFinish()
+{
+	cout << "hot100 207. 课程表" << endl;
+	int numCourses;
+	cout << "输入你需要录入多少门课：" << endl;
+	cin >> numCourses;
+	cout << "依次输入每门课的学习顺序：" << endl;
+	vector<vector<int>> prerequisites(numCourses, vector<int>(2));
+	for (int i = 0; i < numCourses; i++)
+	{
+		for (int j = 0; j < 2; j++)
+		{
+			cin >> prerequisites[i][j];
+		}
+	}
+	bool res = canFinish(numCourses, prerequisites);
+	string resstr = (res == true) ? "TRUE" : "FALSE";
+	cout << resstr << endl;
+}
+
+struct TrieNode
+{
+	bool isEnd = false;
+	TrieNode* next[26];
+};
+
+
+class Trie {
+	TrieNode* root;
+public:
+	Trie() {
+		root = new TrieNode();
+	}
+
+	void insert(string word) {
+		TrieNode* cur = root;
+		for (char c : word)
+		{
+			int idx = c - 'a';
+			if (cur->next[idx] == nullptr)
+				cur->next[idx] = new TrieNode();
+			cur = cur->next[idx];
+		}
+		cur->isEnd = true;
+	}
+
+	bool search(string word) {
+		TrieNode* cur = root;
+		for (char c : word)
+		{
+			int idx = c - 'a';
+			if (cur->next[idx] == nullptr)
+				return false;
+			cur = cur->next[idx];
+		}
+		return cur->isEnd;
+	}
+
+	bool startsWith(string prefix) {
+		TrieNode* cur = root;
+		for (char c : prefix)
+		{
+			int idx = c - 'a';
+			if (cur->next[idx] == nullptr)
+				return false;
+			cur = cur->next[idx];
+		}
+		return true;
+	}
+};
+
+void Test_Trie()
+{
+	cout << "hot100 208. 实现 Trie (前缀树)" << endl;
+	Trie trie;
+	trie.insert("apple");
+	bool apple = trie.search("apple");
+	bool apps = trie.search("app");
+	bool appw = trie.startsWith("app");
+	trie.insert("app");
+	bool appin = trie.search("app");
+	cout << apple << " " << apps << " " << appw << " " << appin << endl;
+}
+
+void permute_dfs(vector<int>& nums, vector<bool>& visited, vector<vector<int>>& res, vector<int>& temp)
+{
+	if (temp.size() >= nums.size())
+	{
+		res.push_back(temp);
+		return;
+	}
+	for (int i = 0; i < nums.size(); i++)
+	{
+		if (!visited[i])
+		{
+			visited[i] = true;
+			temp.push_back(nums[i]);
+			permute_dfs(nums, visited, res, temp);
+			temp.pop_back();
+			visited[i] = false;
+		}
+	}
+}
+
+vector<vector<int>> permute(vector<int>& nums) {
+	vector<bool> visited(nums.size(), false);
+	vector<vector<int>> res;
+	vector<int> temp;
+	permute_dfs(nums, visited, res, temp);
+	return res;
+}
+
+void Test_permute()
+{
+	cout << "hot100 46. 全排列" << endl;
+	vector<int> nums;
+	int num;
+	cout << "输入不含重复元素的数组：" << endl;
+	while (cin >> num)
+	{
+		nums.push_back(num);
+		if (cin.peek() == '\n')
+			break;
+	}
+	vector<vector<int>> res = permute(nums);
+	printVectorOfVector(res);
+}
+
+
+void subsets_dfs(vector<int>& nums, vector<vector<int>>& res, int start, vector<int>& temp)
+{
+	res.push_back(temp);
+	for (int i = start; i < nums.size(); i++)
+	{
+		temp.push_back(nums[i]);
+		subsets_dfs(nums, res, i+1, temp);
+		temp.pop_back();
+	}
+}
+
+vector<vector<int>> subsets(vector<int>& nums) {
+	vector<vector<int>> res;
+	vector<int> temp;
+	subsets_dfs(nums, res, 0 ,temp);
+	return res;
+}
+
+
+void Test_subsets()
+{
+	cout << "hot100 78. 子集" << endl;
+	vector<int> nums;
+	int num;
+	cout << "输入不含重复元素的数组：" << endl;
+	while (cin >> num)
+	{
+		nums.push_back(num);
+		if (cin.peek() == '\n')
+			break;
+	}
+	vector<vector<int>> res = subsets(nums);
+	printVectorOfVector(res);
+}
+
+
 int main()
 {
 	//Test_twosum();						/*			hot100 1.	两数之和							*/
@@ -2012,4 +2324,10 @@ int main()
 	//Test_pathSum();						/*			hot100 437. 路径总和 III						*/
 	//Test_lowestCommonAncestor();			/*			hot100 236. 二叉树的最近公共祖先				*/
 	//Test_maxPathSum();					/*			hot100 124. 二叉树中的最大路径和				*/
+	//Test_numIslands();					/*			hot100 200. 岛屿数量							*/
+	//Test_orangesRotting();				/*			hot100 994. 腐烂的橘子						*/
+	//Test_canFinish();						/*			hot100 207. 课程表							*/
+	//Test_Trie();							/*			hot100 208. 实现 Trie (前缀树)				*/
+	//Test_permute();						/*			hot100 46. 全排列							*/
+	Test_subsets();							/*			hot100 78. 子集								*/
 }
