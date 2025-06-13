@@ -2272,6 +2272,179 @@ void Test_subsets()
 }
 
 
+unordered_map<char, string> phoneNum = {
+		{'1', ""},    {'2', "abc"},  {'3', "def"}, {'4', "ghi"},  {'5', "jkl"},
+		{'6', "mno"}, {'7', "pqrs"}, {'8', "tuv"}, {'9', "wxyz"}, {'0', ""} };
+
+void letterCombinations_dfs(string digits, int star, vector<string>& res,
+	string& temp) {
+	if (star == digits.size())
+		res.push_back(temp);
+	string charnum = phoneNum[digits[star]];
+	for (char c : charnum) {
+		temp.push_back(c);
+		letterCombinations_dfs(digits, star + 1, res, temp);
+		temp.pop_back();
+	}
+}
+
+vector<string> letterCombinations(string digits) {
+	vector<string> res;
+	if (digits.size() == 0) return res;
+	string temp;
+	letterCombinations_dfs(digits, 0, res, temp);
+	return res;
+}
+
+void Test_letterCombinations()
+{
+	cout << "hot100 17. 电话号码的字母组合" << endl;
+	string digits;
+	cout << "输入数字字符串：" << endl;
+	cin >> digits;
+	vector<string> res = letterCombinations(digits);
+	printVector(res);
+}
+
+void combinationSum_dfs(vector<int>& candidates, int target, int idx, vector<vector<int>>& res, vector<int>& temp)
+{
+	if (target == 0)
+		res.push_back(temp);
+	for (int i = idx; i < candidates.size(); i++)
+	{
+		if (target - candidates[i] >= 0)
+		{
+			temp.push_back(candidates[i]);
+			combinationSum_dfs(candidates, target - candidates[i], i, res, temp);
+			temp.pop_back();
+		}
+	}
+}
+
+vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
+	vector<vector<int>> res;
+	vector<int> temp;
+	combinationSum_dfs(candidates, target, 0, res, temp);
+	return res;
+}
+
+void Test_combinationSum()
+{
+	cout << "hot100 39. 组合总和" << endl;
+	vector<int> nums;
+	int num;
+	cout << "\n输入不含重复元素的数组：" << endl;
+	while (cin >> num)
+	{
+		nums.push_back(num);
+		if (cin.peek() == '\n')
+			break;
+	}
+	int target;
+	cout << "\n输入目标整数target：" << endl;
+	cin >> target;
+	vector<vector<int>> res = combinationSum(nums, target);
+	printVectorOfVector(res);
+}
+
+void generateParenthesis_dfs(int left, int right, vector<string>& res, string& temp)
+{
+	if (left > right)
+		return;
+	else if (left < 0 || right < 0)
+		return;
+	else if (left == 0 && right == 0)
+		res.push_back(temp);
+
+	temp.push_back('(');
+	generateParenthesis_dfs(left - 1, right, res, temp);
+	temp.pop_back();
+
+	temp.push_back(')');
+	generateParenthesis_dfs(left, right - 1, res, temp);
+	temp.pop_back();
+}
+
+vector<string> generateParenthesis(int n) {
+	vector<string> res;
+	string temp;
+	generateParenthesis_dfs(n, n, res, temp);
+	return res;
+}
+
+void Test_generateParenthesis()
+{
+	cout << "hot100 22. 括号生成" << endl;
+	int target;
+	cout << "\n输入括号对数：" << endl;
+	cin >> target;
+	vector<string> res = generateParenthesis(target);
+	printVector(res);
+}
+
+vector<vector<int>> exist_dir = { {1,0},{-1,0},{0,1},{0,-1} };
+bool exist_res = false;
+void exist_dfs(vector<vector<char>>& board, string word, int x, int y, int idx, vector<vector<bool>>& visited)
+{
+	if (board[x][y] != word[idx])
+	{
+		return;
+	}
+	else if (board[x][y] == word[idx] && idx == word.size() - 1)
+	{
+		exist_res = true;
+		return;
+	}
+	for (int i = 0; i < exist_dir.size(); i++)
+	{
+		int newx = x + exist_dir[i][0];
+		int newy = y + exist_dir[i][1];
+		if (newx >= 0 && newx < board.size() && newy >= 0 && newy < board[0].size() && !visited[newx][newy])
+		{
+			visited[newx][newy] = true;
+			exist_dfs(board, word, newx, newy, idx + 1, visited);
+			visited[newx][newy] = false;
+		}
+	}
+	return;
+}
+
+bool exist(vector<vector<char>>& board, string word) {
+	vector<vector<bool>> visited(board.size(), vector<bool>(board[0].size(), false));
+	for (int i = 0; i < board.size(); i++)
+	{
+		for (int j = 0; j < board[0].size(); j++)
+		{
+			if (board[i][j] == word[0])
+			{
+				visited[i][j] = true;
+				exist_dfs(board, word, i, j, 0, visited);
+				visited[i][j] = false;
+				if (exist_res)
+					return true;
+			}
+		}
+	}
+	return exist_res;
+}
+
+
+void Test_exist()
+{
+	cout << "hot100 79. 单词搜索" << endl;
+	vector<vector<char>> board = {
+		{'A','B','C','E'},
+		{'S','F','C','S'},
+		{'A','D','E','E'}
+	};
+	string word = "ABCCED";
+	bool res = exist(board, word);
+	string resstr = (res == true) ? "true" : "false";
+	cout << resstr << endl;
+}
+
+
+
 int main()
 {
 	//Test_twosum();						/*			hot100 1.	两数之和							*/
@@ -2329,5 +2502,9 @@ int main()
 	//Test_canFinish();						/*			hot100 207. 课程表							*/
 	//Test_Trie();							/*			hot100 208. 实现 Trie (前缀树)				*/
 	//Test_permute();						/*			hot100 46. 全排列							*/
-	Test_subsets();							/*			hot100 78. 子集								*/
+	//Test_subsets();						/*			hot100 78. 子集								*/
+	//Test_letterCombinations();			/*			hot100 17. 电话号码的字母组合					*/
+	//Test_combinationSum();				/*			hot100 39. 组合总和							*/
+	//Test_generateParenthesis();			/*			hot100 22. 括号生成							*/
+	Test_exist();							/*			hot100 79. 单词搜索							*/
 }
