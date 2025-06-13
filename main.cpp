@@ -2490,6 +2490,63 @@ void Test_partition()
 	printVectorOfVector(res);
 }
 
+bool ifNQueens(int n, int row, int col, vector<string> temp)
+{
+	for (int i = 0; i < row; i++)
+	{
+		if (temp[i][col] == 'Q')
+			return false;
+	}
+	for (int i = row-1, j = col-1; i >=0&&j>=0; i--,j--)
+	{
+		if (temp[i][j] == 'Q')
+			return false;
+	}
+	for (int i = row - 1, j = col + 1; i >= 0 && j < n; i--, j++)
+	{
+		if (temp[i][j] == 'Q')
+			return false;
+	}
+	return true;
+}
+
+
+void findNQueens(int n, int row, vector<string>& temp, vector<vector<string>>& res)
+{
+	if (row == n)
+	{
+		res.push_back(temp);
+		return;
+	}
+	for (int j = 0; j < n; j++)
+	{
+		if (ifNQueens(n, row, j, temp))
+		{
+			temp[row][j] = 'Q';
+			findNQueens(n, row + 1, temp, res);
+			temp[row][j] = '.';
+		}
+	}
+}
+
+vector<vector<string>> solveNQueens(int n) {
+	vector<vector<string>> res;
+	vector<string> temp(n, string(n, '.'));
+	findNQueens(n, 0, temp, res);
+	return res;
+}
+
+void Test_solveNQueens()
+{
+	cout << "hot100 51. N 皇后" << endl;
+	cout << "\n输入棋盘大小n:" << endl;
+	int n;
+	cin >> n;
+	vector<vector<string>> res = solveNQueens(n);
+	printVectorOfVector(res);
+}
+
+
 int main()
 {
 	//Test_twosum();						/*			hot100 1.	两数之和							*/
@@ -2546,11 +2603,12 @@ int main()
 	//Test_orangesRotting();				/*			hot100 994. 腐烂的橘子						*/
 	//Test_canFinish();						/*			hot100 207. 课程表							*/
 	//Test_Trie();							/*			hot100 208. 实现 Trie (前缀树)				*/
-	//Test_permute();						/*			hot100 46. 全排列							*/
-	//Test_subsets();						/*			hot100 78. 子集								*/
-	//Test_letterCombinations();			/*			hot100 17. 电话号码的字母组合					*/
-	//Test_combinationSum();				/*			hot100 39. 组合总和							*/
-	//Test_generateParenthesis();			/*			hot100 22. 括号生成							*/
-	//Test_exist();							/*			hot100 79. 单词搜索							*/
-	Test_partition();						/*			hot100 131. 分割回文串						*/
+	//Test_permute();						/*			hot100 46.	全排列							*/
+	//Test_subsets();						/*			hot100 78.	子集								*/
+	//Test_letterCombinations();			/*			hot100 17.	电话号码的字母组合				*/
+	//Test_combinationSum();				/*			hot100 39.	组合总和							*/
+	//Test_generateParenthesis();			/*			hot100 22.	括号生成							*/
+	//Test_exist();							/*			hot100 79.	单词搜索							*/
+	//Test_partition();						/*			hot100 131. 分割回文串						*/
+	Test_solveNQueens();					/*			hot100 51.	N 皇后							*/
 }
