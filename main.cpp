@@ -7,6 +7,7 @@
 #include <mutex>
 #include <unordered_set>
 #include <stack>
+#include <string>
 using namespace std;
 
 template<typename T>
@@ -2443,7 +2444,51 @@ void Test_exist()
 	cout << resstr << endl;
 }
 
+bool ifhuiwen(string s, int left, int right)
+{
+	int begin = left, end = right;
+	while (begin < end)
+	{
+		if (s[begin] != s[end])
+			return false;
+		begin++;
+		end--;
+	}
+	return true;
+}
 
+void partition_dfs(string& s, int idx, vector<vector<string>>& res, vector<string>& temp)
+{
+	if (idx == s.size())
+		res.push_back(temp);
+	for (int i = idx; i < s.size(); i++)
+	{
+		if (ifhuiwen(s, idx, i))
+		{
+			string stemp = s.substr(idx, i - idx + 1);
+			temp.push_back(stemp);
+			partition_dfs(s, i + 1, res, temp);
+			temp.pop_back();
+		}
+	}
+}
+
+vector<vector<string>> partition(string s) {
+	vector<vector<string>> res;
+	vector<string> temp;
+	partition_dfs(s, 0, res, temp);
+	return res;
+}
+
+void Test_partition()
+{
+	cout << "hot100 131. 分割回文串" << endl;
+	cout << "\n输入字符串:" << endl;
+	string s;
+	cin >> s;
+	vector<vector<string>> res = partition(s);
+	printVectorOfVector(res);
+}
 
 int main()
 {
@@ -2506,5 +2551,6 @@ int main()
 	//Test_letterCombinations();			/*			hot100 17. 电话号码的字母组合					*/
 	//Test_combinationSum();				/*			hot100 39. 组合总和							*/
 	//Test_generateParenthesis();			/*			hot100 22. 括号生成							*/
-	Test_exist();							/*			hot100 79. 单词搜索							*/
+	//Test_exist();							/*			hot100 79. 单词搜索							*/
+	Test_partition();						/*			hot100 131. 分割回文串						*/
 }
