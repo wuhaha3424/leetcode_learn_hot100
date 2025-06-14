@@ -2546,69 +2546,332 @@ void Test_solveNQueens()
 	printVectorOfVector(res);
 }
 
+int searchInsert(vector<int>& nums, int target) {
+	int left = 0, right = nums.size() - 1;
+	while (left <= right)
+	{
+		int mid = left + (right - left) / 2;
+		if (nums[mid] > target)
+		{
+			right = mid - 1;
+		}
+		else if (nums[mid] < target)
+		{
+			left = mid + 1;
+		}
+		else {
+			return mid;
+		}
+	}
+	return left;
+}
+
+void Test_searchInsert()
+{
+	vector<int> nums;
+	int num;
+	cout << "hot100 35. 搜索插入位置" << endl;
+	cout << "\ninput array:" << endl;
+	while (cin >> num)
+	{
+		nums.push_back(num);
+		if (cin.peek() == '\n')
+			break;
+	}
+	int target;
+	cout << "\ninput target value:" << endl;
+	cin >> target;
+	int res = searchInsert(nums, target);
+	cout << "the res is:" << res << endl;
+}
+
+bool searchMatrix2(vector<vector<int>>& matrix, int target) {
+	int m = matrix.size(), n = matrix[0].size();
+	int left = 0, right = m * n - 1;
+	while (left <= right)
+	{
+		int mid = left + (right - left) / 2;
+		int newx = mid / n;
+		int newy = mid % n;
+		if (matrix[newx][newy] > target)
+		{
+			right = mid - 1;
+		}
+		else if (matrix[newx][newy] < target)
+		{
+			left = mid + 1;
+		}
+		else {
+			return true;
+		}
+	}
+	return false;
+}
+
+void Test_searchMatrix2()
+{
+	cout << "\nhot100 74. 搜索二维矩阵" << endl;
+	int m, n, target;
+	cout << "\n请输入矩阵的行数m和列数n:" << endl;
+	cin >> m >> n;
+	cout << "\n依次从左上角到右下角输入矩阵元素" << endl;
+	vector<vector<int>> nums(m, vector<int>(n, 0));
+	for (int i = 0; i < m; i++)
+	{
+		for (int j = 0; j < n; j++)
+		{
+			cin >> nums[i][j];
+		}
+	}
+	cout << "\n请输入目标值target:" << endl;
+	cin >> target;
+
+	bool res = searchMatrix2(nums, target);
+	string resstr = (res == true) ? "true" : "false";
+	cout << resstr << endl;
+}
+
+vector<int> searchRange(vector<int>& nums, int target) {
+	vector<int> res(2, -1);
+	int left = 0, right = nums.size() - 1;
+	while (left <= right)
+	{
+		int mid = left + (right - left) / 2;
+		if (nums[mid] >= target)
+			right = mid - 1;
+		else
+			left = mid + 1;
+	}
+	if (left < nums.size() && nums[left] == target)
+		res[0] = left;
+
+	left = 0;
+	right = nums.size() - 1;
+	while (left <= right)
+	{
+		int mid = left + (right - left) / 2;
+		if (nums[mid] <= target)
+			left = mid + 1;
+		else
+			right = mid - 1;
+	}
+	if (right >= 0 && nums[right] == target)
+		res[1] = right;
+
+	return res;
+}
+
+void Test_searchRange()
+{
+	vector<int> nums;
+	int num;
+	cout << "hot100 34. 在排序数组中查找元素的第一个和最后一个位置" << endl;
+	cout << "\ninput array:" << endl;
+	while (cin >> num)
+	{
+		nums.push_back(num);
+		if (cin.peek() == '\n')
+			break;
+	}
+	int target;
+	cout << "\ninput target value:" << endl;
+	cin >> target;
+	vector<int> res = searchRange(nums, target);
+	printVector(res);
+}
+
+int search(vector<int>& nums, int target) {
+	int left = 0, right = nums.size() - 1;
+	while (left < right)
+	{
+		int mid = left + (right - left) / 2;
+		if (nums[mid] == target)
+			return mid;
+		if (nums[left] <= nums[mid])
+		{
+			if (target >= nums[left] && target < nums[mid])
+				right = mid - 1;
+			else
+				left = mid + 1;
+		}
+		else {
+			if (target > nums[mid] && target <= nums[right])
+				left = mid + 1;
+			else
+				right = mid - 1;
+		}
+	}
+	return -1;
+}
+
+void Test_search()
+{
+	vector<int> nums;
+	int num;
+	cout << "hot100 33. 搜索旋转排序数组" << endl;
+	cout << "\ninput array:" << endl;
+	while (cin >> num)
+	{
+		nums.push_back(num);
+		if (cin.peek() == '\n')
+			break;
+	}
+	int target;
+	cout << "\ninput target value:" << endl;
+	cin >> target;
+	int res = search(nums, target);
+	cout << res << endl;
+}
+
+int findMin(vector<int>& nums) {
+	int left = 0, right = nums.size() - 1;
+	while (left < right)
+	{
+		int mid = left + (right - left) / 2;
+		if (nums[mid] > nums[right])
+			left = mid + 1;
+		else
+			right = mid;
+	}
+	return nums[left];
+}
+
+void Test_findMin()
+{
+	vector<int> nums;
+	int num;
+	cout << "hot100 153. 寻找旋转排序数组中的最小值" << endl;
+	cout << "\ninput array:" << endl;
+	while (cin >> num)
+	{
+		nums.push_back(num);
+		if (cin.peek() == '\n')
+			break;
+	}
+	int res = findMin(nums);
+	cout << res << endl;
+}
+
+double findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) {
+	int m = nums1.size(), n = nums2.size();
+	if (m > n)
+		return findMedianSortedArrays(nums2, nums1);
+	int left = 0, right = m;
+	int totalleft = (m + n + 1) / 2; //i+j = m-i + n-j +1
+	int leftmax = 0, rightmin = 0;
+	while (left <= right)
+	{
+		int mid_i = left + (right - left) / 2;
+		int j = totalleft - mid_i;
+		int numi_1 = mid_i - 1 < 0 ? INT_MIN : nums1[mid_i - 1];
+		int numj_1 = j - 1 < 0 ? INT_MIN : nums2[j - 1];
+		int numi = mid_i >= nums1.size() ? INT_MAX : nums1[mid_i];
+		int numj = j >= nums2.size() ? INT_MAX : nums2[j];
+		if (numi_1 <= numj)
+		{
+			leftmax = max(numi_1, numj_1);
+			rightmin = min(numi, numj);
+			left = mid_i + 1;
+		}
+		else {
+			right = mid_i - 1;
+		}
+	}
+	return (m + n) % 2 == 0 ? (leftmax + rightmin) / 2.0 : leftmax;
+}
+
+void Test_findMedianSortedArrays()
+{
+	vector<int> nums1;
+	int num;
+	cout << "hot100 4. 寻找两个正序数组的中位数" << endl;
+	cout << "\ninput array1:" << endl;
+	while (cin >> num)
+	{
+		nums1.push_back(num);
+		if (cin.peek() == '\n')
+			break;
+	}
+	vector<int> nums2;
+	cout << "\ninput array2:" << endl;
+	while (cin >> num)
+	{
+		nums2.push_back(num);
+		if (cin.peek() == '\n')
+			break;
+	}
+	double res = findMedianSortedArrays(nums1, nums2);
+	cout << res << endl;
+}
 
 int main()
 {
-	//Test_twosum();						/*			hot100 1.	两数之和							*/
-	//Test_groupAnagrams();					/*			hot100 49.	字母异位词分组					*/
-	//Test_longestConsecutive();			/*			hot100 128.	最长连续序列						*/
-	//Test_moveZeroes();					/*			hot100 283.	移动零							*/
-	//Test_maxArea();						/*			hot100 11.	盛最多水的容器					*/
-	//Test_threeSum();						/*			hot100 15.	三数之和							*/
-	//Test_trap();							/*			hot100 42.	接雨水							*/
-	//Test_lengthOfLongestSubstring();		/*			hot100 3.	无重复字符的最长子串				*/
-	//Test_findAnagrams();					/*			hot100 438.	找到字符串中所有字母异位词			*/
-	//Test_subarraySum();					/*			hot100 560. 和为 K 的子数组					*/
-	//Test_maxSlidingWindow();				/*			hot100 239. 滑动窗口最大值					*/
-	//Test_minWindow();						/*			hot100 76.	最小覆盖子串						*/
-	//Test_maxSubArray();					/*			hot100 53.	最大子数组和						*/
-	//Test_merge();							/*			hot100 56.	合并区间							*/	
-	//Test_rotate();						/*			hot100 189. 轮转数组							*/
-	//Test_productExceptSelf();				/*			hot100 238. 除自身以外数组的乘积				*/
-	//Test_firstMissingPositive();			/*			hot100 41.	缺失的第一个正数					*/
-	//Test_setZeroes();						/*			hot100 73.	矩阵置零							*/
-	//Test_spiralOrder();					/*			hot100 54.	螺旋矩阵							*/
-	//Test_rotate_nums();					/*			hot100 48.	旋转图像							*/
-	//Test_searchMatrix();					/*			hot100 240. 搜索二维矩阵 II					*/
-	//Test_getIntersectionNode();			/*			hot100 160. 相交链表							*/
-	//Test_reverseList();					/*			hot100 206. 反转链表							*/
-	//Test_isPalindrome();					/*			hot100 234. 回文链表							*/
-	//Test_hasCycle();						/*			hot100 141. 环形链表							*/
-	//Test_detectCycle();					/*			hot100 142. 环形链表 II						*/
-	//Test_mergeTwoLists();					/*			hot100 21.	合并两个有序链表					*/
-	//Test_addTwoNumbers();					/*			hot100 2.	两数相加							*/
-	//Test_removeNthFromEnd();				/*			hot100 19.	删除链表的倒数第 N 个结点			*/
-	//Test_swapPairs();						/*			hot100 24.	两两交换链表中的节点				*/
-	//Test_reverseKGroup();					/*			hot100 25.	K 个一组翻转链表					*/
-	//Test_copyRandomList();				/*			hot100 138. 随机链表的复制					*/
-	//Test_sortList();						/*			hot100 148. 排序链表							*/
-	//Test_mergeKLists();					/*			hot100 23.	合并 K 个升序链表					*/
-	//Test_LRUCache();						/*			hot100 146. LRU 缓存							*/
-	//Test_inorderTraversal();				/*			hot100 94.  二叉树的中序遍历					*/
-	//Test_maxDepth();						/*			hot100 104. 二叉树的最大深度					*/
-	//Test_invertTree();					/*			hot100 226. 翻转二叉树						*/
-	//Test_isSymmetric();					/*			hot100 101. 对称二叉树						*/
-	//Test_diameterOfBinaryTree();			/*			hot100 543. 二叉树的直径						*/
-	//Test_levelOrder();					/*			hot100 102. 二叉树的层序遍历					*/
-	//Test_sortedArrayToBST();				/*			hot100 108. 将有序数组转换为二叉搜索树			*/
-	//Test_isValidBST();					/*			hot100 98.	验证二叉搜索树					*/
-	//Test_kthSmallest();					/*			hot100 230. 二叉搜索树中第 K 小的元素			*/
-	//Test_rightSideView();					/*			hot100 199. 二叉树的右视图					*/
-	//Test_flatten();						/*			hot100 114. 二叉树展开为链表					*/
-	//Test_buildTree();						/*			hot100 105. 从前序与中序遍历序列构造二叉树		*/
-	//Test_pathSum();						/*			hot100 437. 路径总和 III						*/
-	//Test_lowestCommonAncestor();			/*			hot100 236. 二叉树的最近公共祖先				*/
-	//Test_maxPathSum();					/*			hot100 124. 二叉树中的最大路径和				*/
-	//Test_numIslands();					/*			hot100 200. 岛屿数量							*/
-	//Test_orangesRotting();				/*			hot100 994. 腐烂的橘子						*/
-	//Test_canFinish();						/*			hot100 207. 课程表							*/
-	//Test_Trie();							/*			hot100 208. 实现 Trie (前缀树)				*/
-	//Test_permute();						/*			hot100 46.	全排列							*/
-	//Test_subsets();						/*			hot100 78.	子集								*/
-	//Test_letterCombinations();			/*			hot100 17.	电话号码的字母组合				*/
-	//Test_combinationSum();				/*			hot100 39.	组合总和							*/
-	//Test_generateParenthesis();			/*			hot100 22.	括号生成							*/
-	//Test_exist();							/*			hot100 79.	单词搜索							*/
-	//Test_partition();						/*			hot100 131. 分割回文串						*/
-	Test_solveNQueens();					/*			hot100 51.	N 皇后							*/
+	//Test_twosum();						/*			hot100 1.	两数之和									*/
+	//Test_groupAnagrams();					/*			hot100 49.	字母异位词分组							*/
+	//Test_longestConsecutive();			/*			hot100 128.	最长连续序列								*/
+	//Test_moveZeroes();					/*			hot100 283.	移动零									*/
+	//Test_maxArea();						/*			hot100 11.	盛最多水的容器							*/
+	//Test_threeSum();						/*			hot100 15.	三数之和									*/
+	//Test_trap();							/*			hot100 42.	接雨水									*/
+	//Test_lengthOfLongestSubstring();		/*			hot100 3.	无重复字符的最长子串						*/
+	//Test_findAnagrams();					/*			hot100 438.	找到字符串中所有字母异位词					*/
+	//Test_subarraySum();					/*			hot100 560. 和为 K 的子数组							*/
+	//Test_maxSlidingWindow();				/*			hot100 239. 滑动窗口最大值							*/
+	//Test_minWindow();						/*			hot100 76.	最小覆盖子串								*/
+	//Test_maxSubArray();					/*			hot100 53.	最大子数组和								*/
+	//Test_merge();							/*			hot100 56.	合并区间									*/	
+	//Test_rotate();						/*			hot100 189. 轮转数组									*/
+	//Test_productExceptSelf();				/*			hot100 238. 除自身以外数组的乘积						*/
+	//Test_firstMissingPositive();			/*			hot100 41.	缺失的第一个正数							*/
+	//Test_setZeroes();						/*			hot100 73.	矩阵置零									*/
+	//Test_spiralOrder();					/*			hot100 54.	螺旋矩阵									*/
+	//Test_rotate_nums();					/*			hot100 48.	旋转图像									*/
+	//Test_searchMatrix();					/*			hot100 240. 搜索二维矩阵 II							*/
+	//Test_getIntersectionNode();			/*			hot100 160. 相交链表									*/
+	//Test_reverseList();					/*			hot100 206. 反转链表									*/
+	//Test_isPalindrome();					/*			hot100 234. 回文链表									*/
+	//Test_hasCycle();						/*			hot100 141. 环形链表									*/
+	//Test_detectCycle();					/*			hot100 142. 环形链表 II								*/
+	//Test_mergeTwoLists();					/*			hot100 21.	合并两个有序链表							*/
+	//Test_addTwoNumbers();					/*			hot100 2.	两数相加									*/
+	//Test_removeNthFromEnd();				/*			hot100 19.	删除链表的倒数第 N 个结点					*/
+	//Test_swapPairs();						/*			hot100 24.	两两交换链表中的节点						*/
+	//Test_reverseKGroup();					/*			hot100 25.	K 个一组翻转链表							*/
+	//Test_copyRandomList();				/*			hot100 138. 随机链表的复制							*/
+	//Test_sortList();						/*			hot100 148. 排序链表									*/
+	//Test_mergeKLists();					/*			hot100 23.	合并 K 个升序链表							*/
+	//Test_LRUCache();						/*			hot100 146. LRU 缓存									*/
+	//Test_inorderTraversal();				/*			hot100 94.  二叉树的中序遍历							*/
+	//Test_maxDepth();						/*			hot100 104. 二叉树的最大深度							*/
+	//Test_invertTree();					/*			hot100 226. 翻转二叉树								*/
+	//Test_isSymmetric();					/*			hot100 101. 对称二叉树								*/
+	//Test_diameterOfBinaryTree();			/*			hot100 543. 二叉树的直径								*/
+	//Test_levelOrder();					/*			hot100 102. 二叉树的层序遍历							*/
+	//Test_sortedArrayToBST();				/*			hot100 108. 将有序数组转换为二叉搜索树					*/
+	//Test_isValidBST();					/*			hot100 98.	验证二叉搜索树							*/
+	//Test_kthSmallest();					/*			hot100 230. 二叉搜索树中第 K 小的元素					*/
+	//Test_rightSideView();					/*			hot100 199. 二叉树的右视图							*/
+	//Test_flatten();						/*			hot100 114. 二叉树展开为链表							*/
+	//Test_buildTree();						/*			hot100 105. 从前序与中序遍历序列构造二叉树				*/
+	//Test_pathSum();						/*			hot100 437. 路径总和 III								*/
+	//Test_lowestCommonAncestor();			/*			hot100 236. 二叉树的最近公共祖先						*/
+	//Test_maxPathSum();					/*			hot100 124. 二叉树中的最大路径和						*/
+	//Test_numIslands();					/*			hot100 200. 岛屿数量									*/
+	//Test_orangesRotting();				/*			hot100 994. 腐烂的橘子								*/
+	//Test_canFinish();						/*			hot100 207. 课程表									*/
+	//Test_Trie();							/*			hot100 208. 实现 Trie (前缀树)						*/
+	//Test_permute();						/*			hot100 46.	全排列									*/
+	//Test_subsets();						/*			hot100 78.	子集										*/
+	//Test_letterCombinations();			/*			hot100 17.	电话号码的字母组合						*/
+	//Test_combinationSum();				/*			hot100 39.	组合总和									*/
+	//Test_generateParenthesis();			/*			hot100 22.	括号生成									*/
+	//Test_exist();							/*			hot100 79.	单词搜索									*/
+	//Test_partition();						/*			hot100 131. 分割回文串								*/
+	//Test_solveNQueens();					/*			hot100 51.	N 皇后									*/
+	//Test_searchInsert();					/*			hot100 35.  搜索插入位置								*/
+	//Test_searchMatrix2();					/*			hot100 74.	搜索二维矩阵								*/
+	//Test_searchRange();					/*			hot100 34.	在排序数组中查找元素的第一个和最后一个位置  */
+	//Test_search();						/*			hot100 33.	搜索旋转排序数组							*/
+	//Test_findMin();						/*			hot100 153. 寻找旋转排序数组中的最小值					*/
+	Test_findMedianSortedArrays();			/*			hot100 4.	寻找两个正序数组的中位数					*/
 }
