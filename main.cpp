@@ -2804,6 +2804,103 @@ void Test_findMedianSortedArrays()
 	cout << res << endl;
 }
 
+bool isValid(string s) {
+	stack<char> sta;
+	for (char c : s)
+	{
+		if (c == '(' || c == '[' || c == '{')
+		{
+			if (c == '(')
+				sta.push(')');
+			else if (c == '[')
+				sta.push(']');
+			else if (c == '{')
+				sta.push('}');
+		}
+		else if (c == ')' || c == ']' || c == '}')
+		{
+			if (sta.empty())
+				return false;
+			char temp = sta.top();
+			sta.pop();
+			if (c != temp)
+			{
+				return false;
+			}
+		}
+	}
+	if (!sta.empty())
+		return false;
+	return true;
+}
+
+void Test_isValid()
+{
+	string s;
+	cout << "hot100 20. 有效的括号" << endl;
+	cout << "\ninput'('，')'，'{'，'}'，'['，']'" << endl;
+	cin >> s;
+	bool res = isValid(s);
+	string resstr = (res == true) ? "true" : "false";
+	cout << resstr << endl;
+}
+
+class MinStack {
+	stack<int> sta;
+	stack<int> minsta;
+public:
+	MinStack() {
+
+	}
+
+	void push(int val) {
+		sta.push(val);
+		if (minsta.empty())
+			minsta.push(val);
+		else
+		{
+			minsta.push(min(minsta.top(), val));
+		}
+	}
+
+	void pop() {
+		sta.pop();
+		minsta.pop();
+	}
+
+	int top() {
+		return sta.top();
+	}
+
+	int getMin() {
+		return minsta.top();
+	}
+};
+
+void Test_MinStack()
+{
+	MinStack minstack;
+	minstack.push(-2);
+	minstack.push(0);
+	minstack.push(-3);
+	int res = minstack.getMin();
+	if (res == -3)
+		cout << "true" <<endl;
+	else
+		cout << "false" << endl;
+	minstack.pop();
+	int a = minstack.top();
+	if (a == 0)
+		cout << "true" << endl;
+	else
+		cout << "false" << endl;
+	int c = minstack.getMin();
+	if (c == -2)
+		cout << "true" << endl;
+	else
+		cout << "false"<< endl;
+}
+
 int main()
 {
 	//Test_twosum();						/*			hot100 1.	两数之和									*/
@@ -2873,5 +2970,7 @@ int main()
 	//Test_searchRange();					/*			hot100 34.	在排序数组中查找元素的第一个和最后一个位置  */
 	//Test_search();						/*			hot100 33.	搜索旋转排序数组							*/
 	//Test_findMin();						/*			hot100 153. 寻找旋转排序数组中的最小值					*/
-	Test_findMedianSortedArrays();			/*			hot100 4.	寻找两个正序数组的中位数					*/
+	//Test_findMedianSortedArrays();		/*			hot100 4.	寻找两个正序数组的中位数					*/
+	//Test_isValid();						/*			hot100 20.	有效的括号								*/
+	Test_MinStack();						/*			hot100 155. 最小栈									*/
 }
