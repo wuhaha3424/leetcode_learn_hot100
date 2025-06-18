@@ -2901,6 +2901,54 @@ void Test_MinStack()
 		cout << "false"<< endl;
 }
 
+string decodeString(string s) {
+	stack<int> nums;
+	stack<string> strs;
+	int num = 0;
+	string res;
+	for (char c : s)
+	{
+		if (c - '0' >= 0 && c - '0' <= 9)
+		{
+			num = num * 10 + (c - '0');
+		}
+		else if (c >= 'a' && c <= 'z')
+		{
+			res += c;
+		}
+		else if (c == '[')
+		{
+			nums.push(num);
+			num = 0;
+			strs.push(res);
+			res = "";
+		}
+		else if (c == ']')
+		{
+			string tempword = res;
+			int times = nums.top();
+			nums.pop();
+			res = strs.top();
+			strs.pop();
+			for (int i = 0; i < times; i++)
+			{
+				res += tempword;
+			}
+		}
+	}
+	return res;
+}
+
+void Test_decodeString()
+{
+	string s;
+	cout << "hot100 394. 字符串解码" << endl;
+	cout << "\ninput string with'['，']' and num:" << endl;
+	cin >> s;
+	string res = decodeString(s);
+	cout << res << endl;
+}
+
 int main()
 {
 	//Test_twosum();						/*			hot100 1.	两数之和									*/
@@ -2972,5 +3020,6 @@ int main()
 	//Test_findMin();						/*			hot100 153. 寻找旋转排序数组中的最小值					*/
 	//Test_findMedianSortedArrays();		/*			hot100 4.	寻找两个正序数组的中位数					*/
 	//Test_isValid();						/*			hot100 20.	有效的括号								*/
-	Test_MinStack();						/*			hot100 155. 最小栈									*/
+	//Test_MinStack();						/*			hot100 155. 最小栈									*/
+	//Test_decodeString();					/*			hot100 394. 字符串解码									*/
 }
