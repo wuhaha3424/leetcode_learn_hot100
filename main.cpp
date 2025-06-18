@@ -3042,6 +3042,83 @@ void Test_largestRectangleArea()
 }
 
 
+int findKthLargest(vector<int>& nums, int k) {
+	priority_queue<int, vector<int>> que;
+	for (int i : nums) {
+		que.push(i);
+		/*
+		* if(que.size()>k)
+		*	que.pop();
+		*/
+	}
+	for (int i = 0; i < k - 1; i++) {
+		que.pop();
+	}
+	return que.top();
+}
+
+void Test_findKthLargest()
+{
+	int target;
+	cout << "hot100 215. 数组中的第K个最大元素" << endl;
+	cout << "\ninput the k:" << endl;
+	cin >> target;
+	vector<int> nums;
+	int num;
+	cout << "input array:" << endl;
+	while (cin >> num)
+	{
+		nums.push_back(num);
+		if (cin.peek() == '\n')
+			break;
+	}
+	int res = findKthLargest(nums, target);
+	cout << "\nthe result:"<<res<< endl;
+}
+
+vector<int> topKFrequent(vector<int>& nums, int k) {
+	auto duibi = [](pair<int, int>& a, pair<int, int>& b) {
+		return a.second > b.second;
+	};
+	priority_queue<pair<int, int>, vector<pair<int, int>>, decltype(duibi)>
+		que(duibi);
+	unordered_map<int, int> times;
+	for (int num : nums)
+		times[num]++;
+	for (unordered_map<int, int>::iterator it = times.begin();
+		it != times.end(); it++) {
+		que.push(*it);
+		if (que.size() > k) {
+			que.pop();
+		}
+	}
+	vector<int> res;
+	while (k--) {
+		res.push_back(que.top().first);
+		que.pop();
+	}
+	return res;
+}
+
+void Test_topKFrequent()
+{
+	int target;
+	cout << "hot100 347. 前 K 个高频元素" << endl;
+	cout << "\ninput the k:" << endl;
+	cin >> target;
+	vector<int> nums;
+	int num;
+	cout << "input array:" << endl;
+	while (cin >> num)
+	{
+		nums.push_back(num);
+		if (cin.peek() == '\n')
+			break;
+	}
+	vector<int> res = topKFrequent(nums, target);
+	printVector(res);
+}
+
 int main()
 {
 	//Test_twosum();						/*			hot100 1.	两数之和									*/
@@ -3117,4 +3194,6 @@ int main()
 	//Test_decodeString();					/*			hot100 394. 字符串解码								*/
 	//Test_dailyTemperatures();				/*			hot100 739. 每日温度									*/
 	//Test_largestRectangleArea();			/*			hot100 84.	柱状图中最大的矩形						*/
-}
+	//Test_findKthLargest();				/*			hot100 215. 数组中的第K个最大元素						*/
+	Test_topKFrequent();					/*			hot100 347. 前 K 个高频元素							*/
+}	
