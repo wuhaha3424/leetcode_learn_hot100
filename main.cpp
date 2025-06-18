@@ -2949,6 +2949,99 @@ void Test_decodeString()
 	cout << res << endl;
 }
 
+vector<int> dailyTemperatures(vector<int>& temperatures) {
+	int n = temperatures.size();
+	vector<int> res(n);
+	stack<int> sta;
+	for (int i = 0; i < n; i++)
+	{
+		while (!sta.empty() && temperatures[i] > temperatures[sta.top()])
+		{
+			res[sta.top()] = i - sta.top();
+			sta.pop();
+		}
+		sta.push(i);
+	}
+	return res;
+}
+
+void Test_dailyTemperatures()
+{
+	vector<int> nums;
+	int num;
+	cout << "hot100 739. 每日温度" << endl;
+	cout << "\ninput array:" << endl;
+	while (cin >> num)
+	{
+		nums.push_back(num);
+		if (cin.peek() == '\n')
+			break;
+	}
+	vector<int> res = dailyTemperatures(nums);
+	printVector(res);
+}
+
+int largestRectangleArea(vector<int>& heights) {
+	/*	暴力解法
+		int res = 0;
+        for(int i = 0 ; i<heights.size(); i++)
+        {
+            int leftidx = i;
+            int rightidx = i;
+            while(leftidx>=0&&heights[leftidx]>=heights[i])
+            {
+                leftidx--;
+            }
+            while(rightidx<heights.size()&&heights[rightidx]>=heights[i])
+            {
+                rightidx++;
+            }
+            res = max(res, heights[i]*(rightidx-leftidx-1));
+        }
+        return res;
+	*/
+	int n = heights.size();
+	vector<int> left(n), right(n);
+	stack<int> sta;
+	for (int i = 0; i < n; i++) {
+		while (!sta.empty() && heights[i] <= heights[sta.top()]) {
+			sta.pop();
+		}
+		left[i] = sta.empty() ? -1 : sta.top();
+		sta.push(i);
+	}
+	sta = stack<int>();
+	for (int i = n - 1; i >= 0; i--) {
+		while (!sta.empty() && heights[i] <= heights[sta.top()]) {
+			sta.pop();
+		}
+		right[i] = sta.empty() ? n : sta.top();
+		sta.push(i);
+	}
+	int res = 0;
+	for (int i = 0; i < n; i++) {
+		res = max(res, heights[i] * (right[i] - left[i] - 1));
+	}
+	return res;
+}
+
+void Test_largestRectangleArea()
+{
+	vector<int> nums;
+	int num;
+	cout << "hot100 84. 柱状图中最大的矩形" << endl;
+	cout << "\ninput array:" << endl;
+	while (cin >> num)
+	{
+		nums.push_back(num);
+		if (cin.peek() == '\n')
+			break;
+	}
+	int res = largestRectangleArea(nums);
+	cout << "the res is:" << res << endl;
+}
+
+
 int main()
 {
 	//Test_twosum();						/*			hot100 1.	两数之和									*/
@@ -3021,5 +3114,7 @@ int main()
 	//Test_findMedianSortedArrays();		/*			hot100 4.	寻找两个正序数组的中位数					*/
 	//Test_isValid();						/*			hot100 20.	有效的括号								*/
 	//Test_MinStack();						/*			hot100 155. 最小栈									*/
-	//Test_decodeString();					/*			hot100 394. 字符串解码									*/
+	//Test_decodeString();					/*			hot100 394. 字符串解码								*/
+	//Test_dailyTemperatures();				/*			hot100 739. 每日温度									*/
+	//Test_largestRectangleArea();			/*			hot100 84.	柱状图中最大的矩形						*/
 }
