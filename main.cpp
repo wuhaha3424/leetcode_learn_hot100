@@ -3184,7 +3184,18 @@ int maxProfit(vector<int>& prices) {
 
 void Test_maxProfit()
 {
-	
+	cout << "hot121. 买卖股票的最佳时机" << endl;
+	vector<int> nums;
+	int num;
+	cout << "input array:" << endl;
+	while (cin >> num)
+	{
+		nums.push_back(num);
+		if (cin.peek() == '\n')
+			break;
+	}
+	int res = maxProfit(nums);
+	cout << res << endl;
 }
 
 int main()
@@ -3264,5 +3275,6 @@ int main()
 	//Test_largestRectangleArea();			/*			hot100 84.	柱状图中最大的矩形						*/
 	//Test_findKthLargest();				/*			hot100 215. 数组中的第K个最大元素						*/
 	//Test_topKFrequent();					/*			hot100 347. 前 K 个高频元素							*/
-	Test_MedianFinder();					/*			hot100 295. 数据流的中位数							*/
+	//Test_MedianFinder();					/*			hot100 295. 数据流的中位数							*/
+	Test_maxProfit();						/*			hot100 121. 买卖股票的最佳时机						*/
 }	
