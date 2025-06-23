@@ -3119,6 +3119,74 @@ void Test_topKFrequent()
 	printVector(res);
 }
 
+class MedianFinder {
+private:
+	priority_queue<int, vector<int>> que1;
+	priority_queue<int, vector<int>, greater<int>> que2;
+
+public:
+	MedianFinder() {
+
+	}
+
+	void addNum(int num) {
+		if (que1.size() > que2.size())
+		{
+			que1.push(num);
+			double n = que1.top();
+			que1.pop();
+			que2.push(n);
+		}
+		else {
+			que2.push(num);
+			double m = que2.top();
+			que2.pop();
+			que1.push(m);
+		}
+	}
+
+	double findMedian() {
+		if (que1.size() > que2.size())
+		{
+			return double(que1.top());
+		}
+		else if (que1.size() < que2.size()) {
+			return double(que2.top());
+		}
+		else {
+			return (que1.top() + que2.top()) / 2.0;
+		}
+	}
+};
+
+void Test_MedianFinder()
+{
+	cout << "hot100 295. 数据流的中位数" << endl;
+	MedianFinder medianfinder;
+	medianfinder.addNum(1);
+	medianfinder.addNum(2);
+	cout << medianfinder.findMedian() << endl;
+	medianfinder.addNum(3);
+	cout << medianfinder.findMedian() << endl;
+}
+
+
+int maxProfit(vector<int>& prices) {
+	int res = 0;
+	int pre = prices[0];
+	for (int i = 1; i < prices.size(); i++)
+	{
+		pre = min(pre, prices[i]);
+		res = max(res, (prices[i] - pre));
+	}
+	return res;
+}
+
+void Test_maxProfit()
+{
+	
+}
+
 int main()
 {
 	//Test_twosum();						/*			hot100 1.	两数之和									*/
@@ -3195,5 +3263,6 @@ int main()
 	//Test_dailyTemperatures();				/*			hot100 739. 每日温度									*/
 	//Test_largestRectangleArea();			/*			hot100 84.	柱状图中最大的矩形						*/
 	//Test_findKthLargest();				/*			hot100 215. 数组中的第K个最大元素						*/
-	Test_topKFrequent();					/*			hot100 347. 前 K 个高频元素							*/
+	//Test_topKFrequent();					/*			hot100 347. 前 K 个高频元素							*/
+	Test_MedianFinder();					/*			hot100 295. 数据流的中位数							*/
 }	
