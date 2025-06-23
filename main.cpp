@@ -3198,6 +3198,65 @@ void Test_maxProfit()
 	cout << res << endl;
 }
 
+bool canJump(vector<int>& nums) {
+	int pace = 0;
+	for (int i = 0; i < nums.size() - 1; i++) {
+		pace = max(pace, nums[i] + i);
+		if (pace <= i)
+			return false;
+	}
+	return pace >= nums.size() - 1;
+}
+
+void Test_canJump()
+{
+	cout << "hot55. 跳跃游戏" << endl;
+	vector<int> nums;
+	int num;
+	cout << "input array:" << endl;
+	while (cin >> num)
+	{
+		nums.push_back(num);
+		if (cin.peek() == '\n')
+			break;
+	}
+	bool res = canJump(nums);
+	string strres = (res == true) ? "true" : "false";
+	cout << strres << endl;
+}
+
+int jump(vector<int>& nums) {
+	int idx = 0;
+	int maxfar = 0;
+	int end = 0;
+	for (int i = 0; i < nums.size() - 1; i++)
+	{
+		maxfar = max(maxfar, nums[i] + i);
+		if (i == end)
+		{
+			idx++;
+			end = maxfar;
+		}
+	}
+	return idx;
+}
+
+void Test_jump()
+{
+	cout << "hot45. 跳跃游戏 II" << endl;
+	vector<int> nums;
+	int num;
+	cout << "input array:" << endl;
+	while (cin >> num)
+	{
+		nums.push_back(num);
+		if (cin.peek() == '\n')
+			break;
+	}
+	int res = jump(nums);
+	cout << "The res is :" << res << endl;
+}
+
 int main()
 {
 	//Test_twosum();						/*			hot100 1.	两数之和									*/
@@ -3276,5 +3335,7 @@ int main()
 	//Test_findKthLargest();				/*			hot100 215. 数组中的第K个最大元素						*/
 	//Test_topKFrequent();					/*			hot100 347. 前 K 个高频元素							*/
 	//Test_MedianFinder();					/*			hot100 295. 数据流的中位数							*/
-	Test_maxProfit();						/*			hot100 121. 买卖股票的最佳时机						*/
+	//Test_maxProfit();						/*			hot100 121. 买卖股票的最佳时机						*/
+	//Test_canJump();						/*			hot100 55.	跳跃游戏									*/
+	Test_jump();							/*			hot100 45.	跳跃游戏 II								*/
 }	
