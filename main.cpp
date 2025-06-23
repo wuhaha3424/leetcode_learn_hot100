@@ -3257,6 +3257,38 @@ void Test_jump()
 	cout << "The res is :" << res << endl;
 }
 
+vector<int> partitionLabels(string s) {
+	unordered_map<char, int> map;
+	for (int i = 0; i < s.size(); i++)
+	{
+		map[s[i]] = i;
+	}
+	vector<int> res;
+	int right = 0;
+	int left = 0;
+	for (int i = 0; i < s.size(); i++)
+	{
+		right = max(right, map[s[i]]);
+		if (i == right)
+		{
+			res.push_back(right - left + 1);
+			left = right + 1;
+		}
+	}
+	return res;
+}
+
+void Test_partitionLabels()
+{
+	cout << "763. 划分字母区间" << endl;
+	string inputstr;
+	cout << "input array:" << endl;
+	cin >> inputstr;
+	vector<int> res = partitionLabels(inputstr);
+	cout << "\nThe res is :" << endl;
+	printVector(res);
+}
+
 int main()
 {
 	//Test_twosum();						/*			hot100 1.	两数之和									*/
@@ -3337,5 +3369,6 @@ int main()
 	//Test_MedianFinder();					/*			hot100 295. 数据流的中位数							*/
 	//Test_maxProfit();						/*			hot100 121. 买卖股票的最佳时机						*/
 	//Test_canJump();						/*			hot100 55.	跳跃游戏									*/
-	Test_jump();							/*			hot100 45.	跳跃游戏 II								*/
+	//Test_jump();							/*			hot100 45.	跳跃游戏 II								*/
+	Test_partitionLabels();					/*			hot100 763. 划分字母区间								*/
 }	
