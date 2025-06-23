@@ -3289,6 +3289,55 @@ void Test_partitionLabels()
 	printVector(res);
 }
 
+int climbStairs(int n) {
+	vector<int> dp(n + 1, 0);
+	dp[0] = 1;
+	dp[1] = 1;
+	for (int i = 2; i <= n; i++)
+	{
+		dp[i] = dp[i - 1] + dp[i - 2];
+	}
+	return dp[n];
+}
+
+void Test_climbStairs()
+{
+	cout << "70. 爬楼梯" << endl;
+	int n;
+	cout << "\ninput n:" << endl;
+	cin >> n;
+	int res = climbStairs(n);
+	cout << "\nThe res is :" << res << endl;
+}
+
+vector<vector<int>> generate(int numRows) {
+	vector<vector<int>> res;
+	for (int i = 0; i < numRows; i++)
+	{
+		vector<int> temp(i + 1, 1);
+		res.push_back(temp);
+	}
+	for (int i = 2; i < numRows; i++)
+	{
+		for (int j = 1; j < i; j++)
+		{
+			res[i][j] = res[i - 1][j - 1] + res[i - 1][j];
+		}
+	}
+	return res;
+}
+
+void Test_generate()
+{
+	cout << "118. 杨辉三角" << endl;
+	int n;
+	cout << "\ninput n:" << endl;
+	cin >> n;
+	vector<vector<int>> res = generate(n);
+	cout << "\nThe res is :" << endl;
+	printVectorOfVector(res);
+}
+
 int main()
 {
 	//Test_twosum();						/*			hot100 1.	两数之和									*/
@@ -3370,5 +3419,7 @@ int main()
 	//Test_maxProfit();						/*			hot100 121. 买卖股票的最佳时机						*/
 	//Test_canJump();						/*			hot100 55.	跳跃游戏									*/
 	//Test_jump();							/*			hot100 45.	跳跃游戏 II								*/
-	Test_partitionLabels();					/*			hot100 763. 划分字母区间								*/
+	//Test_partitionLabels();				/*			hot100 763. 划分字母区间								*/
+	//Test_climbStairs();					/*			hot100 70.	爬楼梯									*/
+	//Test_generate();						/*			hot100 118. 杨辉三角									*/
 }	
