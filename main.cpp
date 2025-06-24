@@ -3459,6 +3459,38 @@ void Test_wordBreak()
 	cout << "\nThe res is :" << strres << endl;
 }
 
+int lengthOfLIS(vector<int>& nums) {
+	vector<int> dp(nums.size(), 1);
+	for (int i = 1; i < nums.size(); i++)
+	{
+		for (int j = 0; j < i; j++)
+		{
+			if (nums[j] < nums[i])
+				dp[i] = max(dp[i], dp[j] + 1);
+		}
+	}
+	int res = 0;
+	for (int num : dp)
+		res = max(num, res);
+	return res;
+}
+
+void Test_lengthOfLIS()
+{
+	cout << "300. 最长递增子序列" << endl;
+	vector<int> nums;
+	int num;
+	cout << "\ninput array:" << endl;
+	while (cin >> num)
+	{
+		nums.push_back(num);
+		if (cin.peek() == '\n')
+			break;
+	}
+	int res = lengthOfLIS(nums);
+	cout << "\nThe res is :" << res << endl;
+}
+
 int main()
 {
 	//Test_twosum();						/*			hot100 1.	两数之和									*/
@@ -3547,4 +3579,5 @@ int main()
 	//Test_numSquares();					/*			hot100 279. 完全平方数								*/
 	//Test_coinChange();					/*			hot100 322. 零钱兑换									*/
 	//Test_wordBreak();						/*			hot100 139. 单词拆分									*/
+	//Test_lengthOfLIS();					/*			hot100 300. 最长递增子序列							*/
 }	
