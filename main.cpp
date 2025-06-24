@@ -3423,6 +3423,41 @@ void Test_coinChange()
 	cout << "\nThe res is :" << res << endl;
 }
 
+bool wordBreak(string s, vector<string>& wordDict) {
+	unordered_set<string> myset(wordDict.begin(), wordDict.end());
+	vector<bool> dp(s.size()+1, false);
+	dp[0] = true;
+	for (int i = 1; i <= s.size(); i++)
+	{
+		for (int j = 0; j < i; j++)
+		{
+			string word = s.substr(j, i - j);
+			if (myset.find(word) != myset.end() && dp[j])
+				dp[i] = true;
+		}
+	}
+	return dp[s.size()];
+}
+
+void Test_wordBreak()
+{
+	cout << "139. 单词拆分" << endl;
+	string s;
+	cout << "\ninput s:" << endl;
+	cin >> s;
+	vector<string> nums;
+	string temp;
+	cout << "\ninput wordDict:" << endl;
+	while (cin >> temp)
+	{
+		nums.push_back(temp);
+		if (cin.peek() == '\n')
+			break;
+	}
+	bool res = wordBreak(s, nums);
+	string strres = (res == true) ? "TRUE" : "FALSE";
+	cout << "\nThe res is :" << strres << endl;
+}
 
 int main()
 {
@@ -3511,4 +3546,5 @@ int main()
 	//Test_rob();							/*			hot100 198. 打家劫舍									*/
 	//Test_numSquares();					/*			hot100 279. 完全平方数								*/
 	//Test_coinChange();					/*			hot100 322. 零钱兑换									*/
+	//Test_wordBreak();						/*			hot100 139. 单词拆分									*/
 }	
