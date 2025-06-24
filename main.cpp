@@ -3338,6 +3338,92 @@ void Test_generate()
 	printVectorOfVector(res);
 }
 
+int rob(vector<int>& nums) {
+	int n = nums.size();
+	vector<int> dp(n + 1, 0);
+	dp[0] = 0;  dp[1] = nums[0];
+	for (int i = 2; i <= n; i++)
+	{
+		dp[i] = max(nums[i - 1] + dp[i - 2], dp[i - 1]);//偷，不偷
+	}
+	return dp[n];
+}
+
+void Test_rob()
+{
+	cout << "198. 打家劫舍" << endl;
+	vector<int> nums;
+	int num;
+	cout << "\ninput array:" << endl;
+	while (cin >> num)
+	{
+		nums.push_back(num);
+		if (cin.peek() == '\n')
+			break;
+	}
+	int res = rob(nums);
+	cout << "\nThe res is :" << res << endl;
+}
+
+int numSquares(int n) {
+	vector<int> dp(n + 1, INT_MAX);
+	dp[0] = 0;
+	for (int i = 1; i <= n; i++) {
+		for (int j = 1; j * j <= i; j++) {
+			dp[i] = min(dp[i], dp[i - j * j] + 1);
+		}
+	}
+	return dp[n];
+}
+
+void Test_numSquares()
+{
+	cout << "279. 完全平方数" << endl;
+	int n;
+	cout << "\ninput n:" << endl;
+	cin >> n;
+	int res = numSquares(n);
+	cout << "\nThe res is :" << res <<endl;
+}
+
+int coinChange(vector<int>& coins, int amount) {
+	vector<int> dp(amount + 1, amount + 1);
+	dp[0] = 0;
+	for (int i = 1; i <= amount; i++)
+	{
+		for (int j = 0; j < coins.size(); j++)
+		{
+			if (i - coins[j] < 0)
+				continue;
+			//if(dp[i-coins[j]]!=INT_MAX)
+			dp[i] = min(dp[i], dp[i - coins[j]] + 1);
+		}
+	}
+	if (dp[amount] == amount + 1)
+		return -1;
+	return dp[amount];
+}
+
+void Test_coinChange()
+{
+	cout << "322. 零钱兑换" << endl;
+	vector<int> nums;
+	int num;
+	cout << "\ninput array:" << endl;
+	while (cin >> num)
+	{
+		nums.push_back(num);
+		if (cin.peek() == '\n')
+			break;
+	}
+	int amount;
+	cout << "\ninput amount:" << endl;
+	cin >> amount;
+	int res = coinChange(nums, amount);
+	cout << "\nThe res is :" << res << endl;
+}
+
+
 int main()
 {
 	//Test_twosum();						/*			hot100 1.	两数之和									*/
@@ -3422,4 +3508,7 @@ int main()
 	//Test_partitionLabels();				/*			hot100 763. 划分字母区间								*/
 	//Test_climbStairs();					/*			hot100 70.	爬楼梯									*/
 	//Test_generate();						/*			hot100 118. 杨辉三角									*/
+	//Test_rob();							/*			hot100 198. 打家劫舍									*/
+	//Test_numSquares();					/*			hot100 279. 完全平方数								*/
+	//Test_coinChange();					/*			hot100 322. 零钱兑换									*/
 }	
