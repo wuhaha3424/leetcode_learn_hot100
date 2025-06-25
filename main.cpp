@@ -3599,6 +3599,105 @@ void Test_longestValidParentheses()
 	cout << "\nThe res is : " << res << endl;
 }
 
+int uniquePaths(int m, int n) {
+	vector<vector<int>> dp(m, vector<int>(n, 0));
+	for (int i = 0; i < m; i++)
+		dp[i][0] = 1;
+	for (int j = 0; j < n; j++)
+		dp[0][j] = 1;
+	for (int i = 1; i < m; i++)
+	{
+		for (int j = 1; j < n; j++)
+		{
+			dp[i][j] = dp[i - 1][j] + dp[i][j - 1];
+		}
+	}
+	return dp[m - 1][n - 1];
+}
+
+void Test_uniquePaths()
+{
+	cout << "62. 不同路径" << endl;
+	int m, n;
+	cout << "\ninput m" << endl;
+	cin >> m;
+	cout << "\ninput n" << endl;
+	cin >> n;
+	int res = uniquePaths(m,n);
+	cout << "\nThe res is : " << res << endl;
+}
+
+int minPathSum(vector<vector<int>>& grid) {
+	int m = grid.size();
+	int n = grid[0].size();
+	vector<vector<int>> dp(m, vector<int>(n, 0));
+	dp[0][0] = grid[0][0];
+	for (int i = 1; i < m; i++)
+		dp[i][0] = dp[i - 1][0] + grid[i][0];
+	for (int j = 1; j < n; j++)
+		dp[0][j] = dp[0][j - 1] + grid[0][j];
+	for (int i = 1; i < m; i++)
+	{
+		for (int j = 1; j < n; j++)
+		{
+			dp[i][j] = min(dp[i - 1][j], dp[i][j - 1]) + grid[i][j];
+		}
+	}
+	return dp[m - 1][n - 1];
+}
+
+void Test_minPathSum()
+{
+	cout << "64. 最小路径和" << endl;
+	int m, n;
+	cout << "\ninput the row of grid" << endl;
+	cin >> m;
+	cout << "\ninput the col of grid" << endl;
+	cin >> n;
+	vector<vector<int>> grid(m, vector<int>(n));
+	cout << "\ninput the matrix:" << endl;
+	for (int i = 0; i < m; i++)
+	{
+		for (int j = 0; j < n; j++)
+		{
+			cin >> grid[i][j];
+		}
+	}
+	int res = minPathSum(grid);
+	cout << "\nThe res is : " << res << endl;
+}
+
+string find_longestPalindrome(string s, int left, int right)
+{
+	while (left >= 0 && right < s.size() && s[left] == s[right])
+	{
+		left--; right++;
+	}
+	return s.substr(left + 1, right - left - 1);
+}
+
+string longestPalindrome(string s) {
+	string res = "";
+	for (int i = 0; i < s.size(); i++)
+	{
+		string s1 = find_longestPalindrome(s, i, i);
+		string s2 = find_longestPalindrome(s, i, i+1);
+		res = s1.size() > res.size() ? s1 : res;
+		res = s2.size() > res.size() ? s2 : res;
+	}
+	return res;
+}
+
+void Test_longestPalindrome()
+{
+	cout << "64. 最小路径和" << endl;
+	string s;
+	cout << "\ninput the row of grid" << endl;
+	cin >> s;
+	string res = longestPalindrome(s);
+	cout << "\nThe res is : " << res << endl;
+}
+
 int main()
 {
 	//Test_twosum();						/*			hot100 1.	两数之和									*/
@@ -3691,4 +3790,7 @@ int main()
 	//Test_maxProduct();					/*			hot100 152. 乘积最大子数组							*/
 	//Test_canPartition();					/*			hot100 416. 分割等和子集								*/
 	//Test_longestValidParentheses();		/*			hot100	32. 最长有效括号								*/
+	//Test_uniquePaths();					/*			hot100	62. 不同路径									*/
+	//Test_minPathSum();					/*			hot100	64. 最小路径和								*/
+	//Test_longestPalindrome();				/*			hot100	5.	最长回文子串								*/
 }	
