@@ -3491,6 +3491,39 @@ void Test_lengthOfLIS()
 	cout << "\nThe res is :" << res << endl;
 }
 
+int maxProduct(vector<int>& nums) {
+	int n = nums.size();
+	vector<int> maxv(n), minv(n);
+	maxv[0] = nums[0];
+	minv[0] = nums[0];
+	for (int i = 1; i < n; i++)
+	{
+		int num = nums[i];
+		maxv[i] = max({ maxv[i - 1] * num, minv[i - 1] * num, num });
+		minv[i] = min({ maxv[i - 1] * num, minv[i - 1] * num, num });
+	}
+	int res = INT_MIN;
+	for (int num : maxv)
+		res = max(res, num);
+	return res;
+}
+
+void Test_maxProduct()
+{
+	cout << "152. 乘积最大子数组" << endl;
+	vector<int> nums;
+	int num;
+	cout << "\n请输入数组: " << endl;
+	while (cin >> num)
+	{
+		nums.push_back(num);
+		if (cin.peek() == '\n')
+			break;
+	}
+	int res = maxProduct(nums);
+	cout << "\nThe res is : " << res << endl;
+}
+
 int main()
 {
 	//Test_twosum();						/*			hot100 1.	两数之和									*/
@@ -3580,4 +3613,5 @@ int main()
 	//Test_coinChange();					/*			hot100 322. 零钱兑换									*/
 	//Test_wordBreak();						/*			hot100 139. 单词拆分									*/
 	//Test_lengthOfLIS();					/*			hot100 300. 最长递增子序列							*/
+	//Test_maxProduct();					/*			hot100 152. 乘积最大子数组							*/
 }	
