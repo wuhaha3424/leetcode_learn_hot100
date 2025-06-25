@@ -3692,9 +3692,70 @@ void Test_longestPalindrome()
 {
 	cout << "64. 最小路径和" << endl;
 	string s;
-	cout << "\ninput the row of grid" << endl;
+	cout << "\ninput the string: s" << endl;
 	cin >> s;
 	string res = longestPalindrome(s);
+	cout << "\nThe res is : " << res << endl;
+}
+
+int longestCommonSubsequence(string text1, string text2) {
+	int m = text1.size(), n = text2.size();
+	vector<vector<int>> dp(m + 1, vector<int>(n + 1, 0));
+	for (int i = 1; i <= m; i++) {
+		for (int j = 1; j <= n; j++) {
+			if (text1[i - 1] == text2[j - 1])
+				dp[i][j] = dp[i - 1][j - 1] + 1;
+			else
+				dp[i][j] = max(dp[i - 1][j], dp[i][j - 1]);
+		}
+	}
+	return dp[m][n];
+}
+
+void Test_longestCommonSubsequence()
+{
+	cout << "1143. 最长公共子序列" << endl;
+	string s1;
+	cout << "\ninput the string: text1" << endl;
+	cin >> s1;
+	string s2;
+	cout << "\ninput the string: text2" << endl;
+	cin >> s2;
+	int res = longestCommonSubsequence(s1,s2);
+	cout << "\nThe res is : " << res << endl;
+}
+
+
+int minDistance(string word1, string word2) {
+	int m = word1.size(), n = word2.size();
+	vector<vector<int>> dp(m+1, vector<int>(n+1, 0));
+	for (int i = 0; i <= m; i++)
+		dp[i][0] = i;
+	for (int j = 0; j <= n; j++)
+		dp[0][j] = j;
+	for (int i = 1; i <= m; i++)
+	{
+		for (int j = 1; j <= n; j++)
+		{
+			if (word1[i-1] == word2[j-1])
+				dp[i][j] = dp[i - 1][j - 1];
+			else
+				dp[i][j] = min({ dp[i - 1][j - 1],dp[i - 1][j],dp[i][j - 1] }) + 1;
+		}
+	}
+	return dp[m][n];
+}
+
+void Test_minDistance()
+{
+	cout << "72. 编辑距离" << endl;
+	string s1;
+	cout << "\ninput the string: text1" << endl;
+	cin >> s1;
+	string s2;
+	cout << "\ninput the string: text2" << endl;
+	cin >> s2;
+	int res = minDistance(s1, s2);
 	cout << "\nThe res is : " << res << endl;
 }
 
@@ -3793,4 +3854,6 @@ int main()
 	//Test_uniquePaths();					/*			hot100	62. 不同路径									*/
 	//Test_minPathSum();					/*			hot100	64. 最小路径和								*/
 	//Test_longestPalindrome();				/*			hot100	5.	最长回文子串								*/
+	//Test_longestCommonSubsequence();		/*			hot1001143. 最长公共子序列							*/
+	//Test_minDistance();					/*			hot100	72. 编辑距离									*/
 }	
