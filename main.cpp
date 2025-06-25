@@ -3524,6 +3524,81 @@ void Test_maxProduct()
 	cout << "\nThe res is : " << res << endl;
 }
 
+bool canPartition(vector<int>& nums) {
+	int sum = 0;
+	for (int num : nums)
+		sum += num;
+	if (sum % 2 != 0)
+		return false;
+	int target = sum / 2;
+	int n = nums.size();
+	vector<vector<bool>> dp(n + 1, vector<bool>(target + 1, false));
+	for (int i = 0; i <= n; i++)
+		dp[i][0] = true;
+	for (int i = 1; i <= n; i++)
+	{
+		for (int j = 1; j <= target; j++)
+		{
+			if (j - nums[i-1] < 0)
+				dp[i][j] = dp[i - 1][j];
+			else
+				dp[i][j] = dp[i - 1][j] || dp[i - 1][j - nums[i-1]];
+		}
+	}
+	return dp[n][target];
+}
+
+void Test_canPartition()
+{
+	cout << "416. 分割等和子集" << endl;
+	vector<int> nums;
+	int num;
+	cout << "\n请输入数组: " << endl;
+	while (cin >> num)
+	{
+		nums.push_back(num);
+		if (cin.peek() == '\n')
+			break;
+	}
+	bool res = canPartition(nums);
+	string str = (res == true) ? "true" : "false";
+	cout << "\nThe res is : " << str << endl;
+}
+
+int longestValidParentheses(string s) {
+	vector<int> dp(s.size(), 0);
+	stack<int> sta;
+	for (int i = 0; i < s.size(); i++) {
+		if (s[i] == '(')
+			sta.push(i);
+		else {
+			if (!sta.empty())
+			{
+				int leftidx = sta.top();
+				sta.pop();
+				int length = i - leftidx + 1;
+				if (leftidx - 1 >= 0)
+					length += dp[leftidx - 1];
+				dp[i] = length;
+			}
+		}
+	}
+	int res = 0;
+	for (int num : dp)
+		res = max(res, num);
+	return res;
+}
+
+void Test_longestValidParentheses()
+{
+	cout << "32. 最长有效括号" << endl;
+	string s;
+	cout << "\ninput the string by using '(', ')' " << endl;
+	cin >> s;
+	int res = longestValidParentheses(s);
+	cout << "\nThe res is : " << res << endl;
+}
+
 int main()
 {
 	//Test_twosum();						/*			hot100 1.	两数之和									*/
@@ -3614,4 +3689,6 @@ int main()
 	//Test_wordBreak();						/*			hot100 139. 单词拆分									*/
 	//Test_lengthOfLIS();					/*			hot100 300. 最长递增子序列							*/
 	//Test_maxProduct();					/*			hot100 152. 乘积最大子数组							*/
+	//Test_canPartition();					/*			hot100 416. 分割等和子集								*/
+	//Test_longestValidParentheses();		/*			hot100	32. 最长有效括号								*/
 }	
