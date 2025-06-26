@@ -3849,6 +3849,38 @@ void Test_sortColors()
 	printVector(nums);
 }
 
+void nextPermutation(vector<int>& nums) {
+	int n = nums.size() - 1;
+	int idx = n - 1;
+	while (idx >= 0 && nums[idx] >= nums[(idx + 1)])
+		idx--;
+	if (idx >= 0)
+	{
+		int ridx = n;
+		while (ridx > idx && nums[ridx] <= nums[idx])
+			ridx--;
+		swap(nums[ridx], nums[idx]);
+	}
+	reverse(nums.begin() + idx + 1, nums.end());
+}
+
+void Test_nextPermutation()
+{
+	cout << "31. 下一个排列" << endl;
+	vector<int> nums;
+	int num;
+	cout << "\n请输入数组:" << endl;
+	while (cin >> num)
+	{
+		nums.push_back(num);
+		if (cin.peek() == '\n')
+			break;
+	}
+	nextPermutation(nums);
+	cout << "\nThe res is : " << endl;
+	printVector(nums);
+}
+
 int main()
 {
 	//Test_twosum();						/*			hot100 1.	两数之和									*/
@@ -3949,4 +3981,5 @@ int main()
 	//Test_singleNumber();					/*			hot100 136. 只出现一次的数字							*/
 	//Test_majorityElement();				/*			hot100 169. 多数元素									*/
 	//Test_sortColors();					/*			hot100	75. 颜色分类									*/
+	//Test_nextPermutation();				/*			hot100	31. 下一个排列								*/
 }	
