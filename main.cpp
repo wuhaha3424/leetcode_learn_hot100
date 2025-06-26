@@ -1,5 +1,5 @@
-﻿#include<iostream>
-#include<vector>
+﻿#include <iostream>
+#include <vector>
 #include <unordered_map>
 #include <thread>
 #include <queue>
@@ -3920,104 +3920,104 @@ void Test_findDuplicate()
 
 int main()
 {
-	//Test_twosum();						/*			hot100 1.	两数之和									*/
-	//Test_groupAnagrams();					/*			hot100 49.	字母异位词分组							*/
-	//Test_longestConsecutive();			/*			hot100 128.	最长连续序列								*/
-	//Test_moveZeroes();					/*			hot100 283.	移动零									*/
-	//Test_maxArea();						/*			hot100 11.	盛最多水的容器							*/
-	//Test_threeSum();						/*			hot100 15.	三数之和									*/
-	//Test_trap();							/*			hot100 42.	接雨水									*/
-	//Test_lengthOfLongestSubstring();		/*			hot100 3.	无重复字符的最长子串						*/
-	//Test_findAnagrams();					/*			hot100 438.	找到字符串中所有字母异位词					*/
-	//Test_subarraySum();					/*			hot100 560. 和为 K 的子数组							*/
-	//Test_maxSlidingWindow();				/*			hot100 239. 滑动窗口最大值							*/
-	//Test_minWindow();						/*			hot100 76.	最小覆盖子串								*/
-	//Test_maxSubArray();					/*			hot100 53.	最大子数组和								*/
-	//Test_merge();							/*			hot100 56.	合并区间									*/	
-	//Test_rotate();						/*			hot100 189. 轮转数组									*/
-	//Test_productExceptSelf();				/*			hot100 238. 除自身以外数组的乘积						*/
-	//Test_firstMissingPositive();			/*			hot100 41.	缺失的第一个正数							*/
-	//Test_setZeroes();						/*			hot100 73.	矩阵置零									*/
-	//Test_spiralOrder();					/*			hot100 54.	螺旋矩阵									*/
-	//Test_rotate_nums();					/*			hot100 48.	旋转图像									*/
-	//Test_searchMatrix();					/*			hot100 240. 搜索二维矩阵 II							*/
-	//Test_getIntersectionNode();			/*			hot100 160. 相交链表									*/
-	//Test_reverseList();					/*			hot100 206. 反转链表									*/
-	//Test_isPalindrome();					/*			hot100 234. 回文链表									*/
-	//Test_hasCycle();						/*			hot100 141. 环形链表									*/
-	//Test_detectCycle();					/*			hot100 142. 环形链表 II								*/
-	//Test_mergeTwoLists();					/*			hot100 21.	合并两个有序链表							*/
-	//Test_addTwoNumbers();					/*			hot100 2.	两数相加									*/
-	//Test_removeNthFromEnd();				/*			hot100 19.	删除链表的倒数第 N 个结点					*/
-	//Test_swapPairs();						/*			hot100 24.	两两交换链表中的节点						*/
-	//Test_reverseKGroup();					/*			hot100 25.	K 个一组翻转链表							*/
-	//Test_copyRandomList();				/*			hot100 138. 随机链表的复制							*/
-	//Test_sortList();						/*			hot100 148. 排序链表									*/
-	//Test_mergeKLists();					/*			hot100 23.	合并 K 个升序链表							*/
-	//Test_LRUCache();						/*			hot100 146. LRU 缓存									*/
-	//Test_inorderTraversal();				/*			hot100 94.  二叉树的中序遍历							*/
-	//Test_maxDepth();						/*			hot100 104. 二叉树的最大深度							*/
-	//Test_invertTree();					/*			hot100 226. 翻转二叉树								*/
-	//Test_isSymmetric();					/*			hot100 101. 对称二叉树								*/
-	//Test_diameterOfBinaryTree();			/*			hot100 543. 二叉树的直径								*/
-	//Test_levelOrder();					/*			hot100 102. 二叉树的层序遍历							*/
-	//Test_sortedArrayToBST();				/*			hot100 108. 将有序数组转换为二叉搜索树					*/
-	//Test_isValidBST();					/*			hot100 98.	验证二叉搜索树							*/
-	//Test_kthSmallest();					/*			hot100 230. 二叉搜索树中第 K 小的元素					*/
-	//Test_rightSideView();					/*			hot100 199. 二叉树的右视图							*/
-	//Test_flatten();						/*			hot100 114. 二叉树展开为链表							*/
-	//Test_buildTree();						/*			hot100 105. 从前序与中序遍历序列构造二叉树				*/
-	//Test_pathSum();						/*			hot100 437. 路径总和 III								*/
-	//Test_lowestCommonAncestor();			/*			hot100 236. 二叉树的最近公共祖先						*/
-	//Test_maxPathSum();					/*			hot100 124. 二叉树中的最大路径和						*/
-	//Test_numIslands();					/*			hot100 200. 岛屿数量									*/
-	//Test_orangesRotting();				/*			hot100 994. 腐烂的橘子								*/
-	//Test_canFinish();						/*			hot100 207. 课程表									*/
-	//Test_Trie();							/*			hot100 208. 实现 Trie (前缀树)						*/
-	//Test_permute();						/*			hot100 46.	全排列									*/
-	//Test_subsets();						/*			hot100 78.	子集										*/
-	//Test_letterCombinations();			/*			hot100 17.	电话号码的字母组合						*/
-	//Test_combinationSum();				/*			hot100 39.	组合总和									*/
-	//Test_generateParenthesis();			/*			hot100 22.	括号生成									*/
-	//Test_exist();							/*			hot100 79.	单词搜索									*/
-	//Test_partition();						/*			hot100 131. 分割回文串								*/
-	//Test_solveNQueens();					/*			hot100 51.	N 皇后									*/
-	//Test_searchInsert();					/*			hot100 35.  搜索插入位置								*/
-	//Test_searchMatrix2();					/*			hot100 74.	搜索二维矩阵								*/
-	//Test_searchRange();					/*			hot100 34.	在排序数组中查找元素的第一个和最后一个位置  */
-	//Test_search();						/*			hot100 33.	搜索旋转排序数组							*/
-	//Test_findMin();						/*			hot100 153. 寻找旋转排序数组中的最小值					*/
-	//Test_findMedianSortedArrays();		/*			hot100 4.	寻找两个正序数组的中位数					*/
-	//Test_isValid();						/*			hot100 20.	有效的括号								*/
-	//Test_MinStack();						/*			hot100 155. 最小栈									*/
-	//Test_decodeString();					/*			hot100 394. 字符串解码								*/
-	//Test_dailyTemperatures();				/*			hot100 739. 每日温度									*/
-	//Test_largestRectangleArea();			/*			hot100 84.	柱状图中最大的矩形						*/
-	//Test_findKthLargest();				/*			hot100 215. 数组中的第K个最大元素						*/
-	//Test_topKFrequent();					/*			hot100 347. 前 K 个高频元素							*/
-	//Test_MedianFinder();					/*			hot100 295. 数据流的中位数							*/
-	//Test_maxProfit();						/*			hot100 121. 买卖股票的最佳时机						*/
-	//Test_canJump();						/*			hot100 55.	跳跃游戏									*/
-	//Test_jump();							/*			hot100 45.	跳跃游戏 II								*/
-	//Test_partitionLabels();				/*			hot100 763. 划分字母区间								*/
-	//Test_climbStairs();					/*			hot100 70.	爬楼梯									*/
-	//Test_generate();						/*			hot100 118. 杨辉三角									*/
-	//Test_rob();							/*			hot100 198. 打家劫舍									*/
-	//Test_numSquares();					/*			hot100 279. 完全平方数								*/
-	//Test_coinChange();					/*			hot100 322. 零钱兑换									*/
-	//Test_wordBreak();						/*			hot100 139. 单词拆分									*/
-	//Test_lengthOfLIS();					/*			hot100 300. 最长递增子序列							*/
-	//Test_maxProduct();					/*			hot100 152. 乘积最大子数组							*/
-	//Test_canPartition();					/*			hot100 416. 分割等和子集								*/
-	//Test_longestValidParentheses();		/*			hot100	32. 最长有效括号								*/
-	//Test_uniquePaths();					/*			hot100	62. 不同路径									*/
-	//Test_minPathSum();					/*			hot100	64. 最小路径和								*/
-	//Test_longestPalindrome();				/*			hot100	5.	最长回文子串								*/
-	//Test_longestCommonSubsequence();		/*			hot10^1143. 最长公共子序列							*/
-	//Test_minDistance();					/*			hot100	72. 编辑距离									*/
-	//Test_singleNumber();					/*			hot100 136. 只出现一次的数字							*/
-	//Test_majorityElement();				/*			hot100 169. 多数元素									*/
-	//Test_sortColors();					/*			hot100	75. 颜色分类									*/
-	//Test_nextPermutation();				/*			hot100	31. 下一个排列								*/
-	//Test_findDuplicate();					/*			hot100 287. 寻找重复数								*/
+	//Test_twosum();						   //	 hot100    1. 两数之和								 
+	//Test_groupAnagrams();					   //	 hot100   49. 字母异位词分组							 
+	//Test_longestConsecutive();			   //	 hot100  128. 最长连续序列							 
+	//Test_moveZeroes();					   //	 hot100  283. 移动零									 
+	//Test_maxArea();						   //	 hot100   11. 盛最多水的容器							 
+	//Test_threeSum();						   //	 hot100   15. 三数之和								 
+	//Test_trap();							   //	 hot100   42. 接雨水									 
+	//Test_lengthOfLongestSubstring();		   //	 hot100    3. 无重复字符的最长子串					 
+	//Test_findAnagrams();					   //	 hot100  438. 找到字符串中所有字母异位词			
+	//Test_subarraySum();					   //	 hot100  560. 和为 K 的子数组							
+	//Test_maxSlidingWindow();				   //	 hot100  239. 滑动窗口最大值							
+	//Test_minWindow();						   //	 hot100   76. 最小覆盖子串							
+	//Test_maxSubArray();					   //	 hot100   53. 最大子数组和							
+	//Test_merge();							   //	 hot100   56. 合并区间									
+	//Test_rotate();						   //	 hot100  189. 轮转数组								
+	//Test_productExceptSelf();				   //	 hot100  238. 除自身以外数组的乘积					
+	//Test_firstMissingPositive();			   //	 hot100   41. 缺失的第一个正数						
+	//Test_setZeroes();						   //	 hot100   73. 矩阵置零								
+	//Test_spiralOrder();					   //	 hot100   54. 螺旋矩阵								
+	//Test_rotate_nums();					   //	 hot100   48. 旋转图像							
+	//Test_searchMatrix();					   //	 hot100  240. 搜索二维矩阵 II							
+	//Test_getIntersectionNode();			   //	 hot100  160. 相交链表							
+	//Test_reverseList();					   //	 hot100  206. 反转链表							
+	//Test_isPalindrome();					   //	 hot100  234. 回文链表							
+	//Test_hasCycle();						   //	 hot100  141. 环形链表							
+	//Test_detectCycle();					   //	 hot100  142. 环形链表 II								
+	//Test_mergeTwoLists();					   //	 hot100   21. 合并两个有序链表					
+	//Test_addTwoNumbers();					   //	 hot100    2. 两数相加							
+	//Test_removeNthFromEnd();				   //	 hot100   19. 删除链表的倒数第 N 个结点			
+	//Test_swapPairs();						   //	 hot100   24. 两两交换链表中的节点				
+	//Test_reverseKGroup();					   //	 hot100   25. K 个一组翻转链表					
+	//Test_copyRandomList();				   //	 hot100  138. 随机链表的复制							
+	//Test_sortList();						   //	 hot100  148. 排序链表							
+	//Test_mergeKLists();					   //	 hot100   23. 合并 K 个升序链表					
+	//Test_LRUCache();						   //	 hot100  146. LRU 缓存							
+	//Test_inorderTraversal();				   //	 hot100   94. 二叉树的中序遍历					
+	//Test_maxDepth();						   //	 hot100  104. 二叉树的最大深度					
+	//Test_invertTree();					   //	 hot100  226. 翻转二叉树								
+	//Test_isSymmetric();					   //	 hot100  101. 对称二叉树								
+	//Test_diameterOfBinaryTree();			   //	 hot100  543. 二叉树的直径							
+	//Test_levelOrder();					   //	 hot100  102. 二叉树的层序遍历						
+	//Test_sortedArrayToBST();				   //	 hot100  108. 将有序数组转换为二叉搜索树				
+	//Test_isValidBST();					   //	 hot100   98. 验证二叉搜索树							
+	//Test_kthSmallest();					   //	 hot100  230. 二叉搜索树中第 K 小的元素			
+	//Test_rightSideView();					   //	 hot100  199. 二叉树的右视图							
+	//Test_flatten();						   //	 hot100  114. 二叉树展开为链表					
+	//Test_buildTree();						   //	 hot100  105. 从前序与中序遍历序列构造二叉树		
+	//Test_pathSum();						   //	 hot100  437. 路径总和 III						
+	//Test_lowestCommonAncestor();			   //	 hot100  236. 二叉树的最近公共祖先				
+	//Test_maxPathSum();					   //	 hot100  124. 二叉树中的最大路径和				
+	//Test_numIslands();					   //	 hot100  200. 岛屿数量							
+	//Test_orangesRotting();				   //	 hot100  994. 腐烂的橘子								
+	//Test_canFinish();						   //	 hot100  207. 课程表									
+	//Test_Trie();							   //	 hot100  208. 实现 Trie (前缀树)						
+	//Test_permute();						   //	 hot100   46. 全排列									
+	//Test_subsets();						   //	 hot100   78. 子集								
+	//Test_letterCombinations();			   //	 hot100   17. 电话号码的字母组合						
+	//Test_combinationSum();				   //	 hot100   39. 组合总和							
+	//Test_generateParenthesis();			   //	 hot100   22. 括号生成							
+	//Test_exist();							   //	 hot100   79. 单词搜索							
+	//Test_partition();						   //	 hot100  131. 分割回文串								
+	//Test_solveNQueens();					   //	 hot100   51. N 皇后									
+	//Test_searchInsert();					   //	 hot100   35. 搜索插入位置						
+	//Test_searchMatrix2();					   //	 hot100   74. 搜索二维矩阵						
+	//Test_searchRange();					   //	 hot100   34. 在排序数组中查找元素的第一个和最后一个位置
+	//Test_search();						   //	 hot100   33. 搜索旋转排序数组						
+	//Test_findMin();						   //	 hot100  153. 寻找旋转排序数组中的最小值				
+	//Test_findMedianSortedArrays();		   //	 hot100    4. 寻找两个正序数组的中位数				
+	//Test_isValid();						   //	 hot100   20. 有效的括号								
+	//Test_MinStack();						   //	 hot100  155. 最小栈									
+	//Test_decodeString();					   //	 hot100  394. 字符串解码								
+	//Test_dailyTemperatures();				   //	 hot100  739. 每日温度							
+	//Test_largestRectangleArea();			   //	 hot100   84. 柱状图中最大的矩形						
+	//Test_findKthLargest();				   //	 hot100  215. 数组中的第K个最大元素				
+	//Test_topKFrequent();					   //	 hot100  347. 前 K 个高频元素							
+	//Test_MedianFinder();					   //	 hot100  295. 数据流的中位数							
+	//Test_maxProfit();						   //	 hot100  121. 买卖股票的最佳时机						
+	//Test_canJump();						   //	 hot100   55. 跳跃游戏							
+	//Test_jump();							   //	 hot100   45. 跳跃游戏 II								
+	//Test_partitionLabels();				   //	 hot100  763. 划分字母区间						
+	//Test_climbStairs();					   //	 hot100   70. 爬楼梯									
+	//Test_generate();						   //	 hot100  118. 杨辉三角							
+	//Test_rob();							   //	 hot100  198. 打家劫舍							
+	//Test_numSquares();					   //	 hot100  279. 完全平方数								
+	//Test_coinChange();					   //	 hot100  322. 零钱兑换							
+	//Test_wordBreak();						   //	 hot100  139. 单词拆分							
+	//Test_lengthOfLIS();					   //	 hot100  300. 最长递增子序列							
+	//Test_maxProduct();					   //	 hot100  152. 乘积最大子数组							
+	//Test_canPartition();					   //	 hot100  416. 分割等和子集						
+	//Test_longestValidParentheses();		   //	 hot100   32. 最长有效括号						
+	//Test_uniquePaths();					   //	 hot100   62. 不同路径							
+	//Test_minPathSum();					   //	 hot100   64. 最小路径和								
+	//Test_longestPalindrome();				   //	 hot100	   5. 最长回文子串						
+	//Test_longestCommonSubsequence();		   //	 hot100 1143. 最长公共子序列							
+	//Test_minDistance();					   //	 hot100   72. 编辑距离							
+	//Test_singleNumber();					   //	 hot100  136. 只出现一次的数字					
+	//Test_majorityElement();				   //	 hot100  169. 多数元素							
+	//Test_sortColors();					   //	 hot100   75. 颜色分类							
+	//Test_nextPermutation();				   //	 hot100   31. 下一个排列								
+	//Test_findDuplicate();					   //	 hot100  287. 寻找重复数								
 }
