@@ -3881,6 +3881,39 @@ void Test_nextPermutation()
 	printVector(nums);
 }
 
+int findDuplicate(vector<int>& nums) {
+	int slow = nums[0];
+	int fast = nums[nums[0]];
+	while (slow != fast)
+	{
+		slow = nums[slow];
+		fast = nums[nums[fast]];
+	}
+	fast = 0;
+	while (slow != fast)
+	{
+		slow = nums[slow];
+		fast = nums[fast];
+	}
+	return slow;
+}
+
+void Test_findDuplicate()
+{
+	cout << "287. 寻找重复数" << endl;
+	vector<int> nums;
+	int num;
+	cout << "\n请输入数组:" << endl;
+	while (cin >> num)
+	{
+		nums.push_back(num);
+		if (cin.peek() == '\n')
+			break;
+	}
+	int res = findDuplicate(nums);
+	cout << "\nThe res is : " << res << endl;
+}
+
 int main()
 {
 	//Test_twosum();						/*			hot100 1.	两数之和									*/
@@ -3982,4 +4015,5 @@ int main()
 	//Test_majorityElement();				/*			hot100 169. 多数元素									*/
 	//Test_sortColors();					/*			hot100	75. 颜色分类									*/
 	//Test_nextPermutation();				/*			hot100	31. 下一个排列								*/
+	//Test_findDuplicate();					/*			hot100 287. 寻找重复数								*/
 }	
