@@ -3759,6 +3759,96 @@ void Test_minDistance()
 	cout << "\nThe res is : " << res << endl;
 }
 
+int singleNumber(vector<int>& nums) {
+	int res = 0;
+	for (int num : nums)
+		res ^= num;
+	return res;
+}
+
+void Test_singleNumber()
+{
+	cout << "72. 编辑距离" << endl;
+	vector<int> nums;
+	int num;
+	cout << "\n请输入数组: " << endl;
+	while (cin >> num)
+	{
+		nums.push_back(num);
+		if (cin.peek() == '\n')
+			break;
+	}
+	int res = singleNumber(nums);
+	cout << "\nThe res is : " << res << endl;
+}
+
+int majorityElement(vector<int>& nums) {
+	int target = 0;
+	int count = 0;
+	for (int num : nums)
+	{
+		if (count == 0)
+		{
+			target = num;
+			count = 1;
+		}
+		else if (num == target)
+		{
+			count++;
+		}
+		else if (num != target) {
+			count--;
+		}
+	}
+	return target;
+}
+
+void Test_majorityElement()
+{
+	cout << "169. 多数元素" << endl;
+	vector<int> nums;
+	int num;
+	cout << "\n请输入数组: " << endl;
+	while (cin >> num)
+	{
+		nums.push_back(num);
+		if (cin.peek() == '\n')
+			break;
+	}
+	int res = majorityElement(nums);
+	cout << "\nThe res is : " << res << endl;
+}
+
+void sortColors(vector<int>& nums) {
+	int n0 = 0, n1 = 0;
+	for (int i = 0; i < nums.size(); i++)
+	{
+		int n = nums[i];
+		nums[i] = 2;
+		if (n <= 1)
+			nums[n1++] = 1;
+		if (n == 0)
+			nums[n0++] = 0;
+	}
+}
+
+void Test_sortColors()
+{
+	cout << "75. 颜色分类" << endl;
+	vector<int> nums;
+	int num;
+	cout << "\n请输入数组:(0/1/2) " << endl;
+	while (cin >> num)
+	{
+		nums.push_back(num);
+		if (cin.peek() == '\n')
+			break;
+	}
+	sortColors(nums);
+	cout << "\nThe res is : " << endl;
+	printVector(nums);
+}
+
 int main()
 {
 	//Test_twosum();						/*			hot100 1.	两数之和									*/
@@ -3854,6 +3944,9 @@ int main()
 	//Test_uniquePaths();					/*			hot100	62. 不同路径									*/
 	//Test_minPathSum();					/*			hot100	64. 最小路径和								*/
 	//Test_longestPalindrome();				/*			hot100	5.	最长回文子串								*/
-	//Test_longestCommonSubsequence();		/*			hot1001143. 最长公共子序列							*/
+	//Test_longestCommonSubsequence();		/*			hot10^1143. 最长公共子序列							*/
 	//Test_minDistance();					/*			hot100	72. 编辑距离									*/
+	//Test_singleNumber();					/*			hot100 136. 只出现一次的数字							*/
+	//Test_majorityElement();				/*			hot100 169. 多数元素									*/
+	//Test_sortColors();					/*			hot100	75. 颜色分类									*/
 }	
