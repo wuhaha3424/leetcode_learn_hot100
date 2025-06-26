@@ -1,4 +1,4 @@
-#include<iostream>
+ï»¿#include<iostream>
 #include<vector>
 #include <unordered_map>
 #include <thread>
@@ -25,9 +25,9 @@ template<typename T>
 void printVectorOfVector(vector<vector<T>> nums)
 {
 	cout << endl;
-	for (const auto& row:nums)
+	for (const auto& row : nums)
 	{
-		for (const auto& element:row)
+		for (const auto& element : row)
 		{
 			cout << element << " ";
 		}
@@ -39,7 +39,7 @@ void printVectorOfVector(vector<vector<T>> nums)
 struct ListNode {
 	int val;
 	ListNode* next;
-	ListNode():val(0),next(nullptr){}
+	ListNode() :val(0), next(nullptr) {}
 	ListNode(int x) :val(x), next(nullptr) {}
 	ListNode(int x, ListNode* node) :val(x), next(node) {}
 };
@@ -49,14 +49,14 @@ public:
 	int val;
 	Node* next;
 	Node* random;
-	Node(int int_val):val(int_val),next(NULL),random(NULL){}
+	Node(int int_val) :val(int_val), next(NULL), random(NULL) {}
 };
 
 struct TreeNode {
 	int val;
 	TreeNode* left;
 	TreeNode* right;
-	TreeNode():val(0),left(NULL),right(NULL){}
+	TreeNode() :val(0), left(NULL), right(NULL) {}
 	TreeNode(int val) :val(val), left(NULL), right(NULL) {}
 	TreeNode(int val, TreeNode* left, TreeNode* right) :val(val), left(left), right(right) {}
 };
@@ -85,7 +85,7 @@ ListNode* VectorToListNode(vector<int> nums)
 }
 
 vector<int> twosum(vector<int> nums, int target)
-{	
+{
 	unordered_map<int, int> map;
 	for (int i = 0; i < nums.size(); i++)
 	{
@@ -100,7 +100,7 @@ vector<int> twosum(vector<int> nums, int target)
 void Test_twosum()
 {
 	int target;
-	cout << "hot100 1.Á½ÊıÖ®ºÍ" << endl;
+	cout << "hot100 1.ä¸¤æ•°ä¹‹å’Œ" << endl;
 	cout << "\ninput the val of target at first:" << endl;
 	cin >> target;
 	vector<int> nums;
@@ -136,7 +136,7 @@ void Test_groupAnagrams()
 {
 	string str;
 	vector<string> strs;
-	cout << "hot100 49.×ÖÄ¸ÒìÎ»´Ê·Ö×é" << endl;
+	cout << "hot100 49.å­—æ¯å¼‚ä½è¯åˆ†ç»„" << endl;
 	cout << "\ninput the array of string:" << endl;
 	while (cin >> str)
 	{
@@ -153,12 +153,12 @@ int longestConsecutive(vector<int>& nums)
 {
 	if (nums.empty()) return 0;
 	int res = 1;
-	unordered_set<int> myset(nums.begin(),nums.end());
-	for (int num:myset)//set×Ô¶¯È¥ÖØ£¬±éÀúnums»á±éÀúÓĞÖØ¸´µÄÔªËØ
+	unordered_set<int> myset(nums.begin(), nums.end());
+	for (int num : myset)//setè‡ªåŠ¨å»é‡ï¼Œéå†numsä¼šéå†æœ‰é‡å¤çš„å…ƒç´ 
 	{
 		myset.insert(num);
 		int temp = 1;
-		int fnum= num+1;
+		int fnum = num + 1;
 		while (myset.count(fnum))
 		{
 			fnum++;
@@ -173,7 +173,7 @@ void Test_longestConsecutive()
 {
 	vector<int> nums;
 	int num;
-	cout << "hot100 128.×î³¤Á¬ĞøĞòÁĞ" << endl;
+	cout << "hot100 128.æœ€é•¿è¿ç»­åºåˆ—" << endl;
 	cout << "\ninput array:" << endl;
 	while (cin >> num)
 	{
@@ -207,7 +207,7 @@ void Test_moveZeroes()
 {
 	vector<int> nums;
 	int num;
-	cout << "hot100 283.ÒÆ¶¯Áã" << endl;
+	cout << "hot100 283.ç§»åŠ¨é›¶" << endl;
 	cout << "\ninput array:" << endl;
 	while (cin >> num)
 	{
@@ -221,15 +221,17 @@ void Test_moveZeroes()
 
 int maxArea(vector<int>& height)
 {
-	int left = 0, right = height.size()-1;
+	int left = 0, right = height.size() - 1;
 	int res = INT_MIN;
 	while (left < right)
 	{
 		int temp = (right - left) * min(height[left], height[right]);
 		res = max(res, temp);
 		if (height[left] <= height[right])
-		{left++;}
-		else { right--;}
+		{
+			left++;
+		}
+		else { right--; }
 	}
 	return res;
 }
@@ -238,7 +240,7 @@ void Test_maxArea()
 {
 	vector<int> nums;
 	int num;
-	cout << "hot100 11.Ê¢×î¶àË®µÄÈİÆ÷" << endl;
+	cout << "hot100 11.ç››æœ€å¤šæ°´çš„å®¹å™¨" << endl;
 	cout << "\ninput array:" << endl;
 	while (cin >> num)
 	{
@@ -262,7 +264,7 @@ vector<vector<int>> threeSum(vector<int>& nums) {
 			int sum = nums[left] + nums[right];
 			if (sum == target) {
 				res.push_back({ nums[i], nums[left], nums[right] });
-				//Èç¹ûÕâ¸öºÍÇ°Ò»¸öÏàµÈ£¬¾Í¼ÌĞøÍùÇ°Ìø, ¶øÇÒÒ»¶¨Òªleft<right
+				//å¦‚æœè¿™ä¸ªå’Œå‰ä¸€ä¸ªç›¸ç­‰ï¼Œå°±ç»§ç»­å¾€å‰è·³, è€Œä¸”ä¸€å®šè¦left<right
 				while (left < right && nums[left] == nums[left + 1]) { left++; }
 				while (left < right && nums[right] == nums[right - 1]) { right--; }
 				left++;
@@ -279,7 +281,7 @@ vector<vector<int>> threeSum(vector<int>& nums) {
 
 void Test_threeSum()
 {
-	cout << " hot100 15.ÈıÊıÖ®ºÍ " << endl;
+	cout << " hot100 15.ä¸‰æ•°ä¹‹å’Œ " << endl;
 	cout << "\ninput the num of array:" << endl;
 	vector<int> nums;
 	int num;
@@ -305,7 +307,7 @@ int trap(vector<int>& height)
 		leftmax[i] = maxval;
 	}
 	maxval = 0;
-	for (int i = n-1; i >=0 ; i--)
+	for (int i = n - 1; i >= 0; i--)
 	{
 		maxval = max(maxval, height[i]);
 		rightmax[i] = maxval;
@@ -320,7 +322,7 @@ int trap(vector<int>& height)
 
 void Test_trap()
 {
-	cout << " hot100 42.½ÓÓêË® " << endl;
+	cout << " hot100 42.æ¥é›¨æ°´ " << endl;
 	cout << "\ninput the num of array:" << endl;
 	vector<int> nums;
 	int num;
@@ -331,7 +333,7 @@ void Test_trap()
 			break;
 	}
 	int res = trap(nums);
-	cout << "\nThe res is:"<<res << endl;
+	cout << "\nThe res is:" << res << endl;
 }
 
 int lengthOfLongestSubstring(string s) {
@@ -356,7 +358,7 @@ int lengthOfLongestSubstring(string s) {
 
 void Test_lengthOfLongestSubstring()
 {
-	cout << " hot100 3.ÎŞÖØ¸´×Ö·ûµÄ×î³¤×Ó´® " << endl;
+	cout << " hot100 3.æ— é‡å¤å­—ç¬¦çš„æœ€é•¿å­ä¸² " << endl;
 	cout << "\ninput string:" << endl;
 	string str;
 	cin >> str;
@@ -404,14 +406,14 @@ vector<int> findAnagrams(string s, string p)
 void Test_findAnagrams()
 {
 	string s;
-	string p; 
-	cout << "438. ÕÒµ½×Ö·û´®ÖĞËùÓĞ×ÖÄ¸ÒìÎ»´Ê" << endl;
-	cout << "\nÊäÈë³¤×Ö·û´®£º" << endl;
+	string p;
+	cout << "438. æ‰¾åˆ°å­—ç¬¦ä¸²ä¸­æ‰€æœ‰å­—æ¯å¼‚ä½è¯" << endl;
+	cout << "\nè¾“å…¥é•¿å­—ç¬¦ä¸²ï¼š" << endl;
 	cin >> s;
-	cout << "\nÊäÈëÒìÎ»´Ê£º" << endl;
+	cout << "\nè¾“å…¥å¼‚ä½è¯ï¼š" << endl;
 	cin >> p;
 	vector<int> res = findAnagrams(s, p);
-	cout << "\n¼ÆËãµÄ½á¹ûÊÇ£º" << endl;
+	cout << "\nè®¡ç®—çš„ç»“æœæ˜¯ï¼š" << endl;
 	printVector(res);
 }
 
@@ -436,8 +438,8 @@ int subarraySum(vector<int>& nums, int k)
 
 void Test_subarraySum()
 {
-	cout << "560. ºÍÎª K µÄ×ÓÊı×é" << endl;
-	cout << "\nÊäÈëÊı×énums£º" << endl;
+	cout << "560. å’Œä¸º K çš„å­æ•°ç»„" << endl;
+	cout << "\nè¾“å…¥æ•°ç»„numsï¼š" << endl;
 	vector<int> nums;
 	int num;
 	while (cin >> num)
@@ -447,11 +449,11 @@ void Test_subarraySum()
 			break;
 	}
 	int target;
-	cout << "\nÊäÈëtarget£º" << endl;
+	cout << "\nè¾“å…¥targetï¼š" << endl;
 	cin >> target;
-	
+
 	int res = subarraySum(nums, target);
-	cout << "\n¼ÆËãµÄ½á¹ûÊÇ£º"<< res << endl;
+	cout << "\nè®¡ç®—çš„ç»“æœæ˜¯ï¼š" << res << endl;
 }
 
 class Myqueue {
@@ -496,8 +498,8 @@ vector<int> maxSlidingWindow(vector<int>& nums, int k) {
 
 void Test_maxSlidingWindow()
 {
-	cout << "239. »¬¶¯´°¿Ú×î´óÖµ" << endl;
-	cout << "\nÊäÈëÊı×énums£º" << endl;
+	cout << "239. æ»‘åŠ¨çª—å£æœ€å¤§å€¼" << endl;
+	cout << "\nè¾“å…¥æ•°ç»„numsï¼š" << endl;
 	vector<int> nums;
 	int num;
 	while (cin >> num)
@@ -507,18 +509,20 @@ void Test_maxSlidingWindow()
 			break;
 	}
 	int target;
-	cout << "\nÊäÈëtarget£º" << endl;
+	cout << "\nè¾“å…¥targetï¼š" << endl;
 	cin >> target;
 
 	vector<int> res = maxSlidingWindow(nums, target);
-	cout << "\n¼ÆËãµÄ½á¹ûÊÇ£º" <<endl;
+	cout << "\nè®¡ç®—çš„ç»“æœæ˜¯ï¼š" << endl;
 	printVector(res);
 }
 
 string minWindow(string s, string t) {
 	unordered_map<char, int> map, window;
 	for (int i = 0; i < t.size(); i++)
-	{map[t[i]]++;}
+	{
+		map[t[i]]++;
+	}
 	int left = 0, right = 0;
 	int start = 0, length = INT_MAX;
 	int valid = 0;
@@ -556,19 +560,19 @@ void Test_minWindow()
 {
 	string s;
 	string p;
-	cout << "76. ×îĞ¡¸²¸Ç×Ó´®" << endl;
-	cout << "\nÊäÈë³¤×Ö·û´®£º" << endl;
+	cout << "76. æœ€å°è¦†ç›–å­ä¸²" << endl;
+	cout << "\nè¾“å…¥é•¿å­—ç¬¦ä¸²ï¼š" << endl;
 	cin >> s;
-	cout << "\nÊäÈë¶Ì×Ö·û´®£º" << endl;
+	cout << "\nè¾“å…¥çŸ­å­—ç¬¦ä¸²ï¼š" << endl;
 	cin >> p;
 	string res = minWindow(s, p);
-	cout << "\n¼ÆËãµÄ½á¹ûÊÇ£º" << endl;
+	cout << "\nè®¡ç®—çš„ç»“æœæ˜¯ï¼š" << endl;
 	cout << res << endl;
 }
 
 int maxSubArray(vector<int>& nums) {
 #if 1
-	cout << "\n¶¯Ì¬¹æ»®£º" << endl;
+	cout << "\nåŠ¨æ€è§„åˆ’ï¼š" << endl;
 	vector<int> dp(nums.size());
 	dp[0] = nums[0];
 	int res = dp[0];
@@ -579,7 +583,7 @@ int maxSubArray(vector<int>& nums) {
 	}
 	return res;
 #else
-	cout << "\nÌ°ĞÄ£º" << endl;
+	cout << "\nè´ªå¿ƒï¼š" << endl;
 	int sum = 0;
 	int res = INT_MIN;
 	for (int i = 0; i < nums.size(); i++)
@@ -592,13 +596,13 @@ int maxSubArray(vector<int>& nums) {
 	return res;
 #endif 
 
-	
+
 }
 
 void Test_maxSubArray()
 {
-	cout << "53. ×î´ó×ÓÊı×éºÍ" << endl;
-	cout << "\nÊäÈëÊı×énums£º" << endl;
+	cout << "53. æœ€å¤§å­æ•°ç»„å’Œ" << endl;
+	cout << "\nè¾“å…¥æ•°ç»„numsï¼š" << endl;
 	vector<int> nums;
 	int num;
 	while (cin >> num)
@@ -608,7 +612,7 @@ void Test_maxSubArray()
 			break;
 	}
 	int res = maxSubArray(nums);
-	cout << "\n¼ÆËãµÄ½á¹ûÊÇ£º" <<res<< endl;
+	cout << "\nè®¡ç®—çš„ç»“æœæ˜¯ï¼š" << res << endl;
 }
 
 vector<vector<int>> merge(vector<vector<int>>& intervals) {
@@ -634,17 +638,17 @@ vector<vector<int>> merge(vector<vector<int>>& intervals) {
 }
 
 void Test_merge() {
-	cout << "56. ºÏ²¢Çø¼ä" << endl;
-	cout << "\nÒÀ´ÎÊäÈëÇø¼ä£¨a, b£©£º" << endl;
-	cout << "ÊäÈë·ÇÊı×Ö×Ö·û½áÊøÊäÈë" << endl;
+	cout << "56. åˆå¹¶åŒºé—´" << endl;
+	cout << "\nä¾æ¬¡è¾“å…¥åŒºé—´ï¼ˆa, bï¼‰ï¼š" << endl;
+	cout << "è¾“å…¥éæ•°å­—å­—ç¬¦ç»“æŸè¾“å…¥" << endl;
 	vector<vector<int>> nums;
 	int a, b;
 	while (cin >> a >> b)
 	{
-		nums.push_back({a, b});
+		nums.push_back({ a, b });
 	}
 	vector<vector<int>> res = merge(nums);
-	cout << "\n¼ÆËãµÄ½á¹ûÊÇ£º" << endl;
+	cout << "\nè®¡ç®—çš„ç»“æœæ˜¯ï¼š" << endl;
 	printVectorOfVector(res);
 }
 
@@ -670,8 +674,8 @@ void rotate(vector<int>& nums, int k) {
 
 void Test_rotate()
 {
-	cout << "189. ÂÖ×ªÊı×é" << endl;
-	cout << "\nÒÀ´ÎÊäÈëÊı×éÔªËØ£º" << endl;
+	cout << "189. è½®è½¬æ•°ç»„" << endl;
+	cout << "\nä¾æ¬¡è¾“å…¥æ•°ç»„å…ƒç´ ï¼š" << endl;
 	vector<int> nums;
 	int num;
 	int k;
@@ -681,10 +685,10 @@ void Test_rotate()
 		if (cin.peek() == '\n')
 			break;
 	}
-	cout << "\nÊäÈëÏòÓÒÂÖ×ªµÄÎ»ÖÃk£º" << endl;
+	cout << "\nè¾“å…¥å‘å³è½®è½¬çš„ä½ç½®kï¼š" << endl;
 	cin >> k;
 	rotate(nums, k);
-	cout << "\n¼ÆËãµÄ½á¹ûÊÇ£º" << endl;
+	cout << "\nè®¡ç®—çš„ç»“æœæ˜¯ï¼š" << endl;
 	printVector(nums);
 }
 
@@ -712,8 +716,8 @@ vector<int> productExceptSelf(vector<int>& nums) {
 
 void Test_productExceptSelf()
 {
-	cout << "238. ³ı×ÔÉíÒÔÍâÊı×éµÄ³Ë»ı" << endl;
-	cout << "\nÒÀ´ÎÊäÈëÊı×éÔªËØ£º" << endl;
+	cout << "238. é™¤è‡ªèº«ä»¥å¤–æ•°ç»„çš„ä¹˜ç§¯" << endl;
+	cout << "\nä¾æ¬¡è¾“å…¥æ•°ç»„å…ƒç´ ï¼š" << endl;
 	vector<int> nums;
 	int num;
 	while (cin >> num)
@@ -723,7 +727,7 @@ void Test_productExceptSelf()
 			break;
 	}
 	vector<int> res = productExceptSelf(nums);
-	cout << "\n¼ÆËãµÄ½á¹ûÊÇ£º" << endl;
+	cout << "\nè®¡ç®—çš„ç»“æœæ˜¯ï¼š" << endl;
 	printVector(res);
 }
 
@@ -738,15 +742,15 @@ int firstMissingPositive(vector<int>& nums) {
 	}
 	for (int i = 0; i < n; i++)
 	{
-		if (nums[i] != i+1)
+		if (nums[i] != i + 1)
 			return i + 1;
 	}
 	return n + 1;
 }
 
 void Test_firstMissingPositive() {
-	cout << "41. È±Ê§µÄµÚÒ»¸öÕıÊı" << endl;
-	cout << "\nÒÀ´ÎÊäÈëÊı×éÔªËØ£º" << endl;
+	cout << "41. ç¼ºå¤±çš„ç¬¬ä¸€ä¸ªæ­£æ•°" << endl;
+	cout << "\nä¾æ¬¡è¾“å…¥æ•°ç»„å…ƒç´ ï¼š" << endl;
 	vector<int> nums;
 	int num;
 	while (cin >> num)
@@ -756,7 +760,7 @@ void Test_firstMissingPositive() {
 			break;
 	}
 	int res = firstMissingPositive(nums);
-	cout << "\n¼ÆËãµÄ½á¹ûÊÇ£º" << res << endl;
+	cout << "\nè®¡ç®—çš„ç»“æœæ˜¯ï¼š" << res << endl;
 }
 
 void setZeroes(vector<vector<int>>& matrix) {
@@ -778,7 +782,7 @@ void setZeroes(vector<vector<int>>& matrix) {
 	{
 		for (int j = 0; j < n; j++)
 		{
-			if (row[i]||col[j])
+			if (row[i] || col[j])
 			{
 				matrix[i][j] = 0;
 			}
@@ -788,11 +792,11 @@ void setZeroes(vector<vector<int>>& matrix) {
 
 void Test_setZeroes()
 {
-	cout << "73. ¾ØÕóÖÃÁã" << endl;
+	cout << "73. çŸ©é˜µç½®é›¶" << endl;
 	int m, n;
-	cout << "\nÊäÈë¾ØÕóµÄĞĞÊımºÍÁĞÊın£º" << endl;
+	cout << "\nè¾“å…¥çŸ©é˜µçš„è¡Œæ•°må’Œåˆ—æ•°nï¼š" << endl;
 	cin >> m >> n;
-	cout << "´Ó×óÉÏµ½ÓÒÏÂÒÀ´ÎÊäÈë¾ØÕóÔªËØ" << endl;
+	cout << "ä»å·¦ä¸Šåˆ°å³ä¸‹ä¾æ¬¡è¾“å…¥çŸ©é˜µå…ƒç´ " << endl;
 	vector<vector<int>> nums(m, vector<int>(n));
 	for (int i = 0; i < m; i++)
 	{
@@ -802,7 +806,7 @@ void Test_setZeroes()
 		}
 	}
 	setZeroes(nums);
-	cout << "\n¼ÆËãµÄ½á¹ûÊÇ£º" << endl;
+	cout << "\nè®¡ç®—çš„ç»“æœæ˜¯ï¼š" << endl;
 	printVectorOfVector(nums);
 }
 
@@ -842,10 +846,10 @@ vector<int> spiralOrder(vector<vector<int>>& matrix)
 void Test_spiralOrder()
 {
 	int m, n;
-	cout << "\nÇëÊäÈë¾ØÕóµÄĞĞÊımºÍÁĞÊın:" << endl;
+	cout << "\nè¯·è¾“å…¥çŸ©é˜µçš„è¡Œæ•°må’Œåˆ—æ•°n:" << endl;
 	cin >> m >> n;
-	cout << "\nÒÀ´Î´Ó×óÉÏ½Çµ½ÓÒÏÂ½ÇÊäÈë¾ØÕóÔªËØ" << endl;
-	vector<vector<int>> nums(m, vector<int>(n,0));
+	cout << "\nä¾æ¬¡ä»å·¦ä¸Šè§’åˆ°å³ä¸‹è§’è¾“å…¥çŸ©é˜µå…ƒç´ " << endl;
+	vector<vector<int>> nums(m, vector<int>(n, 0));
 	for (int i = 0; i < m; i++)
 	{
 		for (int j = 0; j < n; j++)
@@ -873,8 +877,8 @@ void rotate_nums(vector<vector<int>>& matrix) {
 	{
 		for (int j = 0; j < m / 2; j++)
 		{
-			int temp = matrix[i][m-j-1];
-			matrix[i][m-j-1] = matrix[i][j];
+			int temp = matrix[i][m - j - 1];
+			matrix[i][m - j - 1] = matrix[i][j];
 			matrix[i][j] = temp;
 		}
 	}
@@ -883,9 +887,9 @@ void rotate_nums(vector<vector<int>>& matrix) {
 void Test_rotate_nums()
 {
 	int n;
-	cout << "\nÇëÊäÈën*n¾ØÕóµÄ´óĞ¡n:" << endl;
+	cout << "\nè¯·è¾“å…¥n*nçŸ©é˜µçš„å¤§å°n:" << endl;
 	cin >> n;
-	cout << "\nÒÀ´Î´Ó×óÉÏ½Çµ½ÓÒÏÂ½ÇÊäÈë¾ØÕóÔªËØ" << endl;
+	cout << "\nä¾æ¬¡ä»å·¦ä¸Šè§’åˆ°å³ä¸‹è§’è¾“å…¥çŸ©é˜µå…ƒç´ " << endl;
 	vector<vector<int>> nums(n, vector<int>(n, 0));
 	for (int i = 0; i < n; i++)
 	{
@@ -921,10 +925,10 @@ bool searchMatrix(vector<vector<int>>& matrix, int target) {
 
 void Test_searchMatrix()
 {
-	int m, n,target;
-	cout << "\nÇëÊäÈë¾ØÕóµÄĞĞÊımºÍÁĞÊın:" << endl;
+	int m, n, target;
+	cout << "\nè¯·è¾“å…¥çŸ©é˜µçš„è¡Œæ•°må’Œåˆ—æ•°n:" << endl;
 	cin >> m >> n;
-	cout << "\nÒÀ´Î´Ó×óÉÏ½Çµ½ÓÒÏÂ½ÇÊäÈë¾ØÕóÔªËØ" << endl;
+	cout << "\nä¾æ¬¡ä»å·¦ä¸Šè§’åˆ°å³ä¸‹è§’è¾“å…¥çŸ©é˜µå…ƒç´ " << endl;
 	vector<vector<int>> nums(m, vector<int>(n, 0));
 	for (int i = 0; i < m; i++)
 	{
@@ -933,7 +937,7 @@ void Test_searchMatrix()
 			cin >> nums[i][j];
 		}
 	}
-	cout << "\nÇëÊäÈëÄ¿±êÖµtarget:" << endl;
+	cout << "\nè¯·è¾“å…¥ç›®æ ‡å€¼target:" << endl;
 	cin >> target;
 
 	bool res = searchMatrix(nums, target);
@@ -954,7 +958,7 @@ ListNode* getIntersectionNode(ListNode* headA, ListNode* headB) {
 
 void Test_getIntersectionNode()
 {
-	ListNode a1(4); 
+	ListNode a1(4);
 	ListNode a2(1); a1.next = &a2;
 	ListNode b1(5);
 	ListNode b2(6); b1.next = &b2;
@@ -1009,7 +1013,7 @@ bool isPalindrome(ListNode* head) {
 	{
 		int temp = sta.top();
 		sta.pop();
-		if(p2->val!=temp)
+		if (p2->val != temp)
 		{
 			return false;
 		}
@@ -1085,7 +1089,7 @@ void Test_detectCycle()
 	if (res == NULL)
 		cout << "NULL" << endl;
 	int resval = res->val;
-	cout << resval<< endl;
+	cout << resval << endl;
 }
 
 ListNode* mergeTwoLists(ListNode* list1, ListNode* list2) {
@@ -1195,7 +1199,7 @@ ListNode* removeNthFromEnd(ListNode* head, int n) {
 	{
 		p1 = p1->next;
 	}
-	p1 = p1 -> next;
+	p1 = p1->next;
 	while (p1 != NULL)
 	{
 		p1 = p1->next;
@@ -1209,10 +1213,10 @@ ListNode* removeNthFromEnd(ListNode* head, int n) {
 
 void Test_removeNthFromEnd()
 {
-	cout << " 19. É¾³ıÁ´±íµÄµ¹ÊıµÚ N ¸ö½áµã " << endl;
+	cout << " 19. åˆ é™¤é“¾è¡¨çš„å€’æ•°ç¬¬ N ä¸ªç»“ç‚¹ " << endl;
 	vector<int> nums;
 	int num;
-	cout << " ÒÀ´ÎÊäÈëÁ´±íÔªËØ " << endl;
+	cout << " ä¾æ¬¡è¾“å…¥é“¾è¡¨å…ƒç´  " << endl;
 	while (cin >> num)
 	{
 		nums.push_back(num);
@@ -1220,7 +1224,7 @@ void Test_removeNthFromEnd()
 			break;
 	}
 	int target;
-	cout << " ÊäÈëÉ¾È¥µ¹ÊıµÚ¼¸¸öÔªËØ " << endl;
+	cout << " è¾“å…¥åˆ å»å€’æ•°ç¬¬å‡ ä¸ªå…ƒç´  " << endl;
 	cin >> target;
 	ListNode* head = VectorToListNode(nums);
 	ListNode* res = removeNthFromEnd(head, target);
@@ -1278,10 +1282,10 @@ ListNode* reverseKGroup(ListNode* head, int k) {
 
 void Test_reverseKGroup()
 {
-	cout << " 25. K ¸öÒ»×é·­×ªÁ´±í " << endl;
+	cout << " 25. K ä¸ªä¸€ç»„ç¿»è½¬é“¾è¡¨ " << endl;
 	vector<int> nums;
 	int num;
-	cout << "ÒÀ´ÎÊäÈëÁ´±íÔªËØ" << endl;
+	cout << "ä¾æ¬¡è¾“å…¥é“¾è¡¨å…ƒç´ " << endl;
 	while (cin >> num)
 	{
 		nums.push_back(num);
@@ -1289,7 +1293,7 @@ void Test_reverseKGroup()
 			break;
 	}
 	int target;
-	cout << "ÊäÈë¼¸¸öÒ»×é£º" << endl;
+	cout << "è¾“å…¥å‡ ä¸ªä¸€ç»„ï¼š" << endl;
 	cin >> target;
 	ListNode* head = VectorToListNode(nums);
 	ListNode* res = reverseKGroup(head, target);
@@ -1345,7 +1349,7 @@ ListNode* sortList(ListNode* head) {
 		return head;
 	ListNode* slow = head;
 	ListNode* fast = head->next;
-	while (fast != NULL&&fast->next!=NULL)
+	while (fast != NULL && fast->next != NULL)
 	{
 		fast = fast->next->next;
 		slow = slow->next;
@@ -1379,10 +1383,10 @@ ListNode* sortList(ListNode* head) {
 
 void Test_sortList()
 {
-	cout << " 148. ÅÅĞòÁ´±í " << endl;
+	cout << " 148. æ’åºé“¾è¡¨ " << endl;
 	vector<int> nums;
 	int num;
-	cout << "ÒÀ´ÎÊäÈëÁ´±íÔªËØ" << endl;
+	cout << "ä¾æ¬¡è¾“å…¥é“¾è¡¨å…ƒç´ " << endl;
 	while (cin >> num)
 	{
 		nums.push_back(num);
@@ -1398,7 +1402,7 @@ ListNode* inputLists()
 {
 	vector<int> nums;
 	int num;
-	cout << "\nÒÀ´ÎÊäÈëÁ´±íÔªËØ" << endl;
+	cout << "\nä¾æ¬¡è¾“å…¥é“¾è¡¨å…ƒç´ " << endl;
 	while (cin >> num)
 	{
 		nums.push_back(num);
@@ -1414,8 +1418,8 @@ ListNode* mergeKLists(vector<ListNode*>& lists) {
 	priority_queue < ListNode*, vector<ListNode*>, decltype(myfunc)> que(myfunc);
 	for (int i = 0; i < lists.size(); i++)
 	{
-		if(lists[i]!=nullptr)
-		que.push(lists[i]);
+		if (lists[i] != nullptr)
+			que.push(lists[i]);
 	}
 	ListNode* dummynode = new ListNode(0);
 	ListNode* p = dummynode;
@@ -1434,11 +1438,11 @@ ListNode* mergeKLists(vector<ListNode*>& lists) {
 
 void Test_mergeKLists()
 {
-	cout << " 23. ºÏ²¢ K ¸öÉıĞòÁ´±í " << endl;
+	cout << " 23. åˆå¹¶ K ä¸ªå‡åºé“¾è¡¨ " << endl;
 	ListNode* head1 = inputLists();
 	ListNode* head2 = inputLists();
 	ListNode* head3 = inputLists();
-	vector<ListNode*> lists = {head1, head2, head3};
+	vector<ListNode*> lists = { head1, head2, head3 };
 	ListNode* res = mergeKLists(lists);
 	cout << endl;
 	printListNode(res);
@@ -1472,7 +1476,7 @@ public:
 				mapcache.erase(cachelist.back().first);
 				cachelist.pop_back();
 			}
-			cachelist.push_front({ key,value});
+			cachelist.push_front({ key,value });
 			mapcache[key] = cachelist.begin();
 		}
 		else {
@@ -1516,7 +1520,7 @@ vector<int> inorderTraversal(TreeNode* root) {
 
 void Test_inorderTraversal()
 {
-	cout << "hot100 94.  ¶ş²æÊ÷µÄÖĞĞò±éÀú" << endl;
+	cout << "hot100 94.  äºŒå‰æ ‘çš„ä¸­åºéå†" << endl;
 	TreeNode* root = new TreeNode(0);
 	root->left = new TreeNode(1);
 	root->left->left = new TreeNode(3);
@@ -1536,7 +1540,7 @@ int maxDepth(TreeNode* root) {
 
 void Test_maxDepth()
 {
-	cout << "hot100 104. ¶ş²æÊ÷µÄ×î´óÉî¶È" << endl;
+	cout << "hot100 104. äºŒå‰æ ‘çš„æœ€å¤§æ·±åº¦" << endl;
 	TreeNode* root = new TreeNode(0);
 	root->left = new TreeNode(1);
 	root->left->left = new TreeNode(3);
@@ -1559,7 +1563,7 @@ TreeNode* invertTree(TreeNode* root) {
 
 void Test_invertTree()
 {
-	cout << "hot100 226. ·­×ª¶ş²æÊ÷" << endl;
+	cout << "hot100 226. ç¿»è½¬äºŒå‰æ ‘" << endl;
 	TreeNode* root = new TreeNode(0);
 	root->left = new TreeNode(1);
 	root->left->left = new TreeNode(3);
@@ -1589,7 +1593,7 @@ bool isSymmetric(TreeNode* root) {
 
 void Test_isSymmetric()
 {
-	cout << "hot100 101. ¶Ô³Æ¶ş²æÊ÷" << endl;
+	cout << "hot100 101. å¯¹ç§°äºŒå‰æ ‘" << endl;
 	TreeNode* root = new TreeNode(0);
 	root->left = new TreeNode(1);
 	root->left->left = new TreeNode(3);
@@ -1618,7 +1622,7 @@ int diameterOfBinaryTree(TreeNode* root) {
 
 void Test_diameterOfBinaryTree()
 {
-	cout << "hot100 543. ¶ş²æÊ÷µÄÖ±¾¶" << endl;
+	cout << "hot100 543. äºŒå‰æ ‘çš„ç›´å¾„" << endl;
 	TreeNode* root = new TreeNode(0);
 	root->left = new TreeNode(1);
 	root->left->left = new TreeNode(3);
@@ -1652,7 +1656,7 @@ vector<vector<int>> levelOrder(TreeNode* root) {
 
 void Test_levelOrder()
 {
-	cout << "hot100 102. ¶ş²æÊ÷µÄ²ãĞò±éÀú" << endl;
+	cout << "hot100 102. äºŒå‰æ ‘çš„å±‚åºéå†" << endl;
 	TreeNode* root = new TreeNode(0);
 	root->left = new TreeNode(1);
 	root->left->left = new TreeNode(3);
@@ -1679,10 +1683,10 @@ TreeNode* sortedArrayToBST(vector<int>& nums) {
 
 void Test_sortedArrayToBST()
 {
-	cout << "hot100 108. ½«ÓĞĞòÊı×é×ª»»Îª¶ş²æËÑË÷Ê÷" << endl;
+	cout << "hot100 108. å°†æœ‰åºæ•°ç»„è½¬æ¢ä¸ºäºŒå‰æœç´¢æ ‘" << endl;
 	vector<int> nums;
 	int num;
-	cout << "\nÒÀ´ÎÊäÈëÉıĞòÊı×éµÄÔªËØ" << endl;
+	cout << "\nä¾æ¬¡è¾“å…¥å‡åºæ•°ç»„çš„å…ƒç´ " << endl;
 	while (cin >> num)
 	{
 		nums.push_back(num);
@@ -1690,7 +1694,7 @@ void Test_sortedArrayToBST()
 			break;
 	}
 	TreeNode* res = sortedArrayToBST(nums);
-	vector<int> resvectror= inorderTraversal(res);
+	vector<int> resvectror = inorderTraversal(res);
 	printVector(resvectror);
 }
 
@@ -1712,7 +1716,7 @@ bool isValidBST(TreeNode* root) {
 
 void Test_isValidBST()
 {
-	cout << "hot100 98. ÑéÖ¤¶ş²æËÑË÷Ê÷" << endl;
+	cout << "hot100 98. éªŒè¯äºŒå‰æœç´¢æ ‘" << endl;
 	TreeNode* root = new TreeNode(0);
 	root->left = new TreeNode(1);
 	root->left->left = new TreeNode(3);
@@ -1745,10 +1749,10 @@ int kthSmallest(TreeNode* root, int k) {
 
 void Test_kthSmallest()
 {
-	cout << "hot100 230. ¶ş²æËÑË÷Ê÷ÖĞµÚ K Ğ¡µÄÔªËØ" << endl;
+	cout << "hot100 230. äºŒå‰æœç´¢æ ‘ä¸­ç¬¬ K å°çš„å…ƒç´ " << endl;
 	vector<int> nums;
 	int num;
-	cout << "\nÒÀ´ÎÊäÈëÉıĞòÊı×éµÄÔªËØ" << endl;
+	cout << "\nä¾æ¬¡è¾“å…¥å‡åºæ•°ç»„çš„å…ƒç´ " << endl;
 	while (cin >> num)
 	{
 		nums.push_back(num);
@@ -1756,11 +1760,11 @@ void Test_kthSmallest()
 			break;
 	}
 	int k;
-	cout << "\nÊäÈëĞèÒª²éÕÒµÚkĞ¡µÄÔªËØ:" << endl;
+	cout << "\nè¾“å…¥éœ€è¦æŸ¥æ‰¾ç¬¬kå°çš„å…ƒç´ :" << endl;
 	cin >> k;
 	TreeNode* nodeTree = sortedArrayToBST(nums);
 	int res = kthSmallest(nodeTree, k);
-	cout << "\nres£º" << res << endl;
+	cout << "\nresï¼š" << res << endl;
 }
 
 vector<int> rightSideView(TreeNode* root) {
@@ -1787,7 +1791,7 @@ vector<int> rightSideView(TreeNode* root) {
 
 void Test_rightSideView()
 {
-	cout << "hot100 199. ¶ş²æÊ÷µÄÓÒÊÓÍ¼" << endl;
+	cout << "hot100 199. äºŒå‰æ ‘çš„å³è§†å›¾" << endl;
 	TreeNode* root = new TreeNode(0);
 	root->left = new TreeNode(1);
 	root->left->left = new TreeNode(3);
@@ -1815,7 +1819,7 @@ void flatten(TreeNode* root) {
 
 void Test_flatten()
 {
-	cout << "hot100 114. ¶ş²æÊ÷Õ¹¿ªÎªÁ´±í" << endl;
+	cout << "hot100 114. äºŒå‰æ ‘å±•å¼€ä¸ºé“¾è¡¨" << endl;
 	TreeNode* root = new TreeNode(1);
 	root->left = new TreeNode(2);
 	root->left->left = new TreeNode(3);
@@ -1843,7 +1847,7 @@ TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder) {
 	}
 	vector<int> leftinorder(inorder.begin(), inorder.begin() + midindex);
 	vector<int> rightinorder(inorder.begin() + midindex + 1, inorder.end());
-	vector<int> leftpreorder(preorder.begin()+1, preorder.begin() + 1+leftinorder.size());
+	vector<int> leftpreorder(preorder.begin() + 1, preorder.begin() + 1 + leftinorder.size());
 	vector<int> rightpreorder(preorder.begin() + 1 + leftinorder.size(), preorder.end());
 	root->left = buildTree(leftpreorder, leftinorder);
 	root->right = buildTree(rightpreorder, rightinorder);
@@ -1852,9 +1856,9 @@ TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder) {
 
 void Test_buildTree()
 {
-	cout << "hot100 105. ´ÓÇ°ĞòÓëÖĞĞò±éÀúĞòÁĞ¹¹Ôì¶ş²æÊ÷" << endl;
-	vector<int> preorder = {3, 9, 20, 15, 7};
-	vector<int> inorder = {9, 3, 15, 20, 7};
+	cout << "hot100 105. ä»å‰åºä¸ä¸­åºéå†åºåˆ—æ„é€ äºŒå‰æ ‘" << endl;
+	vector<int> preorder = { 3, 9, 20, 15, 7 };
+	vector<int> inorder = { 9, 3, 15, 20, 7 };
 	TreeNode* root = buildTree(preorder, inorder);
 	vector<vector<int>> res = levelOrder(root);
 	printVectorOfVector(res);
@@ -1882,7 +1886,7 @@ int pathSum(TreeNode* root, int targetSum) {
 
 void Test_pathSum()
 {
-	cout << "hot100 437. Â·¾¶×ÜºÍ III" << endl;
+	cout << "hot100 437. è·¯å¾„æ€»å’Œ III" << endl;
 	TreeNode* root = new TreeNode(10);
 	root->left = new TreeNode(5);
 	root->left->left = new TreeNode(3);
@@ -1915,7 +1919,7 @@ TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
 
 void Test_lowestCommonAncestor()
 {
-	cout << "hot100 236. ¶ş²æÊ÷µÄ×î½ü¹«¹²×æÏÈ" << endl;
+	cout << "hot100 236. äºŒå‰æ ‘çš„æœ€è¿‘å…¬å…±ç¥–å…ˆ" << endl;
 	TreeNode* root = new TreeNode(10);
 	root->left = new TreeNode(5);
 	root->left->left = new TreeNode(3);
@@ -1947,7 +1951,7 @@ int maxPathSum(TreeNode* root) {
 
 void Test_maxPathSum()
 {
-	cout << "hot100 124. ¶ş²æÊ÷ÖĞµÄ×î´óÂ·¾¶ºÍ" << endl;
+	cout << "hot100 124. äºŒå‰æ ‘ä¸­çš„æœ€å¤§è·¯å¾„å’Œ" << endl;
 	TreeNode* root = new TreeNode(10);
 	root->left = new TreeNode(5);
 	root->left->left = new TreeNode(3);
@@ -1995,12 +1999,12 @@ int numIslands(vector<vector<char>>& grid) {
 
 void Test_numIslands()
 {
-	cout << "hot100 200. µºÓìÊıÁ¿" << endl;
+	cout << "hot100 200. å²›å±¿æ•°é‡" << endl;
 	int m, n;
-	cout << "\nÇëÊäÈëÄ¿±ê¾ØÕóµÄ¸ß¶ÈmºÍ¿í¶Èn" << endl;
+	cout << "\nè¯·è¾“å…¥ç›®æ ‡çŸ©é˜µçš„é«˜åº¦må’Œå®½åº¦n" << endl;
 	cin >> m >> n;
 	vector<vector<char>> grid(m, vector<char>(n));
-	cout << "\n½ÓÏÂÀ´ÒÀ´ÎÊäÈë¾ØÕóÔªËØ:" << endl;
+	cout << "\næ¥ä¸‹æ¥ä¾æ¬¡è¾“å…¥çŸ©é˜µå…ƒç´ :" << endl;
 	for (int i = 0; i < m; i++)
 	{
 		for (int j = 0; j < n; j++)
@@ -2009,7 +2013,7 @@ void Test_numIslands()
 		}
 	}
 	int res = numIslands(grid);
-	cout << "the res is £º" << res << endl;
+	cout << "the res is ï¼š" << res << endl;
 }
 
 int orangesRotting(vector<vector<int>>& grid) {
@@ -2061,12 +2065,12 @@ int orangesRotting(vector<vector<int>>& grid) {
 
 void Test_orangesRotting()
 {
-	cout << "hot100 994. ¸¯ÀÃµÄéÙ×Ó" << endl;
+	cout << "hot100 994. è…çƒ‚çš„æ©˜å­" << endl;
 	int m, n;
-	cout << "\nÇëÊäÈëÄ¿±ê¾ØÕóµÄ¸ß¶ÈmºÍ¿í¶Èn" << endl;
+	cout << "\nè¯·è¾“å…¥ç›®æ ‡çŸ©é˜µçš„é«˜åº¦må’Œå®½åº¦n" << endl;
 	cin >> m >> n;
 	vector<vector<int>> grid(m, vector<int>(n));
-	cout << "\n½ÓÏÂÀ´ÒÀ´ÎÊäÈë¾ØÕóÔªËØ(0-¿Õ, 1-ĞÂÏÊ, 2-¸¯ÀÃ):" << endl;
+	cout << "\næ¥ä¸‹æ¥ä¾æ¬¡è¾“å…¥çŸ©é˜µå…ƒç´ (0-ç©º, 1-æ–°é²œ, 2-è…çƒ‚):" << endl;
 	for (int i = 0; i < m; i++)
 	{
 		for (int j = 0; j < n; j++)
@@ -2075,7 +2079,7 @@ void Test_orangesRotting()
 		}
 	}
 	int res = orangesRotting(grid);
-	cout << "the res is £º" << res << endl;
+	cout << "the res is ï¼š" << res << endl;
 }
 
 bool canFinish(int numCourses, vector<vector<int>>& prerequisites) {
@@ -2087,7 +2091,7 @@ bool canFinish(int numCourses, vector<vector<int>>& prerequisites) {
 		input[prerequisite[0]]++;
 	}
 	queue<int> que;
-	for (int i = 0; i<input.size(); i++)
+	for (int i = 0; i < input.size(); i++)
 	{
 		if (input[i] == 0)
 			que.push(i);
@@ -2110,11 +2114,11 @@ bool canFinish(int numCourses, vector<vector<int>>& prerequisites) {
 
 void Test_canFinish()
 {
-	cout << "hot100 207. ¿Î³Ì±í" << endl;
+	cout << "hot100 207. è¯¾ç¨‹è¡¨" << endl;
 	int numCourses;
-	cout << "ÊäÈëÄãĞèÒªÂ¼Èë¶àÉÙÃÅ¿Î£º" << endl;
+	cout << "è¾“å…¥ä½ éœ€è¦å½•å…¥å¤šå°‘é—¨è¯¾ï¼š" << endl;
 	cin >> numCourses;
-	cout << "ÒÀ´ÎÊäÈëÃ¿ÃÅ¿ÎµÄÑ§Ï°Ë³Ğò£º" << endl;
+	cout << "ä¾æ¬¡è¾“å…¥æ¯é—¨è¯¾çš„å­¦ä¹ é¡ºåºï¼š" << endl;
 	vector<vector<int>> prerequisites(numCourses, vector<int>(2));
 	for (int i = 0; i < numCourses; i++)
 	{
@@ -2181,7 +2185,7 @@ public:
 
 void Test_Trie()
 {
-	cout << "hot100 208. ÊµÏÖ Trie (Ç°×ºÊ÷)" << endl;
+	cout << "hot100 208. å®ç° Trie (å‰ç¼€æ ‘)" << endl;
 	Trie trie;
 	trie.insert("apple");
 	bool apple = trie.search("apple");
@@ -2222,10 +2226,10 @@ vector<vector<int>> permute(vector<int>& nums) {
 
 void Test_permute()
 {
-	cout << "hot100 46. È«ÅÅÁĞ" << endl;
+	cout << "hot100 46. å…¨æ’åˆ—" << endl;
 	vector<int> nums;
 	int num;
-	cout << "ÊäÈë²»º¬ÖØ¸´ÔªËØµÄÊı×é£º" << endl;
+	cout << "è¾“å…¥ä¸å«é‡å¤å…ƒç´ çš„æ•°ç»„ï¼š" << endl;
 	while (cin >> num)
 	{
 		nums.push_back(num);
@@ -2243,7 +2247,7 @@ void subsets_dfs(vector<int>& nums, vector<vector<int>>& res, int start, vector<
 	for (int i = start; i < nums.size(); i++)
 	{
 		temp.push_back(nums[i]);
-		subsets_dfs(nums, res, i+1, temp);
+		subsets_dfs(nums, res, i + 1, temp);
 		temp.pop_back();
 	}
 }
@@ -2251,17 +2255,17 @@ void subsets_dfs(vector<int>& nums, vector<vector<int>>& res, int start, vector<
 vector<vector<int>> subsets(vector<int>& nums) {
 	vector<vector<int>> res;
 	vector<int> temp;
-	subsets_dfs(nums, res, 0 ,temp);
+	subsets_dfs(nums, res, 0, temp);
 	return res;
 }
 
 
 void Test_subsets()
 {
-	cout << "hot100 78. ×Ó¼¯" << endl;
+	cout << "hot100 78. å­é›†" << endl;
 	vector<int> nums;
 	int num;
-	cout << "ÊäÈë²»º¬ÖØ¸´ÔªËØµÄÊı×é£º" << endl;
+	cout << "è¾“å…¥ä¸å«é‡å¤å…ƒç´ çš„æ•°ç»„ï¼š" << endl;
 	while (cin >> num)
 	{
 		nums.push_back(num);
@@ -2299,9 +2303,9 @@ vector<string> letterCombinations(string digits) {
 
 void Test_letterCombinations()
 {
-	cout << "hot100 17. µç»°ºÅÂëµÄ×ÖÄ¸×éºÏ" << endl;
+	cout << "hot100 17. ç”µè¯å·ç çš„å­—æ¯ç»„åˆ" << endl;
 	string digits;
-	cout << "ÊäÈëÊı×Ö×Ö·û´®£º" << endl;
+	cout << "è¾“å…¥æ•°å­—å­—ç¬¦ä¸²ï¼š" << endl;
 	cin >> digits;
 	vector<string> res = letterCombinations(digits);
 	printVector(res);
@@ -2331,10 +2335,10 @@ vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
 
 void Test_combinationSum()
 {
-	cout << "hot100 39. ×éºÏ×ÜºÍ" << endl;
+	cout << "hot100 39. ç»„åˆæ€»å’Œ" << endl;
 	vector<int> nums;
 	int num;
-	cout << "\nÊäÈë²»º¬ÖØ¸´ÔªËØµÄÊı×é£º" << endl;
+	cout << "\nè¾“å…¥ä¸å«é‡å¤å…ƒç´ çš„æ•°ç»„ï¼š" << endl;
 	while (cin >> num)
 	{
 		nums.push_back(num);
@@ -2342,7 +2346,7 @@ void Test_combinationSum()
 			break;
 	}
 	int target;
-	cout << "\nÊäÈëÄ¿±êÕûÊıtarget£º" << endl;
+	cout << "\nè¾“å…¥ç›®æ ‡æ•´æ•°targetï¼š" << endl;
 	cin >> target;
 	vector<vector<int>> res = combinationSum(nums, target);
 	printVectorOfVector(res);
@@ -2375,9 +2379,9 @@ vector<string> generateParenthesis(int n) {
 
 void Test_generateParenthesis()
 {
-	cout << "hot100 22. À¨ºÅÉú³É" << endl;
+	cout << "hot100 22. æ‹¬å·ç”Ÿæˆ" << endl;
 	int target;
-	cout << "\nÊäÈëÀ¨ºÅ¶ÔÊı£º" << endl;
+	cout << "\nè¾“å…¥æ‹¬å·å¯¹æ•°ï¼š" << endl;
 	cin >> target;
 	vector<string> res = generateParenthesis(target);
 	printVector(res);
@@ -2432,7 +2436,7 @@ bool exist(vector<vector<char>>& board, string word) {
 
 void Test_exist()
 {
-	cout << "hot100 79. µ¥´ÊËÑË÷" << endl;
+	cout << "hot100 79. å•è¯æœç´¢" << endl;
 	vector<vector<char>> board = {
 		{'A','B','C','E'},
 		{'S','F','C','S'},
@@ -2482,8 +2486,8 @@ vector<vector<string>> partition(string s) {
 
 void Test_partition()
 {
-	cout << "hot100 131. ·Ö¸î»ØÎÄ´®" << endl;
-	cout << "\nÊäÈë×Ö·û´®:" << endl;
+	cout << "hot100 131. åˆ†å‰²å›æ–‡ä¸²" << endl;
+	cout << "\nè¾“å…¥å­—ç¬¦ä¸²:" << endl;
 	string s;
 	cin >> s;
 	vector<vector<string>> res = partition(s);
@@ -2497,7 +2501,7 @@ bool ifNQueens(int n, int row, int col, vector<string> temp)
 		if (temp[i][col] == 'Q')
 			return false;
 	}
-	for (int i = row-1, j = col-1; i >=0&&j>=0; i--,j--)
+	for (int i = row - 1, j = col - 1; i >= 0 && j >= 0; i--, j--)
 	{
 		if (temp[i][j] == 'Q')
 			return false;
@@ -2538,8 +2542,8 @@ vector<vector<string>> solveNQueens(int n) {
 
 void Test_solveNQueens()
 {
-	cout << "hot100 51. N »Êºó" << endl;
-	cout << "\nÊäÈëÆåÅÌ´óĞ¡n:" << endl;
+	cout << "hot100 51. N çš‡å" << endl;
+	cout << "\nè¾“å…¥æ£‹ç›˜å¤§å°n:" << endl;
 	int n;
 	cin >> n;
 	vector<vector<string>> res = solveNQueens(n);
@@ -2570,7 +2574,7 @@ void Test_searchInsert()
 {
 	vector<int> nums;
 	int num;
-	cout << "hot100 35. ËÑË÷²åÈëÎ»ÖÃ" << endl;
+	cout << "hot100 35. æœç´¢æ’å…¥ä½ç½®" << endl;
 	cout << "\ninput array:" << endl;
 	while (cin >> num)
 	{
@@ -2610,11 +2614,11 @@ bool searchMatrix2(vector<vector<int>>& matrix, int target) {
 
 void Test_searchMatrix2()
 {
-	cout << "\nhot100 74. ËÑË÷¶şÎ¬¾ØÕó" << endl;
+	cout << "\nhot100 74. æœç´¢äºŒç»´çŸ©é˜µ" << endl;
 	int m, n, target;
-	cout << "\nÇëÊäÈë¾ØÕóµÄĞĞÊımºÍÁĞÊın:" << endl;
+	cout << "\nè¯·è¾“å…¥çŸ©é˜µçš„è¡Œæ•°må’Œåˆ—æ•°n:" << endl;
 	cin >> m >> n;
-	cout << "\nÒÀ´Î´Ó×óÉÏ½Çµ½ÓÒÏÂ½ÇÊäÈë¾ØÕóÔªËØ" << endl;
+	cout << "\nä¾æ¬¡ä»å·¦ä¸Šè§’åˆ°å³ä¸‹è§’è¾“å…¥çŸ©é˜µå…ƒç´ " << endl;
 	vector<vector<int>> nums(m, vector<int>(n, 0));
 	for (int i = 0; i < m; i++)
 	{
@@ -2623,7 +2627,7 @@ void Test_searchMatrix2()
 			cin >> nums[i][j];
 		}
 	}
-	cout << "\nÇëÊäÈëÄ¿±êÖµtarget:" << endl;
+	cout << "\nè¯·è¾“å…¥ç›®æ ‡å€¼target:" << endl;
 	cin >> target;
 
 	bool res = searchMatrix2(nums, target);
@@ -2665,7 +2669,7 @@ void Test_searchRange()
 {
 	vector<int> nums;
 	int num;
-	cout << "hot100 34. ÔÚÅÅĞòÊı×éÖĞ²éÕÒÔªËØµÄµÚÒ»¸öºÍ×îºóÒ»¸öÎ»ÖÃ" << endl;
+	cout << "hot100 34. åœ¨æ’åºæ•°ç»„ä¸­æŸ¥æ‰¾å…ƒç´ çš„ç¬¬ä¸€ä¸ªå’Œæœ€åä¸€ä¸ªä½ç½®" << endl;
 	cout << "\ninput array:" << endl;
 	while (cin >> num)
 	{
@@ -2708,7 +2712,7 @@ void Test_search()
 {
 	vector<int> nums;
 	int num;
-	cout << "hot100 33. ËÑË÷Ğı×ªÅÅĞòÊı×é" << endl;
+	cout << "hot100 33. æœç´¢æ—‹è½¬æ’åºæ•°ç»„" << endl;
 	cout << "\ninput array:" << endl;
 	while (cin >> num)
 	{
@@ -2740,7 +2744,7 @@ void Test_findMin()
 {
 	vector<int> nums;
 	int num;
-	cout << "hot100 153. Ñ°ÕÒĞı×ªÅÅĞòÊı×éÖĞµÄ×îĞ¡Öµ" << endl;
+	cout << "hot100 153. å¯»æ‰¾æ—‹è½¬æ’åºæ•°ç»„ä¸­çš„æœ€å°å€¼" << endl;
 	cout << "\ninput array:" << endl;
 	while (cin >> num)
 	{
@@ -2784,7 +2788,7 @@ void Test_findMedianSortedArrays()
 {
 	vector<int> nums1;
 	int num;
-	cout << "hot100 4. Ñ°ÕÒÁ½¸öÕıĞòÊı×éµÄÖĞÎ»Êı" << endl;
+	cout << "hot100 4. å¯»æ‰¾ä¸¤ä¸ªæ­£åºæ•°ç»„çš„ä¸­ä½æ•°" << endl;
 	cout << "\ninput array1:" << endl;
 	while (cin >> num)
 	{
@@ -2837,8 +2841,8 @@ bool isValid(string s) {
 void Test_isValid()
 {
 	string s;
-	cout << "hot100 20. ÓĞĞ§µÄÀ¨ºÅ" << endl;
-	cout << "\ninput'('£¬')'£¬'{'£¬'}'£¬'['£¬']'" << endl;
+	cout << "hot100 20. æœ‰æ•ˆçš„æ‹¬å·" << endl;
+	cout << "\ninput'('ï¼Œ')'ï¼Œ'{'ï¼Œ'}'ï¼Œ'['ï¼Œ']'" << endl;
 	cin >> s;
 	bool res = isValid(s);
 	string resstr = (res == true) ? "true" : "false";
@@ -2885,7 +2889,7 @@ void Test_MinStack()
 	minstack.push(-3);
 	int res = minstack.getMin();
 	if (res == -3)
-		cout << "true" <<endl;
+		cout << "true" << endl;
 	else
 		cout << "false" << endl;
 	minstack.pop();
@@ -2898,7 +2902,7 @@ void Test_MinStack()
 	if (c == -2)
 		cout << "true" << endl;
 	else
-		cout << "false"<< endl;
+		cout << "false" << endl;
 }
 
 string decodeString(string s) {
@@ -2942,8 +2946,8 @@ string decodeString(string s) {
 void Test_decodeString()
 {
 	string s;
-	cout << "hot100 394. ×Ö·û´®½âÂë" << endl;
-	cout << "\ninput string with'['£¬']' and num:" << endl;
+	cout << "hot100 394. å­—ç¬¦ä¸²è§£ç " << endl;
+	cout << "\ninput string with'['ï¼Œ']' and num:" << endl;
 	cin >> s;
 	string res = decodeString(s);
 	cout << res << endl;
@@ -2969,7 +2973,7 @@ void Test_dailyTemperatures()
 {
 	vector<int> nums;
 	int num;
-	cout << "hot100 739. Ã¿ÈÕÎÂ¶È" << endl;
+	cout << "hot100 739. æ¯æ—¥æ¸©åº¦" << endl;
 	cout << "\ninput array:" << endl;
 	while (cin >> num)
 	{
@@ -2982,23 +2986,23 @@ void Test_dailyTemperatures()
 }
 
 int largestRectangleArea(vector<int>& heights) {
-	/*	±©Á¦½â·¨
+	/*	æš´åŠ›è§£æ³•
 		int res = 0;
-        for(int i = 0 ; i<heights.size(); i++)
-        {
-            int leftidx = i;
-            int rightidx = i;
-            while(leftidx>=0&&heights[leftidx]>=heights[i])
-            {
-                leftidx--;
-            }
-            while(rightidx<heights.size()&&heights[rightidx]>=heights[i])
-            {
-                rightidx++;
-            }
-            res = max(res, heights[i]*(rightidx-leftidx-1));
-        }
-        return res;
+		for(int i = 0 ; i<heights.size(); i++)
+		{
+			int leftidx = i;
+			int rightidx = i;
+			while(leftidx>=0&&heights[leftidx]>=heights[i])
+			{
+				leftidx--;
+			}
+			while(rightidx<heights.size()&&heights[rightidx]>=heights[i])
+			{
+				rightidx++;
+			}
+			res = max(res, heights[i]*(rightidx-leftidx-1));
+		}
+		return res;
 	*/
 	int n = heights.size();
 	vector<int> left(n), right(n);
@@ -3029,7 +3033,7 @@ void Test_largestRectangleArea()
 {
 	vector<int> nums;
 	int num;
-	cout << "hot100 84. Öù×´Í¼ÖĞ×î´óµÄ¾ØĞÎ" << endl;
+	cout << "hot100 84. æŸ±çŠ¶å›¾ä¸­æœ€å¤§çš„çŸ©å½¢" << endl;
 	cout << "\ninput array:" << endl;
 	while (cin >> num)
 	{
@@ -3060,7 +3064,7 @@ int findKthLargest(vector<int>& nums, int k) {
 void Test_findKthLargest()
 {
 	int target;
-	cout << "hot100 215. Êı×éÖĞµÄµÚK¸ö×î´óÔªËØ" << endl;
+	cout << "hot100 215. æ•°ç»„ä¸­çš„ç¬¬Kä¸ªæœ€å¤§å…ƒç´ " << endl;
 	cout << "\ninput the k:" << endl;
 	cin >> target;
 	vector<int> nums;
@@ -3073,7 +3077,7 @@ void Test_findKthLargest()
 			break;
 	}
 	int res = findKthLargest(nums, target);
-	cout << "\nthe result:"<<res<< endl;
+	cout << "\nthe result:" << res << endl;
 }
 
 vector<int> topKFrequent(vector<int>& nums, int k) {
@@ -3103,7 +3107,7 @@ vector<int> topKFrequent(vector<int>& nums, int k) {
 void Test_topKFrequent()
 {
 	int target;
-	cout << "hot100 347. Ç° K ¸ö¸ßÆµÔªËØ" << endl;
+	cout << "hot100 347. å‰ K ä¸ªé«˜é¢‘å…ƒç´ " << endl;
 	cout << "\ninput the k:" << endl;
 	cin >> target;
 	vector<int> nums;
@@ -3161,7 +3165,7 @@ public:
 
 void Test_MedianFinder()
 {
-	cout << "hot100 295. Êı¾İÁ÷µÄÖĞÎ»Êı" << endl;
+	cout << "hot100 295. æ•°æ®æµçš„ä¸­ä½æ•°" << endl;
 	MedianFinder medianfinder;
 	medianfinder.addNum(1);
 	medianfinder.addNum(2);
@@ -3184,7 +3188,7 @@ int maxProfit(vector<int>& prices) {
 
 void Test_maxProfit()
 {
-	cout << "hot121. ÂòÂô¹ÉÆ±µÄ×î¼ÑÊ±»ú" << endl;
+	cout << "hot121. ä¹°å–è‚¡ç¥¨çš„æœ€ä½³æ—¶æœº" << endl;
 	vector<int> nums;
 	int num;
 	cout << "input array:" << endl;
@@ -3210,7 +3214,7 @@ bool canJump(vector<int>& nums) {
 
 void Test_canJump()
 {
-	cout << "hot55. ÌøÔ¾ÓÎÏ·" << endl;
+	cout << "hot55. è·³è·ƒæ¸¸æˆ" << endl;
 	vector<int> nums;
 	int num;
 	cout << "input array:" << endl;
@@ -3243,7 +3247,7 @@ int jump(vector<int>& nums) {
 
 void Test_jump()
 {
-	cout << "hot45. ÌøÔ¾ÓÎÏ· II" << endl;
+	cout << "hot45. è·³è·ƒæ¸¸æˆ II" << endl;
 	vector<int> nums;
 	int num;
 	cout << "input array:" << endl;
@@ -3280,7 +3284,7 @@ vector<int> partitionLabels(string s) {
 
 void Test_partitionLabels()
 {
-	cout << "763. »®·Ö×ÖÄ¸Çø¼ä" << endl;
+	cout << "763. åˆ’åˆ†å­—æ¯åŒºé—´" << endl;
 	string inputstr;
 	cout << "input array:" << endl;
 	cin >> inputstr;
@@ -3302,7 +3306,7 @@ int climbStairs(int n) {
 
 void Test_climbStairs()
 {
-	cout << "70. ÅÀÂ¥Ìİ" << endl;
+	cout << "70. çˆ¬æ¥¼æ¢¯" << endl;
 	int n;
 	cout << "\ninput n:" << endl;
 	cin >> n;
@@ -3329,7 +3333,7 @@ vector<vector<int>> generate(int numRows) {
 
 void Test_generate()
 {
-	cout << "118. Ñî»ÔÈı½Ç" << endl;
+	cout << "118. æ¨è¾‰ä¸‰è§’" << endl;
 	int n;
 	cout << "\ninput n:" << endl;
 	cin >> n;
@@ -3344,14 +3348,14 @@ int rob(vector<int>& nums) {
 	dp[0] = 0;  dp[1] = nums[0];
 	for (int i = 2; i <= n; i++)
 	{
-		dp[i] = max(nums[i - 1] + dp[i - 2], dp[i - 1]);//Íµ£¬²»Íµ
+		dp[i] = max(nums[i - 1] + dp[i - 2], dp[i - 1]);//å·ï¼Œä¸å·
 	}
 	return dp[n];
 }
 
 void Test_rob()
 {
-	cout << "198. ´ò¼Ò½ÙÉá" << endl;
+	cout << "198. æ‰“å®¶åŠ«èˆ" << endl;
 	vector<int> nums;
 	int num;
 	cout << "\ninput array:" << endl;
@@ -3378,12 +3382,12 @@ int numSquares(int n) {
 
 void Test_numSquares()
 {
-	cout << "279. ÍêÈ«Æ½·½Êı" << endl;
+	cout << "279. å®Œå…¨å¹³æ–¹æ•°" << endl;
 	int n;
 	cout << "\ninput n:" << endl;
 	cin >> n;
 	int res = numSquares(n);
-	cout << "\nThe res is :" << res <<endl;
+	cout << "\nThe res is :" << res << endl;
 }
 
 int coinChange(vector<int>& coins, int amount) {
@@ -3406,7 +3410,7 @@ int coinChange(vector<int>& coins, int amount) {
 
 void Test_coinChange()
 {
-	cout << "322. ÁãÇ®¶Ò»»" << endl;
+	cout << "322. é›¶é’±å…‘æ¢" << endl;
 	vector<int> nums;
 	int num;
 	cout << "\ninput array:" << endl;
@@ -3425,7 +3429,7 @@ void Test_coinChange()
 
 bool wordBreak(string s, vector<string>& wordDict) {
 	unordered_set<string> myset(wordDict.begin(), wordDict.end());
-	vector<bool> dp(s.size()+1, false);
+	vector<bool> dp(s.size() + 1, false);
 	dp[0] = true;
 	for (int i = 1; i <= s.size(); i++)
 	{
@@ -3441,7 +3445,7 @@ bool wordBreak(string s, vector<string>& wordDict) {
 
 void Test_wordBreak()
 {
-	cout << "139. µ¥´Ê²ğ·Ö" << endl;
+	cout << "139. å•è¯æ‹†åˆ†" << endl;
 	string s;
 	cout << "\ninput s:" << endl;
 	cin >> s;
@@ -3477,7 +3481,7 @@ int lengthOfLIS(vector<int>& nums) {
 
 void Test_lengthOfLIS()
 {
-	cout << "300. ×î³¤µİÔö×ÓĞòÁĞ" << endl;
+	cout << "300. æœ€é•¿é€’å¢å­åºåˆ—" << endl;
 	vector<int> nums;
 	int num;
 	cout << "\ninput array:" << endl;
@@ -3510,10 +3514,10 @@ int maxProduct(vector<int>& nums) {
 
 void Test_maxProduct()
 {
-	cout << "152. ³Ë»ı×î´ó×ÓÊı×é" << endl;
+	cout << "152. ä¹˜ç§¯æœ€å¤§å­æ•°ç»„" << endl;
 	vector<int> nums;
 	int num;
-	cout << "\nÇëÊäÈëÊı×é: " << endl;
+	cout << "\nè¯·è¾“å…¥æ•°ç»„: " << endl;
 	while (cin >> num)
 	{
 		nums.push_back(num);
@@ -3539,10 +3543,10 @@ bool canPartition(vector<int>& nums) {
 	{
 		for (int j = 1; j <= target; j++)
 		{
-			if (j - nums[i-1] < 0)
+			if (j - nums[i - 1] < 0)
 				dp[i][j] = dp[i - 1][j];
 			else
-				dp[i][j] = dp[i - 1][j] || dp[i - 1][j - nums[i-1]];
+				dp[i][j] = dp[i - 1][j] || dp[i - 1][j - nums[i - 1]];
 		}
 	}
 	return dp[n][target];
@@ -3550,10 +3554,10 @@ bool canPartition(vector<int>& nums) {
 
 void Test_canPartition()
 {
-	cout << "416. ·Ö¸îµÈºÍ×Ó¼¯" << endl;
+	cout << "416. åˆ†å‰²ç­‰å’Œå­é›†" << endl;
 	vector<int> nums;
 	int num;
-	cout << "\nÇëÊäÈëÊı×é: " << endl;
+	cout << "\nè¯·è¾“å…¥æ•°ç»„: " << endl;
 	while (cin >> num)
 	{
 		nums.push_back(num);
@@ -3591,7 +3595,7 @@ int longestValidParentheses(string s) {
 
 void Test_longestValidParentheses()
 {
-	cout << "32. ×î³¤ÓĞĞ§À¨ºÅ" << endl;
+	cout << "32. æœ€é•¿æœ‰æ•ˆæ‹¬å·" << endl;
 	string s;
 	cout << "\ninput the string by using '(', ')' " << endl;
 	cin >> s;
@@ -3617,13 +3621,13 @@ int uniquePaths(int m, int n) {
 
 void Test_uniquePaths()
 {
-	cout << "62. ²»Í¬Â·¾¶" << endl;
+	cout << "62. ä¸åŒè·¯å¾„" << endl;
 	int m, n;
 	cout << "\ninput m" << endl;
 	cin >> m;
 	cout << "\ninput n" << endl;
 	cin >> n;
-	int res = uniquePaths(m,n);
+	int res = uniquePaths(m, n);
 	cout << "\nThe res is : " << res << endl;
 }
 
@@ -3648,7 +3652,7 @@ int minPathSum(vector<vector<int>>& grid) {
 
 void Test_minPathSum()
 {
-	cout << "64. ×îĞ¡Â·¾¶ºÍ" << endl;
+	cout << "64. æœ€å°è·¯å¾„å’Œ" << endl;
 	int m, n;
 	cout << "\ninput the row of grid" << endl;
 	cin >> m;
@@ -3681,7 +3685,7 @@ string longestPalindrome(string s) {
 	for (int i = 0; i < s.size(); i++)
 	{
 		string s1 = find_longestPalindrome(s, i, i);
-		string s2 = find_longestPalindrome(s, i, i+1);
+		string s2 = find_longestPalindrome(s, i, i + 1);
 		res = s1.size() > res.size() ? s1 : res;
 		res = s2.size() > res.size() ? s2 : res;
 	}
@@ -3690,7 +3694,7 @@ string longestPalindrome(string s) {
 
 void Test_longestPalindrome()
 {
-	cout << "64. ×îĞ¡Â·¾¶ºÍ" << endl;
+	cout << "64. æœ€å°è·¯å¾„å’Œ" << endl;
 	string s;
 	cout << "\ninput the string: s" << endl;
 	cin >> s;
@@ -3714,21 +3718,21 @@ int longestCommonSubsequence(string text1, string text2) {
 
 void Test_longestCommonSubsequence()
 {
-	cout << "1143. ×î³¤¹«¹²×ÓĞòÁĞ" << endl;
+	cout << "1143. æœ€é•¿å…¬å…±å­åºåˆ—" << endl;
 	string s1;
 	cout << "\ninput the string: text1" << endl;
 	cin >> s1;
 	string s2;
 	cout << "\ninput the string: text2" << endl;
 	cin >> s2;
-	int res = longestCommonSubsequence(s1,s2);
+	int res = longestCommonSubsequence(s1, s2);
 	cout << "\nThe res is : " << res << endl;
 }
 
 
 int minDistance(string word1, string word2) {
 	int m = word1.size(), n = word2.size();
-	vector<vector<int>> dp(m+1, vector<int>(n+1, 0));
+	vector<vector<int>> dp(m + 1, vector<int>(n + 1, 0));
 	for (int i = 0; i <= m; i++)
 		dp[i][0] = i;
 	for (int j = 0; j <= n; j++)
@@ -3737,7 +3741,7 @@ int minDistance(string word1, string word2) {
 	{
 		for (int j = 1; j <= n; j++)
 		{
-			if (word1[i-1] == word2[j-1])
+			if (word1[i - 1] == word2[j - 1])
 				dp[i][j] = dp[i - 1][j - 1];
 			else
 				dp[i][j] = min({ dp[i - 1][j - 1],dp[i - 1][j],dp[i][j - 1] }) + 1;
@@ -3748,7 +3752,7 @@ int minDistance(string word1, string word2) {
 
 void Test_minDistance()
 {
-	cout << "72. ±à¼­¾àÀë" << endl;
+	cout << "72. ç¼–è¾‘è·ç¦»" << endl;
 	string s1;
 	cout << "\ninput the string: text1" << endl;
 	cin >> s1;
@@ -3768,10 +3772,10 @@ int singleNumber(vector<int>& nums) {
 
 void Test_singleNumber()
 {
-	cout << "72. ±à¼­¾àÀë" << endl;
+	cout << "72. ç¼–è¾‘è·ç¦»" << endl;
 	vector<int> nums;
 	int num;
-	cout << "\nÇëÊäÈëÊı×é: " << endl;
+	cout << "\nè¯·è¾“å…¥æ•°ç»„: " << endl;
 	while (cin >> num)
 	{
 		nums.push_back(num);
@@ -3805,10 +3809,10 @@ int majorityElement(vector<int>& nums) {
 
 void Test_majorityElement()
 {
-	cout << "169. ¶àÊıÔªËØ" << endl;
+	cout << "169. å¤šæ•°å…ƒç´ " << endl;
 	vector<int> nums;
 	int num;
-	cout << "\nÇëÊäÈëÊı×é: " << endl;
+	cout << "\nè¯·è¾“å…¥æ•°ç»„: " << endl;
 	while (cin >> num)
 	{
 		nums.push_back(num);
@@ -3834,10 +3838,10 @@ void sortColors(vector<int>& nums) {
 
 void Test_sortColors()
 {
-	cout << "75. ÑÕÉ«·ÖÀà" << endl;
+	cout << "75. é¢œè‰²åˆ†ç±»" << endl;
 	vector<int> nums;
 	int num;
-	cout << "\nÇëÊäÈëÊı×é:(0/1/2) " << endl;
+	cout << "\nè¯·è¾“å…¥æ•°ç»„:(0/1/2) " << endl;
 	while (cin >> num)
 	{
 		nums.push_back(num);
@@ -3866,10 +3870,10 @@ void nextPermutation(vector<int>& nums) {
 
 void Test_nextPermutation()
 {
-	cout << "31. ÏÂÒ»¸öÅÅÁĞ" << endl;
+	cout << "31. ä¸‹ä¸€ä¸ªæ’åˆ—" << endl;
 	vector<int> nums;
 	int num;
-	cout << "\nÇëÊäÈëÊı×é:" << endl;
+	cout << "\nè¯·è¾“å…¥æ•°ç»„:" << endl;
 	while (cin >> num)
 	{
 		nums.push_back(num);
@@ -3900,10 +3904,10 @@ int findDuplicate(vector<int>& nums) {
 
 void Test_findDuplicate()
 {
-	cout << "287. Ñ°ÕÒÖØ¸´Êı" << endl;
+	cout << "287. å¯»æ‰¾é‡å¤æ•°" << endl;
 	vector<int> nums;
 	int num;
-	cout << "\nÇëÊäÈëÊı×é:" << endl;
+	cout << "\nè¯·è¾“å…¥æ•°ç»„:" << endl;
 	while (cin >> num)
 	{
 		nums.push_back(num);
@@ -3916,104 +3920,104 @@ void Test_findDuplicate()
 
 int main()
 {
-	//Test_twosum();						/*			hot100 1.	Á½ÊıÖ®ºÍ									*/
-	//Test_groupAnagrams();					/*			hot100 49.	×ÖÄ¸ÒìÎ»´Ê·Ö×é							*/
-	//Test_longestConsecutive();			/*			hot100 128.	×î³¤Á¬ĞøĞòÁĞ								*/
-	//Test_moveZeroes();					/*			hot100 283.	ÒÆ¶¯Áã									*/
-	//Test_maxArea();						/*			hot100 11.	Ê¢×î¶àË®µÄÈİÆ÷							*/
-	//Test_threeSum();						/*			hot100 15.	ÈıÊıÖ®ºÍ									*/
-	//Test_trap();							/*			hot100 42.	½ÓÓêË®									*/
-	//Test_lengthOfLongestSubstring();		/*			hot100 3.	ÎŞÖØ¸´×Ö·ûµÄ×î³¤×Ó´®						*/
-	//Test_findAnagrams();					/*			hot100 438.	ÕÒµ½×Ö·û´®ÖĞËùÓĞ×ÖÄ¸ÒìÎ»´Ê					*/
-	//Test_subarraySum();					/*			hot100 560. ºÍÎª K µÄ×ÓÊı×é							*/
-	//Test_maxSlidingWindow();				/*			hot100 239. »¬¶¯´°¿Ú×î´óÖµ							*/
-	//Test_minWindow();						/*			hot100 76.	×îĞ¡¸²¸Ç×Ó´®								*/
-	//Test_maxSubArray();					/*			hot100 53.	×î´ó×ÓÊı×éºÍ								*/
-	//Test_merge();							/*			hot100 56.	ºÏ²¢Çø¼ä									*/	
-	//Test_rotate();						/*			hot100 189. ÂÖ×ªÊı×é									*/
-	//Test_productExceptSelf();				/*			hot100 238. ³ı×ÔÉíÒÔÍâÊı×éµÄ³Ë»ı						*/
-	//Test_firstMissingPositive();			/*			hot100 41.	È±Ê§µÄµÚÒ»¸öÕıÊı							*/
-	//Test_setZeroes();						/*			hot100 73.	¾ØÕóÖÃÁã									*/
-	//Test_spiralOrder();					/*			hot100 54.	ÂİĞı¾ØÕó									*/
-	//Test_rotate_nums();					/*			hot100 48.	Ğı×ªÍ¼Ïñ									*/
-	//Test_searchMatrix();					/*			hot100 240. ËÑË÷¶şÎ¬¾ØÕó II							*/
-	//Test_getIntersectionNode();			/*			hot100 160. Ïà½»Á´±í									*/
-	//Test_reverseList();					/*			hot100 206. ·´×ªÁ´±í									*/
-	//Test_isPalindrome();					/*			hot100 234. »ØÎÄÁ´±í									*/
-	//Test_hasCycle();						/*			hot100 141. »·ĞÎÁ´±í									*/
-	//Test_detectCycle();					/*			hot100 142. »·ĞÎÁ´±í II								*/
-	//Test_mergeTwoLists();					/*			hot100 21.	ºÏ²¢Á½¸öÓĞĞòÁ´±í							*/
-	//Test_addTwoNumbers();					/*			hot100 2.	Á½ÊıÏà¼Ó									*/
-	//Test_removeNthFromEnd();				/*			hot100 19.	É¾³ıÁ´±íµÄµ¹ÊıµÚ N ¸ö½áµã					*/
-	//Test_swapPairs();						/*			hot100 24.	Á½Á½½»»»Á´±íÖĞµÄ½Úµã						*/
-	//Test_reverseKGroup();					/*			hot100 25.	K ¸öÒ»×é·­×ªÁ´±í							*/
-	//Test_copyRandomList();				/*			hot100 138. Ëæ»úÁ´±íµÄ¸´ÖÆ							*/
-	//Test_sortList();						/*			hot100 148. ÅÅĞòÁ´±í									*/
-	//Test_mergeKLists();					/*			hot100 23.	ºÏ²¢ K ¸öÉıĞòÁ´±í							*/
-	//Test_LRUCache();						/*			hot100 146. LRU »º´æ									*/
-	//Test_inorderTraversal();				/*			hot100 94.  ¶ş²æÊ÷µÄÖĞĞò±éÀú							*/
-	//Test_maxDepth();						/*			hot100 104. ¶ş²æÊ÷µÄ×î´óÉî¶È							*/
-	//Test_invertTree();					/*			hot100 226. ·­×ª¶ş²æÊ÷								*/
-	//Test_isSymmetric();					/*			hot100 101. ¶Ô³Æ¶ş²æÊ÷								*/
-	//Test_diameterOfBinaryTree();			/*			hot100 543. ¶ş²æÊ÷µÄÖ±¾¶								*/
-	//Test_levelOrder();					/*			hot100 102. ¶ş²æÊ÷µÄ²ãĞò±éÀú							*/
-	//Test_sortedArrayToBST();				/*			hot100 108. ½«ÓĞĞòÊı×é×ª»»Îª¶ş²æËÑË÷Ê÷					*/
-	//Test_isValidBST();					/*			hot100 98.	ÑéÖ¤¶ş²æËÑË÷Ê÷							*/
-	//Test_kthSmallest();					/*			hot100 230. ¶ş²æËÑË÷Ê÷ÖĞµÚ K Ğ¡µÄÔªËØ					*/
-	//Test_rightSideView();					/*			hot100 199. ¶ş²æÊ÷µÄÓÒÊÓÍ¼							*/
-	//Test_flatten();						/*			hot100 114. ¶ş²æÊ÷Õ¹¿ªÎªÁ´±í							*/
-	//Test_buildTree();						/*			hot100 105. ´ÓÇ°ĞòÓëÖĞĞò±éÀúĞòÁĞ¹¹Ôì¶ş²æÊ÷				*/
-	//Test_pathSum();						/*			hot100 437. Â·¾¶×ÜºÍ III								*/
-	//Test_lowestCommonAncestor();			/*			hot100 236. ¶ş²æÊ÷µÄ×î½ü¹«¹²×æÏÈ						*/
-	//Test_maxPathSum();					/*			hot100 124. ¶ş²æÊ÷ÖĞµÄ×î´óÂ·¾¶ºÍ						*/
-	//Test_numIslands();					/*			hot100 200. µºÓìÊıÁ¿									*/
-	//Test_orangesRotting();				/*			hot100 994. ¸¯ÀÃµÄéÙ×Ó								*/
-	//Test_canFinish();						/*			hot100 207. ¿Î³Ì±í									*/
-	//Test_Trie();							/*			hot100 208. ÊµÏÖ Trie (Ç°×ºÊ÷)						*/
-	//Test_permute();						/*			hot100 46.	È«ÅÅÁĞ									*/
-	//Test_subsets();						/*			hot100 78.	×Ó¼¯										*/
-	//Test_letterCombinations();			/*			hot100 17.	µç»°ºÅÂëµÄ×ÖÄ¸×éºÏ						*/
-	//Test_combinationSum();				/*			hot100 39.	×éºÏ×ÜºÍ									*/
-	//Test_generateParenthesis();			/*			hot100 22.	À¨ºÅÉú³É									*/
-	//Test_exist();							/*			hot100 79.	µ¥´ÊËÑË÷									*/
-	//Test_partition();						/*			hot100 131. ·Ö¸î»ØÎÄ´®								*/
-	//Test_solveNQueens();					/*			hot100 51.	N »Êºó									*/
-	//Test_searchInsert();					/*			hot100 35.  ËÑË÷²åÈëÎ»ÖÃ								*/
-	//Test_searchMatrix2();					/*			hot100 74.	ËÑË÷¶şÎ¬¾ØÕó								*/
-	//Test_searchRange();					/*			hot100 34.	ÔÚÅÅĞòÊı×éÖĞ²éÕÒÔªËØµÄµÚÒ»¸öºÍ×îºóÒ»¸öÎ»ÖÃ  */
-	//Test_search();						/*			hot100 33.	ËÑË÷Ğı×ªÅÅĞòÊı×é							*/
-	//Test_findMin();						/*			hot100 153. Ñ°ÕÒĞı×ªÅÅĞòÊı×éÖĞµÄ×îĞ¡Öµ					*/
-	//Test_findMedianSortedArrays();		/*			hot100 4.	Ñ°ÕÒÁ½¸öÕıĞòÊı×éµÄÖĞÎ»Êı					*/
-	//Test_isValid();						/*			hot100 20.	ÓĞĞ§µÄÀ¨ºÅ								*/
-	//Test_MinStack();						/*			hot100 155. ×îĞ¡Õ»									*/
-	//Test_decodeString();					/*			hot100 394. ×Ö·û´®½âÂë								*/
-	//Test_dailyTemperatures();				/*			hot100 739. Ã¿ÈÕÎÂ¶È									*/
-	//Test_largestRectangleArea();			/*			hot100 84.	Öù×´Í¼ÖĞ×î´óµÄ¾ØĞÎ						*/
-	//Test_findKthLargest();				/*			hot100 215. Êı×éÖĞµÄµÚK¸ö×î´óÔªËØ						*/
-	//Test_topKFrequent();					/*			hot100 347. Ç° K ¸ö¸ßÆµÔªËØ							*/
-	//Test_MedianFinder();					/*			hot100 295. Êı¾İÁ÷µÄÖĞÎ»Êı							*/
-	//Test_maxProfit();						/*			hot100 121. ÂòÂô¹ÉÆ±µÄ×î¼ÑÊ±»ú						*/
-	//Test_canJump();						/*			hot100 55.	ÌøÔ¾ÓÎÏ·									*/
-	//Test_jump();							/*			hot100 45.	ÌøÔ¾ÓÎÏ· II								*/
-	//Test_partitionLabels();				/*			hot100 763. »®·Ö×ÖÄ¸Çø¼ä								*/
-	//Test_climbStairs();					/*			hot100 70.	ÅÀÂ¥Ìİ									*/
-	//Test_generate();						/*			hot100 118. Ñî»ÔÈı½Ç									*/
-	//Test_rob();							/*			hot100 198. ´ò¼Ò½ÙÉá									*/
-	//Test_numSquares();					/*			hot100 279. ÍêÈ«Æ½·½Êı								*/
-	//Test_coinChange();					/*			hot100 322. ÁãÇ®¶Ò»»									*/
-	//Test_wordBreak();						/*			hot100 139. µ¥´Ê²ğ·Ö									*/
-	//Test_lengthOfLIS();					/*			hot100 300. ×î³¤µİÔö×ÓĞòÁĞ							*/
-	//Test_maxProduct();					/*			hot100 152. ³Ë»ı×î´ó×ÓÊı×é							*/
-	//Test_canPartition();					/*			hot100 416. ·Ö¸îµÈºÍ×Ó¼¯								*/
-	//Test_longestValidParentheses();		/*			hot100	32. ×î³¤ÓĞĞ§À¨ºÅ								*/
-	//Test_uniquePaths();					/*			hot100	62. ²»Í¬Â·¾¶									*/
-	//Test_minPathSum();					/*			hot100	64. ×îĞ¡Â·¾¶ºÍ								*/
-	//Test_longestPalindrome();				/*			hot100	5.	×î³¤»ØÎÄ×Ó´®								*/
-	//Test_longestCommonSubsequence();		/*			hot10^1143. ×î³¤¹«¹²×ÓĞòÁĞ							*/
-	//Test_minDistance();					/*			hot100	72. ±à¼­¾àÀë									*/
-	//Test_singleNumber();					/*			hot100 136. Ö»³öÏÖÒ»´ÎµÄÊı×Ö							*/
-	//Test_majorityElement();				/*			hot100 169. ¶àÊıÔªËØ									*/
-	//Test_sortColors();					/*			hot100	75. ÑÕÉ«·ÖÀà									*/
-	//Test_nextPermutation();				/*			hot100	31. ÏÂÒ»¸öÅÅÁĞ								*/
-	//Test_findDuplicate();					/*			hot100 287. Ñ°ÕÒÖØ¸´Êı								*/
-}	
+	//Test_twosum();						/*			hot100 1.	ä¸¤æ•°ä¹‹å’Œ									*/
+	//Test_groupAnagrams();					/*			hot100 49.	å­—æ¯å¼‚ä½è¯åˆ†ç»„							*/
+	//Test_longestConsecutive();			/*			hot100 128.	æœ€é•¿è¿ç»­åºåˆ—								*/
+	//Test_moveZeroes();					/*			hot100 283.	ç§»åŠ¨é›¶									*/
+	//Test_maxArea();						/*			hot100 11.	ç››æœ€å¤šæ°´çš„å®¹å™¨							*/
+	//Test_threeSum();						/*			hot100 15.	ä¸‰æ•°ä¹‹å’Œ									*/
+	//Test_trap();							/*			hot100 42.	æ¥é›¨æ°´									*/
+	//Test_lengthOfLongestSubstring();		/*			hot100 3.	æ— é‡å¤å­—ç¬¦çš„æœ€é•¿å­ä¸²						*/
+	//Test_findAnagrams();					/*			hot100 438.	æ‰¾åˆ°å­—ç¬¦ä¸²ä¸­æ‰€æœ‰å­—æ¯å¼‚ä½è¯					*/
+	//Test_subarraySum();					/*			hot100 560. å’Œä¸º K çš„å­æ•°ç»„							*/
+	//Test_maxSlidingWindow();				/*			hot100 239. æ»‘åŠ¨çª—å£æœ€å¤§å€¼							*/
+	//Test_minWindow();						/*			hot100 76.	æœ€å°è¦†ç›–å­ä¸²								*/
+	//Test_maxSubArray();					/*			hot100 53.	æœ€å¤§å­æ•°ç»„å’Œ								*/
+	//Test_merge();							/*			hot100 56.	åˆå¹¶åŒºé—´									*/	
+	//Test_rotate();						/*			hot100 189. è½®è½¬æ•°ç»„									*/
+	//Test_productExceptSelf();				/*			hot100 238. é™¤è‡ªèº«ä»¥å¤–æ•°ç»„çš„ä¹˜ç§¯						*/
+	//Test_firstMissingPositive();			/*			hot100 41.	ç¼ºå¤±çš„ç¬¬ä¸€ä¸ªæ­£æ•°							*/
+	//Test_setZeroes();						/*			hot100 73.	çŸ©é˜µç½®é›¶									*/
+	//Test_spiralOrder();					/*			hot100 54.	èºæ—‹çŸ©é˜µ									*/
+	//Test_rotate_nums();					/*			hot100 48.	æ—‹è½¬å›¾åƒ									*/
+	//Test_searchMatrix();					/*			hot100 240. æœç´¢äºŒç»´çŸ©é˜µ II							*/
+	//Test_getIntersectionNode();			/*			hot100 160. ç›¸äº¤é“¾è¡¨									*/
+	//Test_reverseList();					/*			hot100 206. åè½¬é“¾è¡¨									*/
+	//Test_isPalindrome();					/*			hot100 234. å›æ–‡é“¾è¡¨									*/
+	//Test_hasCycle();						/*			hot100 141. ç¯å½¢é“¾è¡¨									*/
+	//Test_detectCycle();					/*			hot100 142. ç¯å½¢é“¾è¡¨ II								*/
+	//Test_mergeTwoLists();					/*			hot100 21.	åˆå¹¶ä¸¤ä¸ªæœ‰åºé“¾è¡¨							*/
+	//Test_addTwoNumbers();					/*			hot100 2.	ä¸¤æ•°ç›¸åŠ 									*/
+	//Test_removeNthFromEnd();				/*			hot100 19.	åˆ é™¤é“¾è¡¨çš„å€’æ•°ç¬¬ N ä¸ªç»“ç‚¹					*/
+	//Test_swapPairs();						/*			hot100 24.	ä¸¤ä¸¤äº¤æ¢é“¾è¡¨ä¸­çš„èŠ‚ç‚¹						*/
+	//Test_reverseKGroup();					/*			hot100 25.	K ä¸ªä¸€ç»„ç¿»è½¬é“¾è¡¨							*/
+	//Test_copyRandomList();				/*			hot100 138. éšæœºé“¾è¡¨çš„å¤åˆ¶							*/
+	//Test_sortList();						/*			hot100 148. æ’åºé“¾è¡¨									*/
+	//Test_mergeKLists();					/*			hot100 23.	åˆå¹¶ K ä¸ªå‡åºé“¾è¡¨							*/
+	//Test_LRUCache();						/*			hot100 146. LRU ç¼“å­˜									*/
+	//Test_inorderTraversal();				/*			hot100 94.  äºŒå‰æ ‘çš„ä¸­åºéå†							*/
+	//Test_maxDepth();						/*			hot100 104. äºŒå‰æ ‘çš„æœ€å¤§æ·±åº¦							*/
+	//Test_invertTree();					/*			hot100 226. ç¿»è½¬äºŒå‰æ ‘								*/
+	//Test_isSymmetric();					/*			hot100 101. å¯¹ç§°äºŒå‰æ ‘								*/
+	//Test_diameterOfBinaryTree();			/*			hot100 543. äºŒå‰æ ‘çš„ç›´å¾„								*/
+	//Test_levelOrder();					/*			hot100 102. äºŒå‰æ ‘çš„å±‚åºéå†							*/
+	//Test_sortedArrayToBST();				/*			hot100 108. å°†æœ‰åºæ•°ç»„è½¬æ¢ä¸ºäºŒå‰æœç´¢æ ‘					*/
+	//Test_isValidBST();					/*			hot100 98.	éªŒè¯äºŒå‰æœç´¢æ ‘							*/
+	//Test_kthSmallest();					/*			hot100 230. äºŒå‰æœç´¢æ ‘ä¸­ç¬¬ K å°çš„å…ƒç´ 					*/
+	//Test_rightSideView();					/*			hot100 199. äºŒå‰æ ‘çš„å³è§†å›¾							*/
+	//Test_flatten();						/*			hot100 114. äºŒå‰æ ‘å±•å¼€ä¸ºé“¾è¡¨							*/
+	//Test_buildTree();						/*			hot100 105. ä»å‰åºä¸ä¸­åºéå†åºåˆ—æ„é€ äºŒå‰æ ‘				*/
+	//Test_pathSum();						/*			hot100 437. è·¯å¾„æ€»å’Œ III								*/
+	//Test_lowestCommonAncestor();			/*			hot100 236. äºŒå‰æ ‘çš„æœ€è¿‘å…¬å…±ç¥–å…ˆ						*/
+	//Test_maxPathSum();					/*			hot100 124. äºŒå‰æ ‘ä¸­çš„æœ€å¤§è·¯å¾„å’Œ						*/
+	//Test_numIslands();					/*			hot100 200. å²›å±¿æ•°é‡									*/
+	//Test_orangesRotting();				/*			hot100 994. è…çƒ‚çš„æ©˜å­								*/
+	//Test_canFinish();						/*			hot100 207. è¯¾ç¨‹è¡¨									*/
+	//Test_Trie();							/*			hot100 208. å®ç° Trie (å‰ç¼€æ ‘)						*/
+	//Test_permute();						/*			hot100 46.	å…¨æ’åˆ—									*/
+	//Test_subsets();						/*			hot100 78.	å­é›†										*/
+	//Test_letterCombinations();			/*			hot100 17.	ç”µè¯å·ç çš„å­—æ¯ç»„åˆ						*/
+	//Test_combinationSum();				/*			hot100 39.	ç»„åˆæ€»å’Œ									*/
+	//Test_generateParenthesis();			/*			hot100 22.	æ‹¬å·ç”Ÿæˆ									*/
+	//Test_exist();							/*			hot100 79.	å•è¯æœç´¢									*/
+	//Test_partition();						/*			hot100 131. åˆ†å‰²å›æ–‡ä¸²								*/
+	//Test_solveNQueens();					/*			hot100 51.	N çš‡å									*/
+	//Test_searchInsert();					/*			hot100 35.  æœç´¢æ’å…¥ä½ç½®								*/
+	//Test_searchMatrix2();					/*			hot100 74.	æœç´¢äºŒç»´çŸ©é˜µ								*/
+	//Test_searchRange();					/*			hot100 34.	åœ¨æ’åºæ•°ç»„ä¸­æŸ¥æ‰¾å…ƒç´ çš„ç¬¬ä¸€ä¸ªå’Œæœ€åä¸€ä¸ªä½ç½®  */
+	//Test_search();						/*			hot100 33.	æœç´¢æ—‹è½¬æ’åºæ•°ç»„							*/
+	//Test_findMin();						/*			hot100 153. å¯»æ‰¾æ—‹è½¬æ’åºæ•°ç»„ä¸­çš„æœ€å°å€¼					*/
+	//Test_findMedianSortedArrays();		/*			hot100 4.	å¯»æ‰¾ä¸¤ä¸ªæ­£åºæ•°ç»„çš„ä¸­ä½æ•°					*/
+	//Test_isValid();						/*			hot100 20.	æœ‰æ•ˆçš„æ‹¬å·								*/
+	//Test_MinStack();						/*			hot100 155. æœ€å°æ ˆ									*/
+	//Test_decodeString();					/*			hot100 394. å­—ç¬¦ä¸²è§£ç 								*/
+	//Test_dailyTemperatures();				/*			hot100 739. æ¯æ—¥æ¸©åº¦									*/
+	//Test_largestRectangleArea();			/*			hot100 84.	æŸ±çŠ¶å›¾ä¸­æœ€å¤§çš„çŸ©å½¢						*/
+	//Test_findKthLargest();				/*			hot100 215. æ•°ç»„ä¸­çš„ç¬¬Kä¸ªæœ€å¤§å…ƒç´ 						*/
+	//Test_topKFrequent();					/*			hot100 347. å‰ K ä¸ªé«˜é¢‘å…ƒç´ 							*/
+	//Test_MedianFinder();					/*			hot100 295. æ•°æ®æµçš„ä¸­ä½æ•°							*/
+	//Test_maxProfit();						/*			hot100 121. ä¹°å–è‚¡ç¥¨çš„æœ€ä½³æ—¶æœº						*/
+	//Test_canJump();						/*			hot100 55.	è·³è·ƒæ¸¸æˆ									*/
+	//Test_jump();							/*			hot100 45.	è·³è·ƒæ¸¸æˆ II								*/
+	//Test_partitionLabels();				/*			hot100 763. åˆ’åˆ†å­—æ¯åŒºé—´								*/
+	//Test_climbStairs();					/*			hot100 70.	çˆ¬æ¥¼æ¢¯									*/
+	//Test_generate();						/*			hot100 118. æ¨è¾‰ä¸‰è§’									*/
+	//Test_rob();							/*			hot100 198. æ‰“å®¶åŠ«èˆ									*/
+	//Test_numSquares();					/*			hot100 279. å®Œå…¨å¹³æ–¹æ•°								*/
+	//Test_coinChange();					/*			hot100 322. é›¶é’±å…‘æ¢									*/
+	//Test_wordBreak();						/*			hot100 139. å•è¯æ‹†åˆ†									*/
+	//Test_lengthOfLIS();					/*			hot100 300. æœ€é•¿é€’å¢å­åºåˆ—							*/
+	//Test_maxProduct();					/*			hot100 152. ä¹˜ç§¯æœ€å¤§å­æ•°ç»„							*/
+	//Test_canPartition();					/*			hot100 416. åˆ†å‰²ç­‰å’Œå­é›†								*/
+	//Test_longestValidParentheses();		/*			hot100	32. æœ€é•¿æœ‰æ•ˆæ‹¬å·								*/
+	//Test_uniquePaths();					/*			hot100	62. ä¸åŒè·¯å¾„									*/
+	//Test_minPathSum();					/*			hot100	64. æœ€å°è·¯å¾„å’Œ								*/
+	//Test_longestPalindrome();				/*			hot100	5.	æœ€é•¿å›æ–‡å­ä¸²								*/
+	//Test_longestCommonSubsequence();		/*			hot10^1143. æœ€é•¿å…¬å…±å­åºåˆ—							*/
+	//Test_minDistance();					/*			hot100	72. ç¼–è¾‘è·ç¦»									*/
+	//Test_singleNumber();					/*			hot100 136. åªå‡ºç°ä¸€æ¬¡çš„æ•°å­—							*/
+	//Test_majorityElement();				/*			hot100 169. å¤šæ•°å…ƒç´ 									*/
+	//Test_sortColors();					/*			hot100	75. é¢œè‰²åˆ†ç±»									*/
+	//Test_nextPermutation();				/*			hot100	31. ä¸‹ä¸€ä¸ªæ’åˆ—								*/
+	//Test_findDuplicate();					/*			hot100 287. å¯»æ‰¾é‡å¤æ•°								*/
+}
